@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Engine check</title>
+  <style>
+    :root { --cream: #F7F3EA; --plum: #3B2340; --muted: #655468; --line: rgba(59, 35, 64, 0.14); }
+    body { margin: 0; padding: 24px; background: var(--cream); color: var(--plum); font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    h1 { margin: 0 0 4px; font-size: 1.5rem; }
+    p { margin: 0 0 12px; max-width: 60rem; }
+    .muted { color: var(--muted); }
+    .controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 16px 0; }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: 0.9375rem; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { position: sticky; top: 0; background: #fff; }
+    .status-sorted { color: #1f6b3a; font-weight: 600; }
+    .status-unsure { color: #8a5a00; font-weight: 600; }
+    .status-not-sorted { color: var(--muted); }
+    .small { font-size: 0.8125rem; color: var(--muted); }
+    textarea { width: 100%; min-height: 160px; font: 13px/1.4 ui-monospace, Menlo, monospace; }
+    summary { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Engine check</h1>
+  <p class="muted">For Zachary only. It isn't linked from the tester page. Choose a lease to see every section the engine found and how it sorted each one. The lease stays in this browser.</p>
+
+  <div class="controls">
+    <input type="file" id="file" accept=".pdf,.html,.htm,.txt">
+    <label><input type="checkbox" id="preview" checked> Include draft rows (like <code>?preview=1</code>)</label>
+  </div>
+
+  <p id="summary" role="status"></p>
+  <div id="output"></div>
+
+  <script src="engine.js"></script>
+  <script src="engine-check.js"></script>
+</body>
+</html>
