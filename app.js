@@ -1,4 +1,4 @@
-// Clause & Effect, a lease reader prototype.
+// Clause & Effect, the round 1 page (round-one.html).
 // Every word on the page comes from content.json and clause-types.json.
 // Lease text comes from the uploaded PDF, read here in the browser.
 // The PDF is never sent anywhere or kept.

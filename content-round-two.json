@@ -1,5 +1,5 @@
 {
-  "note": "Wording for the round 2 test page (round-two.html) only. The live page never reads this file. Fields named in 'drafts' are Claude's drafts, listed in DRAFT-WORDING.md for Zachary to approve. Fields named in 'zacharysWording' are his own words from his answers. Move approved fields into content.json when round 2 goes live.",
+  "note": "Wording for the main page (index.html), built for round 2. The round 1 page (round-one.html) never reads this file. Fields named in 'drafts' are Claude's drafts, listed in DRAFT-WORDING.md for Zachary to approve. Fields named in 'zacharysWording' are his own words from his answers.",
   "zacharysWording": [
     "tiers.1.name",
     "tiers.2.name",

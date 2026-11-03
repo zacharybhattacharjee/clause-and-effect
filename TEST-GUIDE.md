@@ -10,9 +10,8 @@ Each tester sees the page as it is: "How this works" first, then **Lease text fi
 
 ## Before each session
 
-- **Use the class laptop** and the round 2 link: https://zacharybhattacharjee.github.io/lease-reader/round-two.html. Add the tester's code to the end, such as `?t=R1`, so it shows in the footer. Press **Cmd+Shift+R** once, so the page isn't an old copy.
+- **Use the class laptop** and the main link: https://zacharybhattacharjee.github.io/lease-reader/. Add the tester's code to the end, such as `?t=R1`, so it shows in the footer. Press **Cmd+Shift+R** once, so the page isn't an old copy.
 - **Have the lease PDF on the desktop.** The round 2 page has no sample button, so the PDF has to be uploaded. You can upload it yourself before the tester sits down, or let them do it and watch how it goes.
-- **A dark note at the top says it's a test version.** If a tester asks, say: "Some wording is still being finished." Say nothing more.
 - **The blank form has gaps** where the numbers go, and the page shows "(see the lease)" where a number belongs. If a tester asks, say: "The lease would have a number there."
 - **Paper:** one copy of the note sheet per tester, with a code such as R1 at the top instead of a name.
 - **Roles:** if you can, have a classmate run the session while you take notes.
