@@ -1,0 +1,61 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "missing": [
+    {
+      "type": "term-renewal",
+      "whatIsMissing": "No renewal option",
+      "message": "The tool didn't find a right to renew. Without one, the landlord can raise the rent or ask you to leave when the lease ends.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "default",
+      "whatIsMissing": "No notice or time to fix a problem",
+      "message": "The tool didn't find a warning or time to fix a problem before the landlord can act.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "operating-costs",
+      "whatIsMissing": "No limit on building cost increases",
+      "message": "The tool didn't find a limit on how much your share of building costs can go up each year.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "exclusive",
+      "whatIsMissing": "No exclusive",
+      "message": "The tool didn't find an exclusive. Without one, the landlord can rent nearby space to a business that competes with yours.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "repairs",
+      "whatIsMissing": "Landlord's repair duties not stated",
+      "message": "The tool didn't find a list of what the landlord must repair. You may be responsible for more than you expect.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "personal-guaranty",
+      "whatIsMissing": "Guaranty has no limit or end date",
+      "message": "If you sign a personal guaranty, the tool didn't find a cap or an end date for it.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "tenant-termination",
+      "whatIsMissing": "No way for you to end early",
+      "message": "The tool didn't find a way for you to end the lease early, even if the business closes.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "type": "signage",
+      "whatIsMissing": "No sign rights",
+      "message": "The tool didn't find anything about whether you can put up a sign.",
+      "status": "Draft (Claude)",
+      "live": false
+    }
+  ]
+}

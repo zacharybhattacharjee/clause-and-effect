@@ -1,0 +1,521 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "types": [
+    {
+      "id": "rent-base",
+      "name": "Base rent and increases",
+      "gbrebSection": "",
+      "triggers": [
+        "Base Rent",
+        "Annual Rent",
+        "Minimum Rent",
+        "Fixed Rent",
+        "rent adjustment",
+        "CPI",
+        "escalation"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "taxes",
+      "name": "Real estate taxes",
+      "gbrebSection": "6A",
+      "triggers": [
+        "Real Estate Taxes",
+        "Taxes",
+        "tax escalation",
+        "Base Tax Year",
+        "Tenant's share of taxes"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "operating-costs",
+      "name": "Operating costs (CAM)",
+      "gbrebSection": "6B",
+      "triggers": [
+        "Operating Expenses",
+        "Operating Costs",
+        "Common Area Maintenance",
+        "CAM",
+        "Additional Rent",
+        "proportionate share",
+        "pro rata share",
+        "Base Year"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "late-charge",
+      "name": "Late fees and interest",
+      "gbrebSection": "25",
+      "triggers": [
+        "late charge",
+        "overdue",
+        "interest at the rate of",
+        "service charge",
+        "past due"
+      ],
+      "tier": null,
+      "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "security-deposit",
+      "name": "Security deposit",
+      "gbrebSection": "",
+      "triggers": [
+        "security deposit",
+        "letter of credit",
+        "Security",
+        "as security for",
+        "original amount"
+      ],
+      "tier": null,
+      "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "term-renewal",
+      "name": "Length of lease and renewal",
+      "gbrebSection": "",
+      "triggers": [
+        "Term",
+        "Commencement Date",
+        "Expiration Date",
+        "option to extend",
+        "renewal",
+        "Extension Term",
+        "Option Period"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "use",
+      "name": "What you can use the space for",
+      "gbrebSection": "",
+      "triggers": [
+        "Permitted Use",
+        "use the Premises for",
+        "for no other purpose"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "exclusive",
+      "name": "Exclusive right to sell",
+      "gbrebSection": "",
+      "triggers": [
+        "exclusive",
+        "Landlord shall not lease",
+        "competing business"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "condition-premises",
+      "name": "Condition at move-in",
+      "gbrebSection": "23",
+      "triggers": [
+        "as is",
+        "condition of the Premises",
+        "Landlord's Work",
+        "Tenant's Work"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "repairs",
+      "name": "Repairs and maintenance",
+      "gbrebSection": "",
+      "triggers": [
+        "repair",
+        "maintain",
+        "good order and condition",
+        "in good repair",
+        "HVAC",
+        "structural",
+        "roof",
+        "exterior walls"
+      ],
+      "tier": null,
+      "massachusettsLaw": "c. 186, § 19 repair duty after notice of unsafe condition; applied to a commercial lease (Bishop v. TES Realty Trust, 2011). Verify.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "alterations",
+      "name": "Changes to the space",
+      "gbrebSection": "",
+      "triggers": [
+        "alterations",
+        "improvements",
+        "additions",
+        "Landlord's prior written consent"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "assignment-subletting",
+      "name": "Selling the business or subletting",
+      "gbrebSection": "13",
+      "triggers": [
+        "assign",
+        "assignment",
+        "sublet",
+        "sublease",
+        "transfer",
+        "change of control",
+        "recapture"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance you must carry",
+      "gbrebSection": "17",
+      "triggers": [
+        "insurance",
+        "general liability",
+        "additional insured",
+        "certificate of insurance",
+        "waiver of subrogation"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "indemnity",
+      "name": "Covering the landlord's losses",
+      "gbrebSection": "16",
+      "triggers": [
+        "indemnify",
+        "indemnification",
+        "hold harmless",
+        "defend"
+      ],
+      "tier": null,
+      "massachusettsLaw": "c. 186, § 15 voids clauses making the tenant cover the landlord's own negligence; applied to commercial leases (Norfolk & Dedham v. Morrison, 2010). Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "default",
+      "name": "What counts as breaking the lease",
+      "gbrebSection": "19",
+      "triggers": [
+        "Event of Default",
+        "default",
+        "cure",
+        "fails to pay",
+        "re-enter",
+        "terminate this Lease"
+      ],
+      "tier": null,
+      "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "damages",
+      "name": "What you owe after a default",
+      "gbrebSection": "",
+      "triggers": [
+        "accelerate",
+        "balance of the Term",
+        "deficiency",
+        "liquidated damages",
+        "reletting"
+      ],
+      "tier": null,
+      "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "personal-guaranty",
+      "name": "Personal guaranty",
+      "gbrebSection": "",
+      "triggers": [
+        "Guaranty",
+        "Guarantor",
+        "personally guarantee",
+        "individually",
+        "jointly and severally"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "relocation",
+      "name": "Landlord can move you",
+      "gbrebSection": "",
+      "triggers": [
+        "relocate",
+        "relocation",
+        "substitute premises"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "landlord-termination",
+      "name": "Landlord can end the lease early",
+      "gbrebSection": "",
+      "triggers": [
+        "demolish",
+        "demolition",
+        "redevelop",
+        "sale of the Building",
+        "terminate this Lease upon"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "access",
+      "name": "Landlord entering your space",
+      "gbrebSection": "",
+      "triggers": [
+        "enter the Premises",
+        "access",
+        "inspect",
+        "show the Premises"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "signage",
+      "name": "Signs",
+      "gbrebSection": "",
+      "triggers": [
+        "sign",
+        "signage",
+        "storefront"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "casualty-condemnation",
+      "name": "Fire, damage, or government taking",
+      "gbrebSection": "",
+      "triggers": [
+        "fire or other casualty",
+        "damage or destruction",
+        "damaged or destroyed",
+        "untenantable",
+        "taking",
+        "eminent domain",
+        "condemnation"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "holdover",
+      "name": "Staying after the lease ends",
+      "gbrebSection": "",
+      "triggers": [
+        "holdover",
+        "hold over",
+        "remain in possession"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "surrender",
+      "name": "Move-out duties",
+      "gbrebSection": "",
+      "triggers": [
+        "surrender",
+        "remove",
+        "restore",
+        "yield up",
+        "broom clean",
+        "wear and tear",
+        "expiration or termination"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "subordination-estoppel",
+      "name": "Lender paperwork",
+      "gbrebSection": "",
+      "triggers": [
+        "subordinate",
+        "subordination",
+        "subject and subordinate",
+        "lien of any mortgage",
+        "SNDA",
+        "estoppel certificate",
+        "attornment",
+        "non-disturbance"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "notices",
+      "name": "How notices must be sent",
+      "gbrebSection": "20",
+      "triggers": [
+        "notice",
+        "notices",
+        "certified mail",
+        "address for notices"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "attorneys-fees",
+      "name": "Legal fees",
+      "gbrebSection": "",
+      "triggers": [
+        "attorneys' fees",
+        "legal fees",
+        "costs of collection",
+        "costs of enforcement"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "jury-waiver",
+      "name": "Giving up a jury trial",
+      "gbrebSection": "",
+      "triggers": [
+        "waive trial by jury",
+        "jury trial",
+        "waiver of jury"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "tenant-termination",
+      "name": "Your right to end early",
+      "gbrebSection": "",
+      "triggers": [
+        "Tenant may terminate",
+        "termination fee",
+        "early termination",
+        "right to terminate"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "utilities",
+      "name": "Utilities and service outages",
+      "gbrebSection": "",
+      "triggers": [
+        "utilities",
+        "separately metered",
+        "electricity",
+        "water",
+        "gas",
+        "interruption",
+        "failure to furnish"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "more-space-or-purchase",
+      "name": "Right to more space or to buy",
+      "gbrebSection": "",
+      "triggers": [
+        "right of first refusal",
+        "right of first offer",
+        "ROFR",
+        "ROFO",
+        "expansion space",
+        "option to purchase"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "id": "riders-amendments",
+      "name": "Riders and changes to the lease",
+      "gbrebSection": "",
+      "triggers": [
+        "Rider",
+        "Exhibit",
+        "Addendum",
+        "Amendment",
+        "in the event of any conflict"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "live": false
+    }
+  ]
+}

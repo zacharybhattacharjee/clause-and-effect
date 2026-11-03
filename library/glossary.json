@@ -1,0 +1,185 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "glossary": [
+    {
+      "words": "Premises",
+      "meaning": "The space you're renting.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Term",
+      "meaning": "How long the lease lasts.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Base Rent",
+      "meaning": "Your regular rent, before any extra charges.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Additional Rent",
+      "meaning": "Charges on top of your regular rent, like taxes and building costs. Missing these can count as missing rent.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Operating Expenses",
+      "meaning": "The costs of running the building, like cleaning, repairs, and management.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "CAM",
+      "meaning": "Common Area Maintenance: the cost of shared spaces, like hallways, parking, and sidewalks.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Proportionate Share",
+      "meaning": "Your part of a building-wide cost, usually based on the size of your space.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Base Year",
+      "meaning": "The year used as the starting point. You pay part of any increase above that year's costs.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Triple net",
+      "meaning": "A lease where you pay taxes, insurance, and building costs on top of rent.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Indemnify",
+      "meaning": "Pay for someone else's losses or legal costs.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Hold harmless",
+      "meaning": "Promise not to blame someone, and to cover their losses.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Jointly and severally",
+      "meaning": "Each person who signs can be made to pay the full amount, not just their share.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Assignment",
+      "meaning": "Handing your lease over to someone else, often when you sell your business.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Sublet",
+      "meaning": "Renting part or all of your space to someone else while you stay on the lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Event of Default",
+      "meaning": "Something that counts as breaking the lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Cure",
+      "meaning": "Fix a problem before the landlord can act on it.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Guaranty",
+      "meaning": "A promise to pay if the business can't. A personal guaranty makes you, the owner, responsible.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Holdover",
+      "meaning": "Staying in the space after the lease ends.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Surrender",
+      "meaning": "Giving the space back at the end of the lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Estoppel certificate",
+      "meaning": "A form the landlord or a lender can ask you to sign confirming the lease's terms. What you sign can bind you later.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Subordination",
+      "meaning": "Your lease ranks below the landlord's mortgage. If the landlord loses the building, the lender may not have to keep your lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Waiver of subrogation",
+      "meaning": "Your insurance company and the landlord's agree not to sue each other over covered losses.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Force majeure",
+      "meaning": "Events no one controls, like floods or wars, that can excuse late performance.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Notwithstanding",
+      "meaning": "Even though. This clause wins over others it mentions.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Including without limitation",
+      "meaning": "The list that follows is only examples. More things are covered.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Controllable Operating Expenses",
+      "meaning": "Building costs the landlord can control, like management and cleaning. Usually not taxes, insurance, utilities, or snow removal.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Recapture",
+      "meaning": "The landlord's right to take the space back when you ask to transfer the lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Substitute Premises",
+      "meaning": "The new space the landlord can move you to.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Guaranty of payment",
+      "meaning": "A guaranty that lets the landlord collect from you without first trying the business.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "words": "Good guy guaranty",
+      "meaning": "A personal guaranty that ends if the business gives notice, pays through move-out, and leaves properly.",
+      "status": "Draft (Claude)",
+      "live": false
+    }
+  ]
+}

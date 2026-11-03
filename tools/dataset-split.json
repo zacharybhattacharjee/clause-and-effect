@@ -1,0 +1,28 @@
+{
+  "note": "Which research-dataset leases are used to build and tune the engine's rules, and which are held back for a fair score. Written on 2026-11-03, before any lease was read. Leases: Leivaditi, Rossi & Kanoulas (2020), DOI 10.21942/uva.19732993.v1, CC BY-NC 4.0. Only lease IDs are kept here, never lease text.",
+  "howChosen": "U.S.-style leases are the annotated leases with Landlord and Tenant wording and section-number labels, where American markers (dollar amounts, 'State of', 'County', 'U.S.', 'Commonwealth of', 'dollars') outnumber British or foreign ones ('undertenant', 'Service Charge', 'VAT', the pound sign, 'whilst', 'Leaser'). That gives 20, not the 36 the brief mentions. They were put in order by the SHA-1 of their IDs; the first 13 build the rules, and the last 7 are held back.",
+  "build": [
+    "lease_455",
+    "lease_495",
+    "lease_553",
+    "lease_561",
+    "lease_578",
+    "lease_591",
+    "lease_637",
+    "lease_725",
+    "lease_741",
+    "lease_747",
+    "lease_761",
+    "lease_767",
+    "lease_907"
+  ],
+  "heldBack": [
+    "lease_609",
+    "lease_641",
+    "lease_752",
+    "lease_756",
+    "lease_930",
+    "lease_933",
+    "lease_955"
+  ]
+}
