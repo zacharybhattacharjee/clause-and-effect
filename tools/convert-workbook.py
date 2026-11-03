@@ -199,9 +199,11 @@ def convert():
         "version": "Risky version ID", "askFor": "Ask for", "fallback": "Fallback",
         "plainAsk": "Plain-language ask", "legalWording": "Legal wording to propose",
         "ownerBlanks": "Blanks for the owner", "status": "Status",
-    }, optional={"why": "Why you can ask", "nextStep": "Next step", "softerAsk": "Softer way to say it"}):
+    }, optional={"why": "Why you can ask", "nextStep": "Next step", "softerAsk": "Softer way to say it",
+                 "shortAsk": "Short ask", "shortWhy": "Short why"}):
         asks.append({
             "version": r["version"], "askFor": r["askFor"], "fallback": r["fallback"],
+            "shortAsk": r["shortAsk"], "shortWhy": r["shortWhy"],
             "plainAsk": r["plainAsk"], "softerAsk": r["softerAsk"], "why": r["why"],
             "legalWording": r["legalWording"], "ownerBlanks": r["ownerBlanks"],
             "nextStep": r["nextStep"], "status": r["status"], "_row": r["_row"],

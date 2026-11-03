@@ -349,6 +349,91 @@ These come from your answers on 10/26 and the workbook's "How to use" sheet (the
 - **Versions sheet:** "Suggested tier" and "Reason" for all 49 versions, in green cells. The real "Tier override" column is still blank. If you agree with a suggestion, copy it into "Tier override", or into the clause type's Tier.
 - **Asks sheet:** "Why you can ask", "Next step" and "Softer way to say it" for all 24 asks, in green cells. Each row keeps its "Draft (Claude)" status until you approve it.
 
+## Simpler asks, like round 1 (drafted 11/3)
+
+Status: **for you to approve.** Nothing on the page or in the workbook has changed yet.
+
+Round 1 testers liked short, clear bullets under one line: "Before you sign, ask the landlord in writing for:". Round 2 stacks six parts under every ask. This draft brings back the bullet and puts everything else behind one click.
+
+### How a flagged section would look
+
+> **Before you sign, ask the landlord in writing for:**
+> - A cap or an end date on your personal guaranty
+>
+> *Why:* It protects your own savings.
+>
+> ▸ See what to say
+
+- **The bullet** finishes the sentence "ask the landlord in writing for:". That line is your round 1 wording (`tags.negotiable.askIntro`), already approved.
+- **"Why"** is one short line.
+- **One closed button, "See what to say", holds the rest:** the words to propose with your caution line, the real lease example, the fallback, and the next step.
+
+### How "What to do next" would look
+
+> **What to do next**
+>
+> Everything to ask for, in one list. Email it to your landlord or broker before you sign, and keep a copy.
+>
+> 1. A cap or an end date on your personal guaranty. *Why:* It protects your own savings.
+> 2. Written notice and time to pay before a late payment is a default. *Why:* A real lease includes this.
+> 3. …
+>
+> [Print this list]
+
+- It's numbered, highest stakes first, with one ask and one short "why" per line.
+- The printed list adds the words to propose under each ask, so you can hand it to the landlord. Say if you'd rather print only the bullets.
+
+### The short asks and why lines
+
+Revised with the UX writing skill (11/3).
+- **Every ask finishes the sentence** "Before you sign, ask the landlord in writing for:", so they all read the same way.
+- **Asks are 14 words or fewer,** and most are under 12.
+- **Each "why" is one short line.** Where a real lease example exists, the line is always "A real lease includes this." The example itself is behind the button.
+
+These would replace the longer "Plain-language ask" and "Why you can ask" drafts in the workbook. The longer versions would move behind the button.
+
+| Version | Ask for | Why |
+| --- | --- | --- |
+| default-no-notice | Written notice and time to pay before a late payment is a default | A real lease includes this. |
+| default-notice-limited | Written notice before every default, not just the first few | A real lease includes this. |
+| default-statutory-notice-replaced | Notice that adds to the law's notice, instead of replacing it | Otherwise you could get less time than the law gives. |
+| guaranty-unlimited | A cap or an end date on your personal guaranty | It protects your own savings. |
+| guaranty-payment-not-collection | A promise to collect from the business before coming to you | You should be the backup, not the first stop. |
+| guaranty-survives-changes | Your written OK before your guaranty covers a renewal or change | You shouldn't owe on terms you never saw. |
+| opex-full-share | Paying only cost increases over a base year, or a yearly cap | A real lease includes this. |
+| opex-includes-capital | Leaving major upgrades, like a new roof, out of your share | They outlast your lease. |
+| opex-estimates-only | A limit on charges above the estimate, and a look at the records | So you can plan and check the bill. |
+| opex-cap-carryforward | A yearly cost cap that resets each year | Otherwise a quiet year allows a bigger jump later. |
+| transfer-sole-discretion | A promise not to refuse a transfer without a good reason | Otherwise the landlord can block a sale of your business. |
+| transfer-change-of-control | The right to sell your business without asking permission | It keeps the sale of your business in your hands. |
+| transfer-recapture | A promise not to take the space back when you ask to transfer | Asking shouldn't cost you the space. |
+| transfer-tenant-stays-liable | Release from the lease once the landlord approves your buyer | The buyer should owe the rent from then on. |
+| relocation-or-lease-ends | A promise not to move you without your agreement | Moving can cost you customers. |
+| relocation-cost-unstated | Moving costs paid by the landlord, and the new space finished first | A real lease includes this. |
+| termination-on-notice | More notice, and repayment of what you spent on the space | A real lease includes this. |
+| deposit-top-up | More time to refill the deposit, such as 30 days | A few days may not be enough. |
+| utilities-no-liability | Lower rent if an outage the landlord causes lasts more than a few days | You shouldn't pay full rent for space you can't use. |
+| utilities-no-rent-reduction | Lower rent if a service is out for more than a few days | You shouldn't pay full rent for space you can't use. |
+| surrender-remove-all | Removing only the changes the landlord names in writing | You'll know your move-out costs up front. |
+| casualty-landlord-may-terminate | No rent while the space is unusable, and a way out if repairs drag | A real lease includes this. |
+| subordination-only | A promise from the landlord's lender to keep your lease | Without it, a new owner might not keep your lease. |
+| no-early-exit | A way to end the lease early, with notice and a fee | It limits what closing could cost you. |
+
+### Two more page lines, for "Risk summary first" and the ask bullets
+
+| Field | Draft |
+| --- | --- |
+| `labels.thingsToAsk` | Things to ask for |
+| `labels.why` | Why |
+
+### One new button label
+
+Buttons work best at 2 to 4 words, so the label is shorter than my first draft.
+
+| Field | Draft |
+| --- | --- |
+| `labels.moreAboutAsk` | See what to say |
+
 ## Still yours to decide
 
 - **9e. Translate.** I left it out, as you asked. It waits until after testing.

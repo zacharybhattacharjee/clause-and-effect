@@ -1,8 +1,11 @@
 // Clause & Effect, round 2 test page.
 // The engine (engine.js) reads the uploaded lease and sorts every section.
-// This page shows the result in three versions. It includes draft rows from
-// the library, and shows one "Draft" note at the top. The live page
-// (index.html) is unchanged and never reads draft rows.
+// This page shows the result in three versions, each with its own layout:
+//   A "Lease text first"   - annotated lease: the lease's words, with notes beside them
+//   B "What to ask first"  - plain checklist: short rows, short bullets
+//   C "Risk summary first" - summary first: counts, then one line per section
+// It includes draft rows from the library, and shows one "Draft" note at the
+// top. The live page (index.html) is unchanged and never reads draft rows.
 // Every word comes from content.json, content-round-two.json or the library.
 // The lease is read in this browser and never sent anywhere or kept.
 
@@ -32,7 +35,7 @@ let idCount = 0;
 const newId = (prefix) => `${prefix}-${++idCount}`;
 
 // A button that opens and closes a panel, and tells screen readers which.
-function toggle(showLabel, hideLabel, panel, className = "button button-secondary toggle-button") {
+function toggle(showLabel, hideLabel, panel, className = "text-toggle") {
   panel.id = panel.id || newId("panel");
   panel.hidden = true;
   panel.dataset.printOpen = "true"; // printing the whole page opens it
@@ -44,7 +47,7 @@ function toggle(showLabel, hideLabel, panel, className = "button button-secondar
     const opening = panel.hidden;
     panel.hidden = !opening;
     button.setAttribute("aria-expanded", String(opening));
-    button.textContent = opening ? hideLabel : showLabel;
+    if (hideLabel !== showLabel) button.textContent = opening ? hideLabel : showLabel;
   });
   return button;
 }
@@ -66,7 +69,7 @@ function testerCode() {
   return (new URLSearchParams(location.search).get("t") || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 12);
 }
 
-// ---------- Word meanings ----------
+// ---------- Word meanings and highlights in the lease text ----------
 
 // The glossary from content.json, plus the library's, without repeats.
 function mergedGlossary() {
@@ -89,10 +92,11 @@ function firstMatch(text, phrase) {
   return { start, end: start + match[2].length };
 }
 
-// Lease text with each glossary word underlined the first time it appears.
-// Tapping a word opens its meaning just below the line.
-function withMeanings(text) {
+// A piece of lease text with each glossary word underlined the first time it
+// appears in the section (tracked in `seen`). Tapping a word opens its meaning.
+function withMeanings(text, seen) {
   const found = glossary
+    .filter((entry) => !seen.has(entry.words.toLowerCase()))
     .map((entry) => ({ entry, ...firstMatch(text, entry.words) }))
     .filter((m) => m.start !== undefined)
     .sort((a, b) => a.start - b.start || b.end - a.end);
@@ -100,6 +104,7 @@ function withMeanings(text) {
   let position = 0;
   for (const { entry, start, end } of found) {
     if (start < position) continue;
+    seen.add(entry.words.toLowerCase());
     pieces.push(text.slice(position, start));
     const meaning = make("span", "term-meaning", entry.meaning);
     meaning.id = newId("meaning");
@@ -120,10 +125,41 @@ function withMeanings(text) {
   return pieces;
 }
 
-function leaseWords(section) {
+// Where a version's cue phrase matched, in the lease's own text. The engine
+// matches on a tidied, lower-case copy that reads Lessor as Landlord, so the
+// pattern allows both words, either kind of quote, and any spacing.
+function cueRange(text, matchedText) {
+  if (!matchedText) return null;
+  const pattern = matchedText.trim().split(/\s+/).map((word) =>
+    word
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      .replace(/'/g, "['’]").replace(/"/g, "[\"“”]")
+      .replace(/^landlord/, "(?:landlord|lessor)").replace(/^tenant/, "(?:tenant|lessee)"),
+  ).join("\\s+");
+  const match = new RegExp(pattern, "i").exec(text);
+  return match ? { start: match.index, end: match.index + match[0].length } : null;
+}
+
+// The lease's words for a section, with word meanings, and with the passages
+// that decided its versions highlighted when `highlight` is on.
+function leaseWords(section, { highlight = false } = {}) {
   const panel = make("div", "lease-text");
   const paragraph = make("p");
-  paragraph.append(...withMeanings(section.text));
+  const seen = new Set();
+  const text = section.text;
+  const ranges = highlight
+    ? allVersions(section).map((found) => cueRange(text, found.matchedText)).filter(Boolean).sort((a, b) => a.start - b.start)
+    : [];
+  let position = 0;
+  for (const range of ranges) {
+    if (range.start < position) continue;
+    paragraph.append(...withMeanings(text.slice(position, range.start), seen));
+    const mark = make("mark", "cue-mark");
+    mark.append(...withMeanings(text.slice(range.start, range.end), seen));
+    paragraph.append(mark);
+    position = range.end;
+  }
+  paragraph.append(...withMeanings(text.slice(position), seen));
   panel.append(paragraph);
   return panel;
 }
@@ -140,26 +176,26 @@ function tierName(key) {
   return key === "not-set" ? words.tiers.notSet : words.tiers[key].name;
 }
 
-// The tier mark: its name, never color alone. Clicking it explains the scale.
-function tierMark(tier) {
+// The tier label: a small dot and the tier's name, never color alone.
+// Clicking it explains the scale.
+function tierLabel(tier, className = "tier-label") {
   const key = tierKey(tier);
-  const mark = make("button", `tier-mark tier-${key}`, tierName(key));
-  mark.type = "button";
-  mark.setAttribute("aria-haspopup", "dialog");
-  mark.addEventListener("click", () => openTierDialog(mark));
-  return mark;
+  const label = make("button", `${className} tier-${key}`);
+  label.type = "button";
+  label.setAttribute("aria-haspopup", "dialog");
+  label.append(make("span", "tier-dot"), make("span", "", tierName(key)));
+  label.firstChild.setAttribute("aria-hidden", "true");
+  label.addEventListener("click", () => openTierDialog(label));
+  return label;
 }
 
 function tierScale() {
   const list = make("dl", "tier-scale");
-  for (const key of ["1", "2", "3"]) {
-    const name = make("dt");
-    name.append(make("span", `tier-chip tier-${key}`, words.tiers[key].name));
-    list.append(name, make("dd", "", words.tiers[key].meaning));
+  for (const key of ["1", "2", "3", "not-set"]) {
+    const name = make("dt", `tier-${key}`);
+    name.append(make("span", "tier-dot"), make("span", "", tierName(key)));
+    list.append(name, make("dd", "", key === "not-set" ? words.tiers.notSetMeaning : words.tiers[key].meaning));
   }
-  const notSet = make("dt");
-  notSet.append(make("span", "tier-chip tier-not-set", words.tiers.notSet));
-  list.append(notSet, make("dd", "", words.tiers.notSetMeaning));
   return list;
 }
 
@@ -176,14 +212,20 @@ function openTierDialog(opener) {
   close.focus();
 }
 
-// ---------- One section ----------
+// ---------- Pieces of a section ----------
 
 // "Section 13 · ASSIGNMENT – SUBLEASING". The text before the first
 // section, such as the lease's title, is "Start of the lease".
-function sectionTitle(section) {
+function sectionRef(section) {
   if (!section.number && !section.heading) return words.labels.startOfLease;
   const label = section.number ? `${words.labels.section} ${section.number}` : "";
   return [label, section.heading].filter(Boolean).join(" · ");
+}
+
+// A section's plain title: its clause type's name, or the lease's heading.
+function sectionName(section) {
+  const named = section.matches.map((m) => m.type.name).filter(Boolean);
+  return named.length ? named.join(" or ") : sectionRef(section);
 }
 
 function allVersions(section) {
@@ -191,6 +233,7 @@ function allVersions(section) {
 }
 
 const isFlag = (found) => found.flag && found.ask;
+const hasFlag = (section) => allVersions(section).some(isFlag);
 
 function proofExample(version) {
   if (!version || !version.example) return null;
@@ -199,14 +242,12 @@ function proofExample(version) {
   box.append(make("blockquote", "proof-quote", version.example));
   const source = make("p", "proof-source");
   const url = (version.exampleSource.match(/https?:\/\/\S+/) || [])[0];
-  const name = version.exampleSource.replace(/https?:\/\/\S+/, "").replace(/[.\s]+$/, "");
-  source.append(name);
+  source.append(version.exampleSource.replace(/https?:\/\/\S+/, "").replace(/[.\s]+$/, ""));
   if (url) {
-    source.append(" ");
     const link = make("a", "", url.replace(/^https?:\/\//, "").split("/")[0]);
     link.href = url;
     link.rel = "noopener";
-    source.append(link);
+    source.append(" ", link);
   }
   box.append(source);
   const fromDataset = /Leivaditi/i.test(version.exampleSource);
@@ -214,109 +255,142 @@ function proofExample(version) {
   return box;
 }
 
-// The flag-to-ask chain: the ask, why, the words to propose with proof,
-// the fallback, and the next step.
-function askBlock(found, { open = false } = {}) {
+// What a section means: each version's plain sentence, with "Good for you"
+// on the versions that help the tenant.
+function meaning(section) {
+  const box = make("div", "meaning");
+  if (section.status === "unsure") box.append(make("p", "unsure-line", words.labels.unsureLine));
+  for (const found of allVersions(section)) {
+    const line = make("p", "meaning-line");
+    if (found.goodForYou) line.append(make("span", "good-mark", words.labels.goodForYou), " ");
+    line.append(sentence(found.version.plain));
+    box.append(line);
+  }
+  return box;
+}
+
+// Everything behind "See what to say": the words to propose, a real lease
+// with the better wording, what to ask for if they say no, and the next step.
+function whatToSay(found) {
   const ask = found.ask;
-  const box = make("div", "ask-block");
-  const heading = make("h4", "ask-heading");
-  heading.append(make("span", "flag-mark", words.labels.flag), " ", words.labels.whatToAsk);
-  box.append(heading, make("p", "ask-plain", ask.plainAsk));
-
-  if (ask.why) {
-    const why = make("p", "ask-why");
-    why.append(make("strong", "", `${words.labels.whyYouCanAsk}: `), ask.why);
-    box.append(why);
+  const panel = make("div", "what-to-say");
+  if (ask.legalWording) {
+    panel.append(make("p", "legal-caution", words.labels.legalCaution), make("p", "legal-wording", ask.legalWording));
   }
-
-  const proposal = make("div", "proposal");
-  proposal.append(make("p", "legal-caution", words.labels.legalCaution));
-  if (ask.legalWording) proposal.append(make("p", "legal-wording", ask.legalWording));
   const proof = proofExample(found.askFor);
-  if (proof) proposal.append(proof);
-  if (ask.legalWording || proof) {
-    const button = toggle(words.labels.wordsToPropose, words.labels.wordsToPropose, proposal, "text-toggle");
-    box.append(button, proposal);
-    if (open) button.click();
-  }
-
+  if (proof) panel.append(proof);
   if (found.fallback) {
-    const fallback = make("div", "fallback");
-    fallback.append(make("h5", "", words.labels.ifTheySayNo), make("p", "", sentence(found.fallback.plain)));
-    box.append(fallback);
+    const fallback = make("p", "fallback-line");
+    fallback.append(make("strong", "", `${words.labels.ifTheySayNo}: `), sentence(found.fallback.plain));
+    panel.append(fallback);
   }
   if (ask.nextStep) {
-    const next = make("p", "ask-next");
+    const next = make("p", "next-line");
     next.append(make("strong", "", `${words.labels.nextStep}: `), ask.nextStep);
-    box.append(next);
+    panel.append(next);
   }
-  return box;
+  return panel;
 }
 
-// What a section means: its clause type, and each version it matches.
-function explanation(section, version) {
-  const box = make("div", "explanation");
-  if (section.status === "unsure") box.append(make("p", "unsure-line", words.labels.unsureLine));
-  for (const match of section.matches) {
-    if (match.type.name) box.append(make("h4", "type-name", match.type.name));
-    const versions = match.versions;
-    for (const found of versions) {
-      const line = make("div", "version-line");
-      if (found.goodForYou) line.append(make("span", "good-mark", words.labels.goodForYou));
-      line.append(make("p", "", sentence(found.version.plain)));
-      box.append(line);
-      if (isFlag(found)) box.append(askBlock(found, { open: version === "B" }));
+// The asks, as in round 1: one line, then one short bullet per ask, each
+// with one short "why", and the rest behind "See what to say".
+function askBullets(section) {
+  const flags = allVersions(section).filter(isFlag);
+  if (!flags.length) return null;
+  const box = make("div", "asks");
+  box.append(make("p", "asks-intro", content.tags.negotiable.askIntro));
+  const list = make("ul", "ask-bullets");
+  for (const found of flags) {
+    const item = make("li");
+    item.append(make("span", "ask-text", found.ask.shortAsk || found.ask.plainAsk));
+    const why = found.ask.shortWhy || found.ask.why;
+    if (why) {
+      const line = make("span", "ask-why");
+      line.append(make("span", "why-label", `${words.labels.why}: `), why);
+      item.append(line);
     }
+    const panel = whatToSay(found);
+    if (panel.childNodes.length) item.append(toggle(words.labels.moreAboutAsk, words.labels.moreAboutAsk, panel), panel);
+    list.append(item);
   }
+  box.append(list);
   return box;
 }
 
-function sectionCard(section, version) {
-  const card = make("article", `section-card version-${version}`);
-  card.dataset.tier = tierKey(section.tier);
-  const top = make("div", "card-top");
-  top.append(make("h3", "section-title", sectionTitle(section)), tierMark(section.tier));
-  card.append(top);
+// ---------- The three layouts ----------
 
-  if (version === "C") {
-    // Risk summary first: the explanation, with the lease's words one click away.
-    card.append(explanation(section, version));
-    const text = leaseWords(section);
-    card.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text), text);
-    return card;
-  }
-
-  // Lease text first (A) and What to ask first (B): side by side on a laptop.
-  const lease_ = make("div", "column column-lease");
-  lease_.append(make("h4", "column-label", words.labels.leaseSays), leaseWords(section));
-  const meaning = make("div", "column column-meaning");
-  meaning.append(make("h4", "column-label", words.labels.whatItMeans), explanation(section, version));
-  const columns = make("div", "columns");
-  columns.append(...(version === "A" ? [lease_, meaning] : [meaning, lease_]));
-  card.append(columns);
-  return card;
+// B, plain checklist: a short row with a hairline, and two text links.
+function checklistRow(section) {
+  const row = make("article", "row checklist-row");
+  const top = make("div", "row-top");
+  top.append(make("h3", "row-title", sectionName(section)));
+  if (hasFlag(section)) top.append(make("span", "flag-mark", words.labels.flag));
+  row.append(top, meaning(section));
+  const asks = askBullets(section);
+  if (asks) row.append(asks);
+  const text = leaseWords(section);
+  const links = make("div", "row-links");
+  links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
+  row.append(links, text, make("p", "row-ref", sectionRef(section)));
+  return row;
 }
 
-function unsortedCard(section) {
-  const card = make("article", "section-card unsorted-card");
-  card.append(make("h3", "section-title", sectionTitle(section)), leaseWords(section));
-  return card;
+// A, annotated lease: the lease's words on a page, with a note beside them.
+function annotatedRow(section) {
+  const row = make("article", "row annotated-row");
+  const page = make("div", "lease-page");
+  page.append(make("p", "row-ref", sectionRef(section)), leaseWords(section, { highlight: true }));
+  const note = make("aside", "margin-note");
+  note.append(make("h3", "row-title", sectionName(section)), meaning(section));
+  const asks = askBullets(section);
+  if (asks) note.append(asks);
+  row.append(page, note);
+  return row;
+}
+
+// C, summary first: one line per section that opens for more.
+function summaryRow(section) {
+  const row = make("article", "row summary-row");
+  const panel = make("div", "summary-detail");
+  panel.append(meaning(section));
+  const asks = askBullets(section);
+  if (asks) panel.append(asks);
+  const text = leaseWords(section);
+  const links = make("div", "row-links");
+  links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
+  panel.append(links, text, make("p", "row-ref", sectionRef(section)));
+
+  const opener = toggle(sectionName(section), sectionName(section), panel, "summary-toggle");
+  opener.replaceChildren(make("span", "summary-name", sectionName(section)));
+  if (hasFlag(section)) opener.append(make("span", "flag-mark", words.labels.flag));
+  const heading = make("h3", "summary-heading");
+  heading.append(opener);
+  row.append(heading, panel);
+  return row;
+}
+
+// Sections the tool couldn't sort: a name, and the lease's words one click away.
+function unsortedRow(section) {
+  const row = make("article", "row unsorted-row");
+  const text = leaseWords(section);
+  const links = make("div", "row-links");
+  links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
+  row.append(make("h3", "row-title", sectionRef(section)), links, text);
+  return row;
 }
 
 // ---------- A version ----------
 
-const hasFlag = (section) => allVersions(section).some(isFlag);
-
 // Tier groups, highest stakes first, then sections the tool couldn't sort.
-// "What to ask first" puts flagged sections first within each tier.
+// "What to ask first" puts sections with an ask first within each tier.
 function groupsFor(version) {
   const { sorted, notSorted } = LeaseEngine.inTierOrder(lease.sections);
   const groups = TIER_GROUPS.map((key) => {
     let sections = sorted.filter((section) => tierKey(section.tier) === key);
     if (version === "B") sections = [...sections.filter(hasFlag), ...sections.filter((s) => !hasFlag(s))];
-    return { key, title: tierName(key), sections };
+    return { key, sections };
   }).filter((group) => group.sections.length);
-  if (notSorted.length) groups.push({ key: "unsorted", title: words.labels.notSortedTitle, sections: notSorted });
+  if (notSorted.length) groups.push({ key: "unsorted", sections: notSorted });
   return groups;
 }
 
@@ -328,49 +402,71 @@ function versionNotes(version) {
   return notes;
 }
 
+// Summary first opens with three counts: two tiers and the asks.
+function summaryCounts() {
+  const { sorted } = LeaseEngine.inTierOrder(lease.sections);
+  const asks = new Set(sorted.flatMap((s) => allVersions(s).filter(isFlag).map((f) => f.ask.version))).size;
+  const strip = make("div", "summary-counts");
+  const tile = (label, count, href, key) => {
+    const link = make("a", `count-tile tier-${key}`);
+    link.href = href;
+    link.append(make("span", "count-label", label), make("span", "count-number", String(count)));
+    return link;
+  };
+  strip.append(
+    tile(words.tiers["1"].name, sorted.filter((s) => s.tier === 1).length, "#group-1", "1"),
+    tile(words.tiers["2"].name, sorted.filter((s) => s.tier === 2).length, "#group-2", "2"),
+    tile(words.labels.thingsToAsk, asks, "#group-asks", "asks"),
+  );
+  return strip;
+}
+
 function renderVersion(letter) {
   const version = words.versions[letter];
-  const section = make("section", "version-view");
+  const view = make("section", `version-view layout-${letter}`);
   const heading = make("h2", "version-heading", version.name);
   heading.tabIndex = -1;
-  section.append(heading, make("p", "version-description", version.description), versionNotes(letter));
+  view.append(heading, make("p", "version-description", version.description), versionNotes(letter));
+  if (letter === "C") view.append(summaryCounts());
 
+  const rowFor = { A: annotatedRow, B: checklistRow, C: summaryRow }[letter];
   for (const group of groupsFor(letter)) {
     const block = make("section", `tier-group group-${group.key}`);
     block.id = `group-${group.key}`;
-    block.dataset.trackerLabel = group.title;
     const title = make("h2", "group-title");
     if (group.key === "unsorted") {
-      title.textContent = group.title;
+      block.dataset.trackerLabel = words.labels.notSortedTitle;
+      title.textContent = words.labels.notSortedTitle;
       block.append(title, make("p", "group-intro", words.labels.notSortedIntro));
-      for (const s of group.sections) block.append(unsortedCard(s));
+      for (const s of group.sections) block.append(unsortedRow(s));
     } else {
-      title.append(make("span", `tier-chip tier-${group.key}`, group.title));
+      block.dataset.trackerLabel = tierName(group.key);
+      title.append(tierLabel(group.key === "not-set" ? null : Number(group.key), "tier-label tier-heading"));
       block.append(title);
-      for (const s of group.sections) block.append(sectionCard(s, letter));
+      for (const s of group.sections) block.append(rowFor(s));
     }
-    section.append(block);
+    view.append(block);
   }
   const list = askList();
-  if (list) section.append(list);
-  return section;
+  if (list) view.append(list);
+  return view;
 }
 
 // The whole lease in its own order, each section with its tier.
 function renderWholeLease() {
-  const section = make("section", "version-view whole-lease");
+  const view = make("section", "version-view whole-lease");
   const heading = make("h2", "version-heading", words.labels.wholeLease);
   heading.tabIndex = -1;
-  section.append(heading);
+  view.append(heading);
   for (const piece of lease.sections) {
-    const card = make("article", "section-card");
-    const top = make("div", "card-top");
-    top.append(make("h3", "section-title", sectionTitle(piece)));
-    if (piece.status !== "not-sorted") top.append(tierMark(piece.tier));
-    card.append(top, leaseWords(piece));
-    section.append(card);
+    const row = make("article", "row whole-row");
+    const top = make("div", "row-top");
+    top.append(make("h3", "row-title", sectionRef(piece)));
+    if (piece.status !== "not-sorted") top.append(tierLabel(piece.tier));
+    row.append(top, leaseWords(piece));
+    view.append(row);
   }
-  return section;
+  return view;
 }
 
 // ---------- What to do next: every ask, highest stakes first ----------
@@ -393,30 +489,27 @@ function askList() {
   box.id = "group-asks";
   box.dataset.trackerLabel = page.nextStepsTitle;
   box.append(make("h2", "next-steps-title", page.nextStepsTitle), make("p", "next-steps-intro", page.nextStepsIntro));
-  box.append(make("p", "legal-caution", words.labels.legalCaution));
   const list = make("ol", "ask-items");
   for (const { section, found } of items) {
     const item = make("li", "ask-item");
-    const title = make("div", "ask-item-top");
-    title.append(make("h3", "", sectionTitle(section)), tierMark(section.tier));
-    item.append(title, make("p", "ask-plain", found.ask.plainAsk));
-    const add = (label, text, className) => {
-      if (!text) return;
-      const line = make("p", className);
-      line.append(make("strong", "", `${label}: `), text);
+    const top = make("p", "ask-item-top");
+    top.append(make("span", "ask-text", found.ask.shortAsk || found.ask.plainAsk), make("span", "ask-item-section", sectionName(section)));
+    item.append(top);
+    const why = found.ask.shortWhy || found.ask.why;
+    if (why) {
+      const line = make("p", "ask-why");
+      line.append(make("span", "why-label", `${words.labels.why}: `), why);
       item.append(line);
-    };
-    add(words.labels.whyYouCanAsk, found.ask.why, "ask-why");
-    add(words.labels.wordsToPropose, found.ask.legalWording, "legal-wording");
-    if (found.askFor && found.askFor.example) {
-      const proof = proofExample(found.askFor);
-      item.append(proof);
     }
-    if (found.fallback) add(words.labels.ifTheySayNo, sentence(found.fallback.plain), "fallback-line");
-    add(words.labels.nextStep, found.ask.nextStep, "ask-next");
+    // On paper, each ask also shows the words to propose, ready to hand over.
+    if (found.ask.legalWording) {
+      const wording = make("p", "legal-wording print-only");
+      wording.append(make("strong", "", `${words.labels.wordsToPropose}: `), found.ask.legalWording);
+      item.append(wording);
+    }
     list.append(item);
   }
-  box.append(list);
+  box.append(list, make("p", "legal-caution print-only", words.labels.legalCaution));
 
   const print = make("button", "button button-secondary print-button", page.printButton);
   print.type = "button";
@@ -493,10 +586,10 @@ function renderReader(firstView) {
   switcher.append(whole);
 
   const tools = make("div", "reader-tools");
-  const back = make("button", "button button-secondary", words.labels.howItWorks);
+  const back = make("button", "text-toggle", words.labels.howItWorks);
   back.type = "button";
   back.addEventListener("click", () => showSplash());
-  const printPage = make("button", "button button-secondary", words.labels.printPage);
+  const printPage = make("button", "text-toggle", words.labels.printPage);
   printPage.type = "button";
   printPage.addEventListener("click", () => {
     document.body.classList.add("print-page");
@@ -524,14 +617,7 @@ function showSplash() {
   const parts = [make("h2", "splash-title", s.title), make("p", "splash-lead", s.whatItIs)];
 
   const sorting = make("section", "splash-part");
-  sorting.append(make("h3", "", s.sortingTitle), make("p", "", s.sorting));
-  const groups = make("p", "splash-groups");
-  for (const key of ["1", "2", "3"]) groups.append(make("span", `tier-chip tier-${key}`, words.tiers[key].name), " ");
-  groups.append(make("span", "tier-chip tier-unsorted", words.labels.notSortedTitle));
-  sorting.append(groups);
-
-  const scale = make("section", "splash-part");
-  scale.append(make("h3", "", s.scaleTitle), tierScale());
+  sorting.append(make("h3", "", s.sortingTitle), make("p", "", s.sorting), tierScale());
 
   const versions = make("section", "splash-part");
   versions.append(make("h3", "", s.versionsTitle), make("p", "", s.versionsIntro));
@@ -541,10 +627,7 @@ function showSplash() {
     item.append(make("strong", "", words.versions[letter].name), make("span", "", ` ${words.versions[letter].description}`));
     list.append(item);
   }
-  versions.append(list);
-
-  const whole = make("section", "splash-part");
-  whole.append(make("h3", "", s.wholeLeaseTitle), make("p", "", s.wholeLease));
+  versions.append(list, make("p", "splash-note", s.wholeLease));
 
   const choose = make("section", "splash-part splash-choose");
   choose.append(make("h3", "", s.chooseTitle));
@@ -561,10 +644,11 @@ function showSplash() {
   buttons.append(wholeButton);
   choose.append(buttons);
 
-  splash.replaceChildren(...parts, sorting, scale, versions, whole, choose);
+  splash.replaceChildren(...parts, sorting, versions, choose);
   document.getElementById("upload-screen").hidden = true;
   document.getElementById("reader").hidden = true;
   splash.hidden = false;
+  document.body.classList.add("reading");
   window.scrollTo(0, 0);
   splash.querySelector(".splash-title").tabIndex = -1;
   splash.querySelector(".splash-title").focus({ preventScroll: true });
@@ -630,6 +714,7 @@ function renderUploadScreen() {
 
 function goHome() {
   lease = null;
+  document.body.classList.remove("reading");
   document.getElementById("reader").hidden = true;
   document.getElementById("reader").replaceChildren();
   document.getElementById("splash").hidden = true;

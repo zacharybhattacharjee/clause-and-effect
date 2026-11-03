@@ -226,3 +226,32 @@ Your notes asked for six things. I've sorted them by size, smallest first.
   
   Reading scanned PDFs waits. Step 9 comes first, so you can test. The full plan is in `ENGINE-PLAN.md`.
 - A view of the whole uploaded lease, with the key clauses highlighted on the real pages. Now planned as step 8.
+
+### Step 10: Round 2 polish (planned, not built)
+
+Status: built on branch `claude/simpler-asks` (11/3), not merged. Zachary chose one direction per version: Annotated lease for Lease text first, Plain checklist for What to ask first, and Summary first for Risk summary first. The asks use the short, round 1 style bullets from `DRAFT-WORDING.md`, stored as Draft columns ("Short ask" and "Short why") on the Asks sheet.
+
+**What the design critique found** (design-critique skill, 11/3, on the standard form at laptop width):
+
+1. **The tier shows three times per section:** the group chip, a chip on the card, and a colored bar. It's noise, and nothing stands out (aesthetic and minimalist design, the Von Restorff effect).
+2. **Boxes inside boxes.** Card, then ask box, then "Words to propose", then the example: four nested containers per section. This is the main reason the page reads as unsophisticated (common region, Prägnanz).
+3. **Each ask stacks up to ten pieces,** such as the chip, "What to ask", the ask, why, the toggle, the caution, the wording, the example and the next step. Round 1's single bullet was easier to act on (Miller's law).
+4. **The page is very long,** about 22,800 px on a laptop. Every section shows its full lease text in "Lease text first", and the unsorted group at the end shows long boilerplate.
+5. **The masthead repeats on every screen.** The title and intro push the splash page and each version below the fold.
+6. **Headings copied from the form are in capitals** ("LESSOR’ S ACCESS"), which clashes with the plain voice everywhere else.
+7. **Too many accent colors at once:** brick, gold, green, slate tint, plus gold chips.
+
+**Three directions to choose from,** all in the current colors and fonts. Mockups were shown in the conversation on 11/3.
+
+- **Plain checklist,** closest to round 1. One open section per row with hairline dividers, no nested boxes. Each row shows the tier as a small dot and words, the one-line meaning, "Before you sign, ask the landlord in writing for:" with short bullets, and two text links: "See what to say" and "Show the lease's words".
+- **Annotated lease.** The lease's words sit on a white page with the key passage highlighted. The meaning and the ask sit beside it like a margin note. This fits "Lease text first".
+- **Summary first.** Three counts at the top (highest stakes, costs money, things to ask for), then one line per section that opens for more. This fits "Risk summary first".
+
+These could also map one direction to each version, which would make the three versions easier to tell apart.
+
+**Accessibility check of the directions:**
+- Tier text #7A2A1F on cream is about 8:1. Muted text #655468 on cream is about 6.3:1.
+- The tier is always a word, never color alone.
+- Links are underlined.
+
+The real page would keep 16 px body text and 44 px tap targets.

@@ -54,7 +54,10 @@
     "labels.notSortedIntro",
     "labels.blankNumber",
     "labels.section",
-    "labels.startOfLease"
+    "labels.startOfLease",
+    "labels.moreAboutAsk",
+    "labels.thingsToAsk",
+    "labels.why"
   ],
   "page": {
     "draftNote": "Test version. Some wording on this page is still a draft."
@@ -128,6 +131,9 @@
     "onThisPage": "On this page",
     "blankNumber": "(see the lease)",
     "section": "Section",
-    "startOfLease": "Start of the lease"
+    "startOfLease": "Start of the lease",
+    "moreAboutAsk": "See what to say",
+    "thingsToAsk": "Things to ask for",
+    "why": "Why"
   }
 }
