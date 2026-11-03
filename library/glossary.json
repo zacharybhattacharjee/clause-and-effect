@@ -4,14 +4,14 @@
     {
       "words": "Premises",
       "meaning": "The space you're renting.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Term",
       "meaning": "How long the lease lasts.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Base Rent",
@@ -40,14 +40,14 @@
     {
       "words": "Proportionate Share",
       "meaning": "Your part of a building-wide cost, usually based on the size of your space.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Base Year",
       "meaning": "The year used as the starting point. You pay part of any increase above that year's costs.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Triple net",
@@ -76,8 +76,8 @@
     {
       "words": "Assignment",
       "meaning": "Handing your lease over to someone else, often when you sell your business.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Sublet",
@@ -112,8 +112,8 @@
     {
       "words": "Surrender",
       "meaning": "Giving the space back at the end of the lease.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Estoppel certificate",
@@ -123,9 +123,9 @@
     },
     {
       "words": "Subordination",
-      "meaning": "Your lease ranks below the landlord's mortgage. If the landlord loses the building, the lender may not have to keep your lease.",
-      "status": "Draft (Claude)",
-      "live": false
+      "meaning": "Your lease ranks below the landlord's mortgage. If the landlord loses the building to its lender, the lender may not have to keep your lease.",
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Waiver of subrogation",
@@ -136,8 +136,8 @@
     {
       "words": "Force majeure",
       "meaning": "Events no one controls, like floods or wars, that can excuse late performance.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Notwithstanding",
@@ -148,8 +148,8 @@
     {
       "words": "Including without limitation",
       "meaning": "The list that follows is only examples. More things are covered.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "words": "Controllable Operating Expenses",
