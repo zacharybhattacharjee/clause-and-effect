@@ -1,0 +1,1004 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "versions": [
+    {
+      "id": "default-notice-and-cure",
+      "type": "default",
+      "cues": [
+        "within {days} days after written notice",
+        "after written notice thereof"
+      ],
+      "example": "continue for a period of ten (10) days after written notice thereof from Landlord",
+      "exampleSource": "ON Technology, 10-Q exhibit, 1997. https://www.sec.gov/Archives/edgar/data/0000925288/000092701697002345/0000927016-97-002345.txt/seq-2",
+      "plain": "If you miss a payment, the landlord must warn you in writing. You then have {days} days to pay before the landlord can end the lease.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Best",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: even with the usual warning and time to fix, it decides when the landlord can end the lease.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "default-no-notice",
+      "type": "default",
+      "cues": [
+        "without notice",
+        "without demand",
+        "immediately upon"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "The landlord can treat a late payment as breaking the lease right away, without warning you first.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1, and this version gives no time to fix the problem.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "default-split-periods",
+      "type": "default",
+      "cues": [
+        "monetary default",
+        "non-monetary default",
+        "other than the payment of rent",
+        "any other provision, covenant or condition"
+      ],
+      "example": "within five (5) business days after Landlord's delivery of written notice",
+      "exampleSource": "SiTime, 10-Q exhibit, 2026. https://www.sec.gov/Archives/edgar/data/0001451809/000145180926000041/exhibit103-leaseagreement.htm",
+      "plain": "You get {money_days} days to fix a missed payment, and {other_days} days to fix other problems.",
+      "numbers": [
+        "money_days",
+        "other_days"
+      ],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: it decides when the landlord can end the lease.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "default-notice-limited",
+      "type": "default",
+      "cues": [
+        "more than two (2) such notices",
+        "shall not be required to deliver any notice",
+        "without any obligation of Landlord to give any notice"
+      ],
+      "example": "not be required to give Tenant more than two (2) such written notices",
+      "exampleSource": "Mandiant, 10-K exhibit, 2021. https://www.sec.gov/Archives/edgar/data/1370880/000137088022000004/a10kexhibit102820211231.htm",
+      "plain": "You get a warning before a late payment counts as breaking the lease, but only {count} times in {months} months. After that, a late payment counts right away, with no warning.",
+      "numbers": [
+        "count",
+        "months"
+      ],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1, and after the warnings run out there's no time to fix the problem.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "default-extended-cure",
+      "type": "default",
+      "cues": [
+        "diligently commences such cure",
+        "cannot reasonably be cured within",
+        "diligently pursues"
+      ],
+      "example": "has commenced cure within such thirty (30) day period and diligently pursues same",
+      "exampleSource": "Castle Creek Biosciences, S-1 exhibit, 2021. https://www.sec.gov/Archives/edgar/data/1756702/000119312521217390/d167954dex1019.htm",
+      "plain": "For problems other than payment, you get {days} days to fix them, or longer if the fix takes more time and you keep working on it.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Best",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: even with extra time to fix, it decides when the landlord can end the lease.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "default-statutory-notice-replaced",
+      "type": "default",
+      "cues": [
+        "in lieu of, and not in addition to, any notice"
+      ],
+      "example": "in lieu of, and not in addition to, any notice periods provided by law",
+      "exampleSource": "Pulmonx, S-1 exhibit, 2020. https://www.sec.gov/Archives/edgar/data/1127537/000162828020013340/exhibit1018s-1xofficel.htm",
+      "plain": "The lease's warning replaces any warning the law would otherwise give you. You may get less time than the law would allow.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: it decides when the landlord can end the lease.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-unlimited",
+      "type": "personal-guaranty",
+      "cues": [
+        "unconditionally guarantees",
+        "full and punctual payment and performance",
+        "all obligations of Tenant"
+      ],
+      "example": "Guarantor absolutely, irrevocably and unconditionally guarantees",
+      "exampleSource": "First Seacoast Bancorp, 8-K exhibit, 2024. https://www.sec.gov/Archives/edgar/data/1943802/000094337424000256/ex10-2.htm",
+      "plain": "You personally promise to pay everything the business owes under the lease. If the business can't pay, the landlord can go after your own savings and property.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-payment-not-collection",
+      "type": "personal-guaranty",
+      "cues": [
+        "guaranty of payment and not of collection",
+        "separate action may be brought against Guarantor",
+        "whether or not an action is commenced against Tenant"
+      ],
+      "example": "a guaranty of payment and not of collection",
+      "exampleSource": "Yodle, S-1 exhibit, 2014 (personal guaranty by an individual). https://www.sec.gov/Archives/edgar/data/0001382605/000119312514262256/d721498dex103.htm",
+      "plain": "The landlord can come straight to you for the money. It doesn't have to try collecting from the business first.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-capped",
+      "type": "personal-guaranty",
+      "cues": [
+        "shall not exceed",
+        "limited to",
+        "maximum liability of Guarantor"
+      ],
+      "example": "THE MAXIMUM LIABILITY OF GUARANTOR HEREUNDER SHALL BE LIMITED TO",
+      "exampleSource": "Sensus Drug Development, S-1/A exhibit, 1998. https://www.sec.gov/Archives/edgar/data/0000949175/000101287098002520/0001012870-98-002520.txt/seq-6",
+      "plain": "You personally promise to pay up to {cap} if the business can't.",
+      "numbers": [
+        "cap"
+      ],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), even though the amount is capped. The rules stop at the first yes.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-step-down",
+      "type": "personal-guaranty",
+      "cues": [
+        "shall be reduced in accordance with the following schedule",
+        "shall be reduced by an amount equal to"
+      ],
+      "example": "the Cap shall be reduced in accordance with the following schedule",
+      "exampleSource": "JPC Capital Partners, 8-K exhibit, 2006. https://www.sec.gov/Archives/edgar/data/0001162867/000117266506000236/ex991.txt",
+      "plain": "The most you could owe under your personal promise goes down on a set schedule while the business keeps paying. The amounts and dates are in the lease's own words.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), even though the most you could owe goes down.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-burn-off",
+      "type": "personal-guaranty",
+      "cues": [
+        "shall terminate after",
+        "provided Tenant is not then in default",
+        "as of the first day of the"
+      ],
+      "example": "Guarantor's liability hereunder, shall be limited to one (1) month's installment",
+      "exampleSource": "Munson Crowd Group, Form C, 2026 (small-business crowdfunding filing). https://www.sec.gov/Archives/edgar/data/2109751/000210975126000001/munsoncrowdgroup_formc26227.pdf",
+      "plain": "Your personal promise shrinks or ends after {months} months, as long as the business hasn't broken the lease.",
+      "numbers": [
+        "months"
+      ],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1) until it ends.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-good-guy",
+      "type": "personal-guaranty",
+      "cues": [
+        "vacates and surrenders possession",
+        "delivered the keys",
+        "prior written notice of",
+        "Surrender Date",
+        "good guy"
+      ],
+      "example": "given Landlord one month's prior written notice that Tenant intends to vacate",
+      "exampleSource": "Phreesia, S-1 exhibit, 2019. https://www.sec.gov/Archives/edgar/data/1412408/000119312519178862/d692551dex1013.htm",
+      "plain": "If the business gives {notice_period} notice, pays rent through move-out, hands back the keys, and leaves, your personal promise covers only rent up to the day you leave. Miss any step, and the full promise may still apply.",
+      "numbers": [
+        "notice_period"
+      ],
+      "rating": "Best",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), though it's limited to rent up to the day you leave.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-initial-term-only",
+      "type": "personal-guaranty",
+      "cues": [
+        "during the initial term"
+      ],
+      "example": "payable by Tenant, its successors and assigns, during the initial term",
+      "exampleSource": "ICON plc, 20-F exhibit, 2013. https://www.sec.gov/Archives/edgar/data/0001060955/000115752314001042/a50812469ex10_3.htm",
+      "plain": "Your personal promise covers only the first lease term, not any renewal.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1) during the first term.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "guaranty-survives-changes",
+      "type": "personal-guaranty",
+      "cues": [
+        "renewal, modification or extension of the Lease",
+        "whether or not Guarantor shall have received any notice",
+        "modification or amendment"
+      ],
+      "example": "the modification or amendment of any of the obligations of Tenant",
+      "exampleSource": "EDGAR filer CIK 1104038, exhibit 10.10, 2022. https://www.sec.gov/Archives/edgar/data/1104038/000121465922005800/ex10_10.htm",
+      "plain": "Your personal promise still applies if the lease is renewed, changed, or transferred, even if no one tells you.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), including for changes you didn't agree to.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "opex-base-year",
+      "type": "operating-costs",
+      "cues": [
+        "in excess of Operating Expenses for the Base Year",
+        "over the Base Year"
+      ],
+      "example": "exceed Operating Expenses for the Base Year",
+      "exampleSource": "Pier 1 Imports, 10-Q exhibit, 2008. https://www.sec.gov/Archives/edgar/data/0000278130/000095013408012504/d58236exv10w1.htm",
+      "plain": "You pay your share of any increase in building costs above what they were in {base_year}.",
+      "numbers": [
+        "base_year"
+      ],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): increases come from the landlord's costs, not from anything unusual you do.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "opex-full-share",
+      "type": "operating-costs",
+      "cues": [
+        "Tenant's Proportionate Share of all Operating Expenses",
+        "net lease"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "You pay {share} of the building's costs every year, on top of your rent.",
+      "numbers": [
+        "share"
+      ],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): your share of all building costs, which come from running the building.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "opex-capped",
+      "type": "operating-costs",
+      "cues": [
+        "Controllable Operating Expenses",
+        "shall not increase by more than",
+        "cap on"
+      ],
+      "example": "shall not increase by more than 5% per calendar year",
+      "exampleSource": "Carbon Black, S-1 exhibit, 2018. https://www.sec.gov/Archives/edgar/data/0001366527/000104746918002643/a2235165zex-10_1.htm",
+      "plain": "Some building costs, the ones the landlord controls, can't go up more than {percent} a year. Taxes, insurance, utilities, and snow removal usually aren't covered by the limit.",
+      "numbers": [
+        "percent"
+      ],
+      "rating": "Best",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, but capped (tier 2).",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "opex-cap-carryforward",
+      "type": "operating-costs",
+      "cues": [
+        "carried forward",
+        "until fully recouped",
+        "carry-forward"
+      ],
+      "example": "may be carried forward to any future year",
+      "exampleSource": "Vaxcyte, 10-K exhibit, 2024. https://www.sec.gov/Archives/edgar/data/1649094/000164909425000028/exhibit1022.htm",
+      "plain": "If costs rise less than the limit one year, the landlord can save the difference and charge more in a later year.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, but still capped, even with unused room carried forward (tier 2).",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "opex-includes-capital",
+      "type": "operating-costs",
+      "cues": [
+        "capital improvements",
+        "capital repairs",
+        "capital expenditures"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "Your share can include the cost of major building upgrades, like a new roof.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): the landlord decides on upgrades, and the lease sets no limit.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "opex-estimates-only",
+      "type": "operating-costs",
+      "cues": [
+        "are only estimates",
+        "makes no guaranty or warranty that such estimates"
+      ],
+      "example": "Landlord makes no guaranty or warranty that such estimates will be accurate",
+      "exampleSource": "Sears Hometown and Outlet, 10-Q exhibit, 2016. https://www.sec.gov/Archives/edgar/data/0001548309/000154830916000101/exh1012.htm",
+      "plain": "The building-cost amount you were quoted is only a guess. You'll pay the real amount, even if it's higher.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): the real amount can be any amount above the estimate.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "transfer-consent-reasonable",
+      "type": "assignment-subletting",
+      "cues": [
+        "not be unreasonably withheld",
+        "not to be unreasonably withheld",
+        "not be unreasonably withheld, conditioned or delayed"
+      ],
+      "example": "not to be unreasonably withheld",
+      "exampleSource": "Insmed, 10-Q exhibit, 2016. https://www.sec.gov/Archives/edgar/data/0001104506/000110465916136806/a16-11538_1ex10d1.htm",
+      "plain": "You need the landlord's permission to transfer the lease or rent out the space. The landlord needs a good reason to say no.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): you ask, and the landlord needs a good reason to refuse.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "transfer-sole-discretion",
+      "type": "assignment-subletting",
+      "cues": [
+        "sole discretion",
+        "sole and absolute discretion",
+        "may withhold consent for any reason"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "You need the landlord's permission to transfer the lease or rent out the space. The landlord can say no for any reason.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the business (tier 1): the landlord can block a sale of the business for any reason.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "transfer-change-of-control",
+      "type": "assignment-subletting",
+      "cues": [
+        "change in control",
+        "Change of Control",
+        "more than fifty percent (50%) of the ownership",
+        "transfer of stock"
+      ],
+      "example": "change in more than fifty percent (50%) of the ownership interest",
+      "exampleSource": "WatchGuard Technologies, 10-K405/A exhibit, 1999. https://www.sec.gov/Archives/edgar/data/0001062019/000103221000000850/0001032210-00-000850.txt/seq-2",
+      "plain": "Selling your business, or bringing in a new owner, counts as transferring the lease. You'd need the landlord's permission.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the business (tier 1): selling it needs the landlord's permission.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "transfer-recapture",
+      "type": "assignment-subletting",
+      "cues": [
+        "recapture",
+        "Recapture Notice",
+        "terminate this Lease as to"
+      ],
+      "example": "it shall serve to terminate the entire term of this Lease",
+      "exampleSource": "BillionToOne, S-1 exhibit, 2025. https://www.sec.gov/Archives/edgar/data/2070849/000119312525233697/d903739dex105.htm",
+      "plain": "If you ask to transfer the lease, the landlord can end it and take the space back instead.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "transfer-tenant-stays-liable",
+      "type": "assignment-subletting",
+      "cues": [
+        "remain primarily liable",
+        "shall not relieve Tenant",
+        "shall not release Tenant",
+        "shall remain liable"
+      ],
+      "example": "Tenant will remain primarily liable on this Lease",
+      "exampleSource": "Sentigen Holding, 10-K exhibit, 2003. https://www.sec.gov/Archives/edgar/data/0000864890/000095012304003671/y95462exv10w23.txt",
+      "plain": "Even after you transfer the lease to a buyer, your business can still be made to pay if the buyer doesn't.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent if the buyer stops paying.",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "transfer-profit-sharing",
+      "type": "assignment-subletting",
+      "cues": [
+        "pay to Landlord as Additional Rent",
+        "excess rent",
+        "fifty percent (50%) of any"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "If you rent out the space for more than you pay, you must give the landlord part of the extra.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): a share of the extra rent you collect.",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "transfer-deemed-consent",
+      "type": "assignment-subletting",
+      "cues": [
+        "shall be deemed to have consented"
+      ],
+      "example": "Landlord shall be deemed to have consented to the proposed Transfer",
+      "exampleSource": "DURECT, 10-Q exhibit, 2005. https://www.sec.gov/Archives/edgar/data/0001082038/000119312505200975/dex1044.htm",
+      "plain": "If the landlord doesn't answer your request in time, the answer counts as yes.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a deadline rule that helps you.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "relocation-landlord-pays",
+      "type": "relocation",
+      "cues": [
+        "relocate Tenant",
+        "substitute premises",
+        "Landlord shall pay",
+        "at Landlord's expense"
+      ],
+      "example": "Landlord shall pay the reasonable out-of-pocket costs to relocate",
+      "exampleSource": "United Business Holdings, S-1 exhibit, 2008. https://www.sec.gov/Archives/edgar/data/0001443217/000095013408017775/d59828exv10w16.htm",
+      "plain": "The landlord can move your business to another space in the building, and pays the moving costs.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": null,
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 2 if the move costs you sales, tier 3 if the landlord's paying for the move covers it.",
+      "effectiveTier": null,
+      "live": false
+    },
+    {
+      "id": "relocation-cost-unstated",
+      "type": "relocation",
+      "cues": [
+        "relocate Tenant",
+        "substitute premises"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "The landlord can move your business to another space in the building. The lease doesn't say who pays to move.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): the landlord's decision to move you sets moving costs, and the lease doesn't say who pays.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "relocation-or-lease-ends",
+      "type": "relocation",
+      "cues": [
+        "refuses to accept the substitute",
+        "fails to reply",
+        "this Lease shall terminate"
+      ],
+      "example": "If Tenant refuses to accept the substitute Demised Premises",
+      "exampleSource": "Stellar Biotechnologies, 20-F exhibit, 2012. https://www.sec.gov/Archives/edgar/data/0001540159/000121716012000029/f332scottlease.htm",
+      "plain": "If you turn down the new space, your lease ends.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "relocation-limited",
+      "type": "relocation",
+      "cues": [
+        "more than once",
+        "only in connection with",
+        "at least {days} days' notice"
+      ],
+      "example": "shall not have the right to relocate Tenant's operation more than once",
+      "exampleSource": "Boston Restaurant Associates, 10-KSB exhibit, 1997. https://www.sec.gov/Archives/edgar/data/0000926295/000102986997000924/0001029869-97-000924.txt/seq-2",
+      "plain": "The landlord can move your business only once during the lease, with at least {days} days' notice.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Middle",
+      "tier": null,
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: it limits how often you can be moved, but doesn't say who pays the move.",
+      "effectiveTier": null,
+      "live": false
+    },
+    {
+      "id": "relocation-move-when-ready",
+      "type": "relocation",
+      "cues": [
+        "not be required to vacate",
+        "until all improvements are complete"
+      ],
+      "example": "until all improvements are complete in the Substitute Space",
+      "exampleSource": "Impossible Kicks, Form 1-A exhibit, 2024. https://www.sec.gov/Archives/edgar/data/1951179/000121390024052599/ea020760001ex6-29_imp.htm",
+      "plain": "You don't have to move until the new space is finished.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": null,
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: it says when you move, but not who pays for it.",
+      "effectiveTier": null,
+      "live": false
+    },
+    {
+      "id": "termination-on-notice",
+      "type": "landlord-termination",
+      "cues": [
+        "demolish",
+        "redevelop",
+        "expand or renovate",
+        "may terminate this Lease",
+        "days prior notice"
+      ],
+      "example": "upon one hundred eighty (180) days prior notice in writing to Tenant, may terminate",
+      "exampleSource": "uWink, 10-KSB exhibit, 2005. https://www.sec.gov/Archives/edgar/data/0001108699/000101968706000871/uwink_10kex10-8.txt",
+      "plain": "The landlord can end your lease with {days} days' notice to tear down, expand, or rebuild.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "termination-with-payment",
+      "type": "landlord-termination",
+      "cues": [
+        "cost (less depreciation)",
+        "unamortized",
+        "shall pay Tenant"
+      ],
+      "example": "shall pay Tenant, on the termination date, the cost (less depreciation)",
+      "exampleSource": "Healthy Extracts, 10-K exhibit, 2021. https://www.sec.gov/Archives/edgar/data/1630176/000152013822000131/hyex-20211231_10kex10z6.htm",
+      "plain": "If the landlord ends the lease to tear down the building, it pays you back part of what you spent improving the space.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1), even with some money back.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "deposit-top-up",
+      "type": "security-deposit",
+      "cues": [
+        "restore the security deposit to its original amount",
+        "replenish",
+        "original amount"
+      ],
+      "example": "Tenant will restore the security deposit to its original amount within five (5) days",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_609 (CC BY-NC 4.0)",
+      "plain": "If the landlord takes money out of your deposit, you must refill it within {days} days.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Worst",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, capped at the deposit amount (tier 2).",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "utilities-metered",
+      "type": "utilities",
+      "cues": [
+        "separately metered",
+        "all charges for",
+        "not separately metered"
+      ],
+      "example": "Tenant shall pay before delinquency all charges for separately metered water",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_741 (CC BY-NC 4.0)",
+      "plain": "You pay for utilities that have their own meter. Utilities without their own meter are added to your share of building costs.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": null,
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: metered use can be calculated (tier 2), but unmetered utilities join your building-cost share, which has no cap (tier 1).",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "utilities-no-liability",
+      "type": "utilities",
+      "cues": [
+        "no liability to Tenant",
+        "shall not be liable",
+        "for any interruption",
+        "failure to furnish"
+      ],
+      "example": "Landlord shall have no liability to Tenant or any other party for any interruption",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_930 (CC BY-NC 4.0)",
+      "plain": "If power, water, or another service goes out, the landlord doesn't owe you anything, even if you have to close.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): outages come from others, and you get nothing back, even if you have to close.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "utilities-no-rent-reduction",
+      "type": "utilities",
+      "cues": [
+        "not be entitled to any abatement",
+        "abatement or reduction of rent"
+      ],
+      "example": "Tenant shall not be entitled to any abatement or reduction",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_553 (CC BY-NC 4.0)",
+      "plain": "You still pay full rent while a service is out.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): you pay full rent through an outage someone else caused, however long it lasts.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "utilities-landlord-fault-only",
+      "type": "utilities",
+      "cues": [
+        "except such failure or interruption which results from the negligence"
+      ],
+      "example": "except such failure or interruption which results from the negligence",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_756 (CC BY-NC 4.0)",
+      "plain": "The landlord is responsible for an outage only if the landlord caused it.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): for outages the landlord didn't cause, you pay full rent however long they last.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "surrender-wear-and-tear",
+      "type": "surrender",
+      "cues": [
+        "ordinary wear and tear excepted",
+        "reasonable wear and tear"
+      ],
+      "example": "surrender the premises in good order and condition, ordinary wear and tear excepted",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_609 (CC BY-NC 4.0)",
+      "plain": "When you leave, the space must be in good shape, but normal wear from use is fine.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a move-out rule that protects you.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "surrender-remove-designated",
+      "type": "surrender",
+      "cues": [
+        "which Landlord designated to be removed",
+        "Landlord has requested be removed"
+      ],
+      "example": "remove any alterations, additions or improvements which Landlord designated to be removed",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_747 (CC BY-NC 4.0)",
+      "plain": "When you leave, you must remove the changes the landlord said to remove when it approved them, at your cost.",
+      "numbers": [],
+      "rating": "Middle",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): only the changes named in writing.",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "surrender-remove-all",
+      "type": "surrender",
+      "cues": [
+        "remove any such improvements constructed or installed by Landlord or Tenant",
+        "repair all damage caused by such removal"
+      ],
+      "example": "remove any such improvements constructed or installed by Landlord or Tenant and repair all damage caused by such removal",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_637 (CC BY-NC 4.0)",
+      "plain": "When you leave, you may have to remove improvements, even ones the landlord built, and repair the damage.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): removal comes with every normal move-out, and covers even the landlord's improvements.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "repairs-landlord-structural",
+      "type": "repairs",
+      "cues": [
+        "Landlord shall maintain, repair and replace",
+        "roof",
+        "exterior walls",
+        "structural portions"
+      ],
+      "example": "Landlord shall maintain, repair and replace the roof, exterior walls",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_930 (CC BY-NC 4.0)",
+      "plain": "The landlord fixes the roof, outside walls, and main building systems.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): the landlord handles the big repairs.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "repairs-landlord-self-help",
+      "type": "repairs",
+      "cues": [
+        "Landlord may ... make necessary repairs",
+        "Tenant shall pay the entire cost"
+      ],
+      "example": "Tenant shall pay the entire cost of the repair or maintenance to the Landlord",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_907 (CC BY-NC 4.0)",
+      "plain": "If you don't make a repair the lease requires, the landlord can do it after {days} days' notice and bill you.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Middle",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money (tier 2). No cap doesn't count: it only happens if you skip a repair the lease requires.",
+      "effectiveTier": 2,
+      "live": false
+    },
+    {
+      "id": "casualty-landlord-may-terminate",
+      "type": "casualty-condemnation",
+      "cues": [
+        "Landlord may ... terminate this Lease",
+        "days after the damage"
+      ],
+      "example": "within forty-five (45) days after the damage, terminate this Lease",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_747 (CC BY-NC 4.0)",
+      "plain": "If a fire or other disaster damages the building, the landlord can end your lease within {days} days.",
+      "numbers": [
+        "days"
+      ],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1).",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "casualty-rent-abates",
+      "type": "casualty-condemnation",
+      "cues": [
+        "rent shall abate",
+        "abate proportionately"
+      ],
+      "example": "the rent shall abate in full during the period of such rebuilding",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_756 (CC BY-NC 4.0)",
+      "plain": "You don't pay rent while the space is being rebuilt.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a protection. Rent stops while the space is rebuilt.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "subordination-with-non-disturbance",
+      "type": "subordination-estoppel",
+      "cues": [
+        "will not disturb",
+        "non-disturbance",
+        "SNDA"
+      ],
+      "example": "the holder will not disturb Tenant's leasehold interest",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_741 (CC BY-NC 4.0)",
+      "plain": "Your lease ranks below the landlord's mortgage, but if the lender takes over, it must keep your lease as long as you're not in default.",
+      "numbers": [],
+      "rating": "Best",
+      "tier": 3,
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): the lender must keep your lease. Your brief gives this example.",
+      "effectiveTier": 3,
+      "live": false
+    },
+    {
+      "id": "subordination-only",
+      "type": "subordination-estoppel",
+      "cues": [
+        "subject and subordinate to the lien of any mortgage",
+        "subject and subordinate to"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "Your lease ranks below the landlord's mortgage. If the landlord's lender takes over the building, it may not have to keep your lease.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 1,
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1): the landlord's lender may not have to keep your lease. Your brief gives this example.",
+      "effectiveTier": 1,
+      "live": false
+    },
+    {
+      "id": "no-early-exit",
+      "type": "tenant-termination",
+      "cues": [
+        "will not release the Lessee",
+        "shall not relieve Tenant",
+        "vacating ... will not release"
+      ],
+      "example": "will not release the Lessee from his liabilities",
+      "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_contract_115 (foreign lease in English) (CC BY-NC 4.0)",
+      "plain": "Closing the business or moving out early doesn't end the lease. You still owe rent.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": 2,
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent after you close.",
+      "effectiveTier": 2,
+      "live": false
+    }
+  ]
+}

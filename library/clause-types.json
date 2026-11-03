@@ -1,0 +1,682 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "types": [
+    {
+      "id": "rent-base",
+      "name": "Base rent and increases",
+      "gbrebSection": "",
+      "triggers": [
+        "Base Rent",
+        "Annual Rent",
+        "Minimum Rent",
+        "Fixed Rent",
+        "rent adjustment",
+        "rent at the rate of",
+        "CPI",
+        "Consumer Price Index",
+        "Price Index"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: fixed rent can be calculated (tier 2), but increases tied to an index like the CPI have no cap (tier 1).",
+      "live": false
+    },
+    {
+      "id": "taxes",
+      "name": "Real estate taxes",
+      "gbrebSection": "6A",
+      "triggers": [
+        "Real Estate Taxes",
+        "Taxes",
+        "tax escalation",
+        "Base Tax Year",
+        "Tenant's share of taxes"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): tax increases come from the city, not from anything you do.",
+      "live": false
+    },
+    {
+      "id": "operating-costs",
+      "name": "Operating costs (CAM)",
+      "gbrebSection": "6B",
+      "triggers": [
+        "Operating Expenses",
+        "Operating Costs",
+        "operating cost",
+        "Common Area Maintenance",
+        "CAM"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): your share comes from the landlord's costs of running the building.",
+      "live": false
+    },
+    {
+      "id": "late-charge",
+      "name": "Late fees and interest",
+      "gbrebSection": "25",
+      "triggers": [
+        "late charge",
+        "overdue",
+        "interest at the rate of",
+        "service charge",
+        "past due"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): a set charge or rate on the late amount.",
+      "live": false
+    },
+    {
+      "id": "security-deposit",
+      "name": "Security deposit",
+      "gbrebSection": "",
+      "triggers": [
+        "security deposit",
+        "letter of credit",
+        "Security",
+        "as security for",
+        "original amount"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, capped at the deposit amount (tier 2).",
+      "live": false
+    },
+    {
+      "id": "term-renewal",
+      "name": "Length of lease and renewal",
+      "gbrebSection": "",
+      "triggers": [
+        "Term",
+        "Commencement Date",
+        "Expiration Date",
+        "option to extend",
+        "renewal",
+        "Extension Term",
+        "Option Period"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if missing a renewal deadline would cost you the space, tier 3 if it's only dates and notices.",
+      "live": false
+    },
+    {
+      "id": "use",
+      "name": "What you can use the space for",
+      "gbrebSection": "",
+      "triggers": [
+        "Use",
+        "Permitted Use",
+        "use the Premises for",
+        "use of leased premises",
+        "for no other purpose"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): what you may use the space for.",
+      "live": false
+    },
+    {
+      "id": "exclusive",
+      "name": "Exclusive right to sell",
+      "gbrebSection": "",
+      "triggers": [
+        "exclusive",
+        "Landlord shall not lease",
+        "competing business"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a right that protects you from competing tenants.",
+      "live": false
+    },
+    {
+      "id": "condition-premises",
+      "name": "Condition at move-in",
+      "gbrebSection": "23",
+      "triggers": [
+        "as is",
+        "condition of the Premises",
+        "condition of premises",
+        "Landlord's Work",
+        "Tenant's Work"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): you may have to fix problems that were there before you moved in, which you didn't cause.",
+      "live": false
+    },
+    {
+      "id": "repairs",
+      "name": "Repairs and maintenance",
+      "gbrebSection": "",
+      "triggers": [
+        "repair",
+        "maintain",
+        "maintenance",
+        "agrees to maintain",
+        "maintain the structure",
+        "good order and condition",
+        "in good order",
+        "in good repair",
+        "HVAC",
+        "structural",
+        "roof",
+        "exterior walls"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "c. 186, § 19 repair duty after notice of unsafe condition; applied to a commercial lease (Bishop v. TES Realty Trust, 2011). Verify.",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if you must fix major systems such as the roof or heating with no cap, tier 2 or 3 if only minor repairs.",
+      "live": false
+    },
+    {
+      "id": "alterations",
+      "name": "Changes to the space",
+      "gbrebSection": "",
+      "triggers": [
+        "alterations",
+        "improvements",
+        "additions",
+        "Landlord's prior written consent"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): you need permission before changing the space.",
+      "live": false
+    },
+    {
+      "id": "assignment-subletting",
+      "name": "Selling the business or subletting",
+      "gbrebSection": "13",
+      "triggers": [
+        "assign",
+        "assignment",
+        "assign or sublet",
+        "sublet",
+        "sublease",
+        "transfer",
+        "change of control",
+        "recapture"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if the landlord can refuse a transfer for any reason, tier 3 if it needs a good reason. The versions set this.",
+      "live": false
+    },
+    {
+      "id": "insurance",
+      "name": "Insurance you must carry",
+      "gbrebSection": "17",
+      "triggers": [
+        "insurance",
+        "general liability",
+        "additional insured",
+        "certificate of insurance",
+        "waiver of subrogation"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): the premiums for the insurance you must carry.",
+      "live": false
+    },
+    {
+      "id": "indemnity",
+      "name": "Covering the landlord's losses",
+      "gbrebSection": "16",
+      "triggers": [
+        "indemnify",
+        "indemnification",
+        "hold harmless",
+        "defend"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "c. 186, § 15 voids clauses making the tenant cover the landlord's own negligence; applied to commercial leases (Norfolk & Dedham v. Morrison, 2010). Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): you cover the landlord's losses from claims, such as a customer's injury, that come from running the business.",
+      "live": false
+    },
+    {
+      "id": "default",
+      "name": "What counts as breaking the lease",
+      "gbrebSection": "19",
+      "triggers": [
+        "Event of Default",
+        "default",
+        "cure",
+        "fails to pay",
+        "re-enter",
+        "terminate this Lease"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: it decides when the landlord can end the lease.",
+      "live": false
+    },
+    {
+      "id": "damages",
+      "name": "What you owe after a default",
+      "gbrebSection": "",
+      "triggers": [
+        "accelerate",
+        "balance of the Term",
+        "deficiency",
+        "liquidated damages",
+        "reletting"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): the rent for the rest of the term. No cap doesn't count, since it only follows a default.",
+      "live": false
+    },
+    {
+      "id": "personal-guaranty",
+      "name": "Personal guaranty",
+      "gbrebSection": "",
+      "triggers": [
+        "Guaranty",
+        "Guarantor",
+        "personally guarantee",
+        "individually",
+        "jointly and severally"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1).",
+      "live": false
+    },
+    {
+      "id": "relocation",
+      "name": "Landlord can move you",
+      "gbrebSection": "",
+      "triggers": [
+        "relocate",
+        "relocation",
+        "substitute premises"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if the landlord can move you without paying, tier 2 or 3 if it pays and finishes the new space first. The versions set this.",
+      "live": false
+    },
+    {
+      "id": "landlord-termination",
+      "name": "Landlord can end the lease early",
+      "gbrebSection": "",
+      "triggers": [
+        "demolish",
+        "demolition",
+        "redevelop",
+        "sale of the Building",
+        "terminate this Lease upon"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1).",
+      "live": false
+    },
+    {
+      "id": "access",
+      "name": "Landlord entering your space",
+      "gbrebSection": "",
+      "triggers": [
+        "enter the Premises",
+        "access",
+        "inspect",
+        "show the Premises"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): when the landlord may enter the space.",
+      "live": false
+    },
+    {
+      "id": "signage",
+      "name": "Signs",
+      "gbrebSection": "",
+      "triggers": [
+        "sign",
+        "signage",
+        "storefront"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): what signs you may put up.",
+      "live": false
+    },
+    {
+      "id": "casualty-condemnation",
+      "name": "Fire, damage, or government taking",
+      "gbrebSection": "",
+      "triggers": [
+        "fire or other casualty",
+        "damage or destruction",
+        "damaged or destroyed",
+        "untenantable",
+        "taking",
+        "eminent domain",
+        "condemnation"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can cost you the space (tier 1): after a fire or a government taking, the lease can end.",
+      "live": false
+    },
+    {
+      "id": "holdover",
+      "name": "Staying after the lease ends",
+      "gbrebSection": "",
+      "triggers": [
+        "holdover",
+        "hold over",
+        "remain in possession"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): a set rent, often higher, if you stay after the lease ends.",
+      "live": false
+    },
+    {
+      "id": "surrender",
+      "name": "Move-out duties",
+      "gbrebSection": "",
+      "triggers": [
+        "surrender",
+        "remove",
+        "restore",
+        "yield up",
+        "broom clean",
+        "wear and tear",
+        "expiration or termination"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if you must remove all improvements with no limit, tier 2 or 3 if only named changes or normal wear. The versions set this.",
+      "live": false
+    },
+    {
+      "id": "subordination-estoppel",
+      "name": "Lender paperwork",
+      "gbrebSection": "",
+      "triggers": [
+        "subordinate",
+        "subordination",
+        "subject and subordinate",
+        "lien of any mortgage",
+        "SNDA",
+        "estoppel certificate",
+        "attornment",
+        "non-disturbance"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 without a non-disturbance promise, tier 3 with one, as your brief's example says. The versions set this.",
+      "live": false
+    },
+    {
+      "id": "notices",
+      "name": "How notices must be sent",
+      "gbrebSection": "20",
+      "triggers": [
+        "notice",
+        "notices",
+        "certified mail",
+        "address for notices"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): how notices must be sent.",
+      "live": false
+    },
+    {
+      "id": "attorneys-fees",
+      "name": "Legal fees",
+      "gbrebSection": "",
+      "triggers": [
+        "attorneys' fees",
+        "legal fees",
+        "costs of collection",
+        "costs of enforcement"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money (tier 2). No cap doesn't count, since the fees only come with a dispute or a default.",
+      "live": false
+    },
+    {
+      "id": "jury-waiver",
+      "name": "Giving up a jury trial",
+      "gbrebSection": "",
+      "triggers": [
+        "waive trial by jury",
+        "jury trial",
+        "waiver of jury"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): how a dispute would be decided.",
+      "live": false
+    },
+    {
+      "id": "tenant-termination",
+      "name": "Your right to end early",
+      "gbrebSection": "",
+      "triggers": [
+        "Tenant may terminate",
+        "termination fee",
+        "early termination",
+        "right to terminate"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a right that lets you end early.",
+      "live": false
+    },
+    {
+      "id": "utilities",
+      "name": "Utilities and service outages",
+      "gbrebSection": "",
+      "triggers": [
+        "utilities",
+        "separately metered",
+        "electricity",
+        "water",
+        "gas",
+        "interruption",
+        "failure to furnish"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: metered bills can be calculated (tier 2), but outages with no rent reduction have no cap (tier 1). The versions set this.",
+      "live": false
+    },
+    {
+      "id": "more-space-or-purchase",
+      "name": "Right to more space or to buy",
+      "gbrebSection": "",
+      "triggers": [
+        "right of first refusal",
+        "right of first offer",
+        "ROFR",
+        "ROFO",
+        "expansion space",
+        "option to purchase"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a right that helps you.",
+      "live": false
+    },
+    {
+      "id": "riders-amendments",
+      "name": "Riders and changes to the lease",
+      "gbrebSection": "",
+      "triggers": [
+        "Rider",
+        "Exhibit",
+        "Addendum",
+        "Amendment",
+        "in the event of any conflict"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: a rider can change any part of the lease, so its tier depends on what it changes.",
+      "live": false
+    },
+    {
+      "id": "liability-of-owner",
+      "name": "Limits on what the landlord owes you",
+      "gbrebSection": "26",
+      "triggers": [
+        "liability of owner",
+        "liability of landlord",
+        "landlord's liability",
+        "limitation of landlord's liability",
+        "no owner of the property"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if your losses from a landlord's broken promise could be large, tier 3 if it only limits whom you can sue.",
+      "live": false
+    },
+    {
+      "id": "force-majeure",
+      "name": "Delays no one can control",
+      "gbrebSection": "24",
+      "triggers": [
+        "force majeure",
+        "beyond the control of",
+        "beyond its reasonable control",
+        "acts of God",
+        "unavoidable delays"
+      ],
+      "tier": 2,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): on the GBREB form you keep paying full rent through delays no one controls, however long they last.",
+      "live": false
+    },
+    {
+      "id": "brokerage",
+      "name": "The real estate broker",
+      "gbrebSection": "22",
+      "triggers": [
+        "brokerage",
+        "broker",
+        "brokers",
+        "brokerage commission",
+        "real estate broker"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3). No cap doesn't count: the cost only comes if you used a broker you didn't name.",
+      "live": false
+    },
+    {
+      "id": "compliance-with-laws",
+      "name": "Following laws and local rules",
+      "gbrebSection": "9",
+      "triggers": [
+        "compliance with laws",
+        "comply with all laws",
+        "applicable laws",
+        "by-law or ordinance"
+      ],
+      "tier": 3,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3). No cap doesn't count: the cost only comes if your use breaks a law.",
+      "live": false
+    },
+    {
+      "id": "insurance-increase",
+      "name": "Uses that raise the building's insurance",
+      "gbrebSection": "10",
+      "triggers": [
+        "fire insurance",
+        "make voidable any insurance",
+        "extra insurance premiums",
+        "increase the rate of insurance",
+        "rate of fire insurance",
+        "increase in insurance premiums"
+      ],
+      "tier": 1,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if your normal business raises the building's insurance, such as cooking, since there's no cap. Tier 3 if it doesn't.",
+      "live": false
+    }
+  ]
+}

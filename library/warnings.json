@@ -1,0 +1,275 @@
+{
+  "note": "Made by tools/convert-workbook.py from library/clause-library.xlsx. Don't edit by hand: change the workbook and run the converter again.",
+  "warnings": [
+    {
+      "phrase": "sole discretion",
+      "kind": "risky",
+      "meaning": "The landlord can decide for any reason.",
+      "matchingNotes": "Also: sole and absolute discretion; in Landlord's judgment; in its sole judgment",
+      "plainAsk": "Ask that the landlord need a good reason to say no.",
+      "legalWording": "not be unreasonably withheld, conditioned, or delayed",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "not be unreasonably withheld",
+      "kind": "friendly",
+      "meaning": "The landlord needs a good reason to say no.",
+      "matchingNotes": "Must match as a whole phrase. Contains 'withheld'; don't flag as risky.",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "without notice",
+      "kind": "risky",
+      "meaning": "No warning before the landlord acts.",
+      "matchingNotes": "Also: without demand",
+      "plainAsk": "Ask for a written warning and time to fix the problem first.",
+      "legalWording": "after written notice and [ten (10)] days to cure",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "hereby waives",
+      "kind": "risky",
+      "meaning": "You give up a right.",
+      "matchingNotes": "Also: waives; waiver",
+      "plainAsk": "Ask to remove the waiver.",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "jointly and severally",
+      "kind": "risky",
+      "meaning": "Each person who signs can be made to pay the full amount.",
+      "matchingNotes": "",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "personally",
+      "kind": "risky",
+      "meaning": "You, not just the business, are on the hook.",
+      "matchingNotes": "Also: individually. Check that it refers to the tenant or guarantor.",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "balance of the Term",
+      "kind": "risky",
+      "meaning": "You could owe rent for the rest of the lease all at once.",
+      "matchingNotes": "Also: accelerate; all Rent for the remainder",
+      "plainAsk": "Ask that the landlord try to rent the space again and subtract that rent from what you owe.",
+      "legalWording": "Landlord shall use reasonable efforts to relet the Premises, and any rent received shall be credited against Tenant's obligations.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "at Tenant's sole cost and expense",
+      "kind": "risky",
+      "meaning": "You pay the full cost.",
+      "matchingNotes": "",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "as is",
+      "kind": "risky",
+      "meaning": "You take the space in its current condition, problems included.",
+      "matchingNotes": "Also: as-is; in its present condition",
+      "plainAsk": "Ask the landlord to promise the building systems work when you move in.",
+      "legalWording": "Landlord represents that the building systems serving the Premises are in good working order on the Commencement Date.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "time is of the essence",
+      "kind": "risky",
+      "meaning": "Deadlines are strict. Being even a day late can count as breaking the lease.",
+      "matchingNotes": "",
+      "plainAsk": "Ask to limit strict deadlines to rent payment dates.",
+      "legalWording": "Time is of the essence only as to the payment of Rent.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "irrevocable",
+      "kind": "risky",
+      "meaning": "You can't take this back later.",
+      "matchingNotes": "",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "reasonable",
+      "kind": "friendly",
+      "meaning": "The landlord has to act sensibly.",
+      "matchingNotes": "Weak alone. Count it only next to consent, approval, or costs.",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "shall not exceed",
+      "kind": "friendly",
+      "meaning": "There's a limit on how much this can cost.",
+      "matchingNotes": "Also: cap; capped at",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "guaranty of payment and not of collection",
+      "kind": "risky",
+      "meaning": "The landlord can come straight to you without trying the business first.",
+      "matchingNotes": "",
+      "plainAsk": "Ask that the landlord try to collect from the business first.",
+      "legalWording": "Landlord shall first exhaust its remedies against Tenant before seeking payment from Guarantor.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "in lieu of, and not in addition to",
+      "kind": "risky",
+      "meaning": "The lease's warning replaces the one the law would give.",
+      "matchingNotes": "Must match as a whole phrase. The reverse order is friendly.",
+      "plainAsk": "Ask that the lease's warning add to the law's warning, not replace it.",
+      "legalWording": "in addition to, and not in lieu of",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "in addition to, and not in lieu of",
+      "kind": "friendly",
+      "meaning": "You get the lease's warning and the law's warning.",
+      "matchingNotes": "Must match as a whole phrase.",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "remain primarily liable",
+      "kind": "risky",
+      "meaning": "You still owe money after transferring the lease.",
+      "matchingNotes": "Also: shall not relieve Tenant",
+      "plainAsk": "Ask to be released once the landlord approves the buyer.",
+      "legalWording": "Tenant and any Guarantor shall be released upon an assignment approved by Landlord.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "deemed to have consented",
+      "kind": "friendly",
+      "meaning": "If the landlord doesn't answer in time, the answer is yes.",
+      "matchingNotes": "",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "Controllable",
+      "kind": "risky",
+      "meaning": "A cost limit may cover only part of the building costs.",
+      "matchingNotes": "Flag only near a cap on operating expenses.",
+      "plainAsk": "Ask that the limit cover all building costs except taxes and insurance.",
+      "legalWording": "Controllable Operating Expenses shall mean all Operating Expenses other than Taxes and insurance premiums.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "carried forward",
+      "kind": "risky",
+      "meaning": "Savings under a cost limit can be charged later.",
+      "matchingNotes": "Flag only near a cap on operating expenses.",
+      "plainAsk": "Ask that unused room under the limit not carry over to later years.",
+      "legalWording": "without carry-forward of any unused amount",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "no representations have been made",
+      "kind": "risky",
+      "meaning": "Anything the landlord or broker told you that isn't written in the lease doesn't count.",
+      "matchingNotes": "Also: entire agreement; supersedes all prior",
+      "plainAsk": "Ask to add any promise the landlord or broker made to the lease, as an exhibit.",
+      "legalWording": "The representations set forth in Exhibit [X] are made part of this Lease.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "for any interruption",
+      "kind": "risky",
+      "meaning": "The landlord doesn't owe you anything when a service goes out.",
+      "matchingNotes": "Flag only near 'shall not be liable' or 'no liability'.",
+      "plainAsk": "Ask for a rent reduction if a service is out for more than a few days.",
+      "legalWording": "Rent shall abate if service is interrupted for more than [three (3)] consecutive business days.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "not be entitled to any abatement",
+      "kind": "risky",
+      "meaning": "You keep paying full rent even when you can't fully use the space.",
+      "matchingNotes": "",
+      "plainAsk": "Ask for a rent reduction if a service is out for more than a few days.",
+      "legalWording": "Rent shall abate if service is interrupted for more than [three (3)] consecutive business days.",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "rent shall abate",
+      "kind": "friendly",
+      "meaning": "Your rent goes down or stops while you can't use the space.",
+      "matchingNotes": "Also: abate proportionately",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "will not disturb",
+      "kind": "friendly",
+      "meaning": "A lender who takes over the building must keep your lease.",
+      "matchingNotes": "Also: non-disturbance; SNDA",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "ordinary wear and tear excepted",
+      "kind": "friendly",
+      "meaning": "Normal wear from use doesn't count against you at move-out.",
+      "matchingNotes": "Also: reasonable wear and tear",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    },
+    {
+      "phrase": "except to the extent caused by Landlord's negligence",
+      "kind": "friendly",
+      "meaning": "You don't cover harm the landlord caused.",
+      "matchingNotes": "Relates to c. 186, § 15.",
+      "plainAsk": "",
+      "legalWording": "",
+      "status": "Draft (Claude)",
+      "live": false
+    }
+  ]
+}

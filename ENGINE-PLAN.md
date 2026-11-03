@@ -1,6 +1,10 @@
 # Plan: the lease-reading engine
 
-Status: draft for Zachary to review. Nothing in this plan is built. The questions are at the end.
+Status: stage 1's behind-the-scenes part is built (11/3): the converter, the library files, the engine and a check page. The tester page doesn't use the engine yet, because the round 2 layout is still being decided. Results are in `tools/first-run.md`. The questions are at the end.
+
+Two changes to the plan, from building it:
+- **20 U.S. leases, not 36.** Only 20 of the dataset's leases are clearly American by their wording. 13 build the rules, and 7 are held back.
+- **The held-back leases come only from leases the workbook doesn't quote.** The workbook already quotes 8 of them as real examples, so those can't give a fair score. See `tools/dataset-split.json`.
 
 Version 4 (10/26). This version uses the second workbook (with the Asks sheet), the updated `RESEARCH-BRIEF.md`, and both rounds of your answers, recorded in "Decisions" below. I've also checked the third workbook and brief (see "What I checked").
 

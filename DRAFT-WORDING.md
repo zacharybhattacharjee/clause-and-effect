@@ -197,6 +197,158 @@ Picture someone who runs a café or a salon, has never read a lease closely, and
 5. **"Upload a different lease" is the first button after the upload.** A first-timer might press it, thinking it's the next step. Moving it below the versions would be a layout change.
 6. **Many Boston owners read English as a second language.** That's 9e (translate), which you set aside until after testing. Worth noting as something to watch in testing.
 
+## Workbook fixes from the first engine run (drafted 11/3)
+
+Status: **for you to paste into `library/clause-library.xlsx`.** I haven't changed the workbook. After you paste them, run `python3 tools/convert-workbook.py` (or ask me to), and the engine picks them up. Until then, the same fixes are in `library/proposed-fixes.json`, so the check page can try them. Delete that file once they're in the workbook.
+
+I tested every fix below on the GBREB form and the 13 build leases, by applying them to a temporary copy. Both columns include the engine fixes listed next:
+
+| | Today's library | With these fixes |
+| --- | --- | --- |
+| GBREB form (31 pieces) | 18 sorted, 0 unsure, 13 not sorted | 27 sorted, 0 unsure, 4 not sorted |
+| 13 build leases | 459 sorted, 21 unsure | 511 sorted, 21 unsure |
+
+On the form, only the title area, 1 parties, 2 premises and 27 other provisions stay "not sorted". They have no clause type, which is accurate.
+
+(Earlier I wrote "28 sorted, 3 not sorted". That was a counting mistake: it's 27 and 4.)
+
+### Two engine fixes I already made (code, not the workbook)
+
+- **LESSOR and LESSEE now match Landlord and Tenant.** Every cue phrase in the workbook says "Landlord" and "Tenant", but the GBREB form says "LESSOR" and "LESSEE", so most versions couldn't match the form. The engine now reads the two pairs as the same words. Keep writing cues with Landlord and Tenant.
+- **Sections 6 and 11 no longer take their parts' text.** On the form, 6A's and 11A's text starts beside the parent heading. The engine now gives that text to 6A and 11A, and drops headings with no text of their own, such as 6 "RENT ADJUSTMENT".
+- **A phrase inside a longer matched phrase doesn't count again.** "maintenance" inside "Common Area Maintenance" now counts only for building costs, and "in good order" inside "good order and condition" counts once.
+- **The heading wins a close call.** When two types are close but only one of them appears in the section's heading, the heading's type wins. A section headed "BROKERS" that also mentions "indemnify" is now about brokers.
+
+### Why some build-lease sections became unsure
+
+With my first list of fixes, 13 build-lease sections became unsure and 8 stopped being unsure, so the count rose by 5, not by 5 particular sections. The 13 came from four phrases:
+
+| Phrase | Sections | What it was | Fix |
+| --- | --- | --- | --- |
+| "brokers", "brokerage" (new brokerage type) | 4 | Sections headed "BROKERS" also mention "indemnify" and "hold harmless". Brokerage was right. | The heading rule above. No change to the phrase. |
+| "maintenance" (repairs) | 5 | Three are one mixed section ("Repairs, Maintenance, Services and Utilities"), one is "Maintenance, Repairs and Alterations", and one is "Common Area Maintenance Charges". | The phrase-inside-a-phrase rule fixes the last one. The other two really are about two things, so "unsure" is honest. |
+| "use of the premises" (use) | 3 | Too common in lease text, such as inside subletting and rooftop sections. | Removed from the use triggers. "Use" is added instead, and as a single word it counts only in headings. |
+| "in good order" (repairs) | 1 | It counted twice, next to "good order and condition". | The phrase-inside-a-phrase rule. |
+
+With the changes below, the build leases' unsure count stays at 21. Three sections still change to unsure, and each heading names two topics: "Repairs, Maintenance, Services and Utilities", "Maintenance, Repairs and Alterations" and "Premises, Term and Use".
+
+### Changes to existing rows
+
+Paste each "new value" over the whole cell.
+
+**Clause types sheet, "Trigger phrases" column:**
+
+| Clause type ID | Why | New value |
+| --- | --- | --- |
+| rent-base | "escalation" made 6A and 6B unsure. Rent on the form is "fixed rent at the rate of", and 6C is about the Price Index. | Base Rent; Annual Rent; Minimum Rent; Fixed Rent; rent adjustment; rent at the rate of; CPI; Consumer Price Index; Price Index |
+| operating-costs | "Additional Rent", "Base Year" and "proportionate share" also appear in tax clauses, so 6A looked like both. The form's heading says "operating cost". | Operating Expenses; Operating Costs; operating cost; Common Area Maintenance; CAM |
+| repairs | The form's heading is "MAINTENANCE", and its wording is "agrees to maintain" and "in good order". | repair; maintain; maintenance; agrees to maintain; maintain the structure; good order and condition; in good order; in good repair; HVAC; structural; roof; exterior walls |
+| condition-premises | The form's heading is "CONDITION OF PREMISES", without "the". | as is; condition of the Premises; condition of premises; Landlord's Work; Tenant's Work |
+| use | The form's heading is "USE OF LEASED PREMISES". "Use" counts only in headings, since it's a single word. | Use; Permitted Use; use the Premises for; use of leased premises; for no other purpose |
+| assignment-subletting | Only the heading counted before. Single words like "sublet" count only in headings. | assign; assignment; assign or sublet; sublet; sublease; transfer; change of control; recapture |
+
+**Versions sheet:**
+
+| Version ID | Column | Why | New value |
+| --- | --- | --- | --- |
+| casualty-landlord-may-terminate | Cue phrases | "fire or other casualty" is in every casualty clause, so it doesn't tell this version apart. The form still matches through "Landlord may … terminate this Lease". | Landlord may ... terminate this Lease; days after the damage |
+| transfer-tenant-stays-liable | Cue phrases | The form says "shall remain liable". | remain primarily liable; shall not relieve Tenant; shall not release Tenant; shall remain liable |
+| subordination-only | Cue phrases | The form says "subject and subordinate to any and all mortgages". A lease that also has a non-disturbance promise will match both versions, and both will show. | subject and subordinate to the lien of any mortgage; subject and subordinate to |
+| opex-base-year | Numbers to fill | The converter's one problem: `share` is listed, but the sentence has no `{share}`. | base_year |
+
+### New clause types
+
+These fill the gaps on the form (sections 9, 10, 22, 24 and 26). Add each as a new row on the Clause types sheet. The "Plain name" is owner-facing wording, so it's a draft for you to change. Tier stays blank for you.
+
+| Clause type ID | Plain name (draft) | GBREB section | Trigger phrases | Tier | Status |
+| --- | --- | --- | --- | --- | --- |
+| liability-of-owner | Limits on what the landlord owes you | 26 | liability of owner; liability of landlord; landlord's liability; limitation of landlord's liability; no owner of the property | | Draft (Claude) |
+| force-majeure | Delays no one can control | 24 | force majeure; beyond the control of; beyond its reasonable control; acts of God; unavoidable delays | | Draft (Claude) |
+| brokerage | The real estate broker | 22 | brokerage; broker; brokers; brokerage commission; real estate broker | | Draft (Claude) |
+| compliance-with-laws | Following laws and local rules | 9 | compliance with laws; comply with all laws; applicable laws; by-law or ordinance | | Draft (Claude) |
+| insurance-increase | Uses that raise the building's insurance | 10 | fire insurance; make voidable any insurance; extra insurance premiums; increase the rate of insurance; rate of fire insurance; increase in insurance premiums | | Draft (Claude) |
+
+These have no versions yet, so they'll show as sorted but with nothing to explain until you add versions.
+
+### Your call
+
+- **Section 10, "FIRE INSURANCE",** now has its own type, `insurance-increase` (you decided on 11/3). Section 17 still sorts as "insurance", and no build lease changed.
+- **Parties (1), premises (2) and other provisions (27)** stay "not sorted". That seems right to me, since they're basic terms and signatures, not risks. Add types only if you want them in the tier list.
+- **The 15 number blanks that can't be filled yet** wait for stage 2. I'll draft their cue phrases then.
+
+## Round 2 test page wording (drafted 11/3)
+
+Status: **unverified.** These lines are in `content-round-two.json`, which only the round 2 test page (`round-two.html`) reads. The live page and `content.json` are unchanged. Once you approve them, they move into `content.json` when round 2 goes live.
+
+### My drafts, for you to approve
+
+| Field | Draft |
+| --- | --- |
+| `page.draftNote` | Test version. Some wording on this page is still a draft. |
+| `splash.title` | How this works |
+| `splash.whatItIs` | This tool reads your lease and sorts its sections by what they could cost you. For each section, it shows what the lease says, what it means, and what you can ask the landlord to change. |
+| `splash.sortingTitle` | How your lease is sorted |
+| `splash.sorting` | Each section gets a tier, shown in red, yellow or green, always with its name. Sections the tool couldn't match go in their own group at the end, with the lease's own words. |
+| `splash.versionsTitle` | Three ways to read it |
+| `splash.versionsIntro` | All three show the same sections and the same explanations, arranged differently. Try each one. |
+| `splash.scaleTitle` | What the tiers mean |
+| `splash.wholeLeaseTitle` | The whole lease, in order |
+| `splash.wholeLease` | To read every section in the lease's own order, choose “Whole lease, in order” at the top of any version. |
+| `splash.chooseTitle` | Choose a version to start |
+| `versions.A.name` | Lease text first |
+| `versions.A.description` | Each section starts with the lease's own words, with its explanation beside them. |
+| `versions.B.name` | What to ask first |
+| `versions.B.description` | In each tier, sections you can ask to change come first, each with what to ask and why. |
+| `versions.B.flagLine` | Flagged sections are ones you can ask the landlord to change. Each one shows what to ask, and why. |
+| `versions.C.name` | Risk summary first |
+| `versions.C.description` | Short summaries, highest stakes first. The lease's own words are one click away. |
+| `tiers.notSetMeaning` | This section's tier hasn't been set yet. |
+| `labels.flag` | You can ask about this |
+| `labels.leaseSays` | The lease says |
+| `labels.whatItMeans` | What it means |
+| `labels.showLeaseWords` | Show the lease's words |
+| `labels.hideLeaseWords` | Hide the lease's words |
+| `labels.whyYouCanAsk` | Why you can ask |
+| `labels.nextStep` | Next step |
+| `labels.realExample` | In a real lease |
+| `labels.wholeLease` | Whole lease, in order |
+| `labels.howItWorks` | How this works |
+| `labels.close` | Close |
+| `labels.printPage` | Print this page |
+| `labels.onThisPage` | On this page |
+| `labels.notSortedIntro` | The tool couldn't match these sections to a clause type. Read the lease's own words, and tap an underlined word to see what it means. |
+| `labels.blankNumber` | (see the lease) |
+| `labels.section` | Section |
+| `labels.startOfLease` | Start of the lease |
+
+### Your own wording, from your answers
+
+These come from your answers on 10/26 and the workbook's "How to use" sheet (the tier meanings). They need no approval, just a check that I copied them right.
+
+| Field | Wording |
+| --- | --- |
+| `tiers.1.name` | Highest stakes |
+| `tiers.2.name` | Costs money |
+| `tiers.3.name` | Rules and paperwork |
+| `tiers.1.meaning` | Could cost you the space, the business, or personal assets, or puts no limit on what you could owe. |
+| `tiers.2.meaning` | Costs money, but the amount is limited or can be worked out from the lease. |
+| `tiers.3.meaning` | Rules and paperwork that cost nothing directly unless you miss them. |
+| `tiers.notSet` | Tier not set |
+| `labels.goodForYou` | Good for you |
+| `labels.whatToAsk` | What to ask |
+| `labels.wordsToPropose` | Words to propose |
+| `labels.ifTheySayNo` | If they say no, ask for this instead |
+| `labels.legalCaution` | Wording to suggest to the landlord. It changes what the lease means, so read the final version carefully before you sign. |
+| `labels.proofLine` | From a lease a company filed publicly. Larger tenants often get better terms, so this shows the wording exists, not that your landlord will agree. |
+| `labels.datasetCredit` | From Leivaditi, Rossi & Kanoulas (2020), CC BY-NC 4.0. |
+| `labels.unsureLine` | This section could be either of these. Check the lease's own words. |
+| `labels.notSortedTitle` | Sections the tool couldn't sort |
+
+### In the workbook, also drafts
+
+- **Versions sheet:** "Suggested tier" and "Reason" for all 49 versions, in green cells. The real "Tier override" column is still blank. If you agree with a suggestion, copy it into "Tier override", or into the clause type's Tier.
+- **Asks sheet:** "Why you can ask", "Next step" and "Softer way to say it" for all 24 asks, in green cells. Each row keeps its "Draft (Claude)" status until you approve it.
+
 ## Still yours to decide
 
 - **9e. Translate.** I left it out, as you asked. It waits until after testing.

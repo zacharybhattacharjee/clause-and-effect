@@ -1,0 +1,570 @@
+/* Round 2 test page. Builds on style.css, tuned for a laptop screen first. */
+
+:root {
+  --tier-1: #A63A2B;      /* brick: white text, 6.6:1 */
+  --tier-2: #C9A227;      /* gold: plum text, 6.0:1 */
+  --tier-3: #2F6B45;      /* green: white text, 6.4:1 */
+  --tier-not-set: #6E6E6E;
+}
+
+/* A closed panel stays closed, whatever layout its class gives it. */
+[hidden] {
+  display: none !important;
+}
+
+/* One note at the top: this page shows draft wording. */
+.draft-note {
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--plum);
+  color: var(--cream);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Use the full width of a laptop screen. */
+.wrap.wide {
+  max-width: 1240px;
+}
+
+/* ---------- Tier marks and chips ---------- */
+
+.tier-mark,
+.tier-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.tier-mark {
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.tier-mark:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 3px;
+}
+
+.tier-1 { background: var(--tier-1); color: var(--white); }
+.tier-2 { background: var(--tier-2); color: var(--plum); }
+.tier-3 { background: var(--tier-3); color: var(--white); }
+
+/* No color for a tier that isn't set: just its words. */
+.tier-not-set {
+  background: var(--white);
+  color: var(--plum);
+  border: 2px dashed var(--tier-not-set);
+}
+
+.tier-unsorted {
+  background: var(--white);
+  color: var(--plum);
+  border: 2px solid var(--hairline);
+}
+
+.tier-dialog {
+  max-width: 34rem;
+  padding: 28px;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px rgba(59, 35, 64, 0.25);
+  color: var(--plum);
+}
+
+.tier-dialog::backdrop {
+  background: rgba(59, 35, 64, 0.45);
+}
+
+.tier-dialog h2 {
+  font-size: 1.375rem;
+  margin-bottom: 16px;
+}
+
+.tier-scale {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 16px;
+  align-items: start;
+  margin: 0 0 24px;
+}
+
+.tier-scale dd {
+  margin: 4px 0 0;
+}
+
+/* ---------- Splash page ---------- */
+
+.splash {
+  max-width: 52rem;
+}
+
+.splash-title {
+  font-size: 1.875rem;
+}
+
+.splash-lead {
+  margin-top: 12px;
+  font-size: 1.1875rem;
+}
+
+.splash-part {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+}
+
+.splash-part h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.splash-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.splash-versions {
+  margin: 12px 0 0;
+  padding-left: 1.2em;
+}
+
+.splash-versions li + li {
+  margin-top: 8px;
+}
+
+.splash-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ---------- Reader: switcher, tools and tracker ---------- */
+
+.reader-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  align-items: center;
+  margin: 0 -16px 8px;
+  padding: 12px 16px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.wide-switcher {
+  position: static;
+  margin: 0;
+  padding: 0;
+  border: none;
+  flex-wrap: wrap;
+}
+
+.wide-switcher .switch-button {
+  flex: 0 1 auto;
+  padding: 8px 18px;
+}
+
+.reader-tools {
+  display: flex;
+  gap: 8px;
+}
+
+.reader-tools .button {
+  min-height: 44px;
+  padding: 8px 16px;
+}
+
+.tracker {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 0.9375rem;
+  color: var(--plum-muted);
+}
+
+.tracker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tracker a {
+  color: var(--plum-muted);
+  text-decoration: none;
+  padding: 6px 0;
+  display: inline-block;
+}
+
+.tracker a[aria-current="true"] {
+  color: var(--plum);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tracker-label {
+  font-weight: 600;
+}
+
+/* ---------- Versions ---------- */
+
+.version-view {
+  padding-top: 24px;
+}
+
+.version-view .version-heading {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+
+.version-view .version-description {
+  margin: 0 0 24px;
+}
+
+.flag-line {
+  color: var(--plum);
+  font-weight: 600;
+}
+
+.tier-group {
+  margin-top: 40px;
+  scroll-margin-top: 150px;
+}
+
+.group-title {
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.group-title .tier-chip {
+  font-size: 1.0625rem;
+  padding: 6px 16px;
+}
+
+.group-intro {
+  margin: -8px 0 16px;
+  color: var(--plum-muted);
+}
+
+.section-card {
+  margin-top: 16px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  border-left: 6px solid var(--hairline);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.section-card[data-tier="1"] { border-left-color: var(--tier-1); }
+.section-card[data-tier="2"] { border-left-color: var(--tier-2); }
+.section-card[data-tier="3"] { border-left-color: var(--tier-3); }
+
+.card-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 1.1875rem;
+}
+
+.column-label {
+  margin-bottom: 8px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--plum-muted);
+}
+
+.section-card .lease-text {
+  box-shadow: none;
+  background: #FCFBF8;
+}
+
+.explanation {
+  display: grid;
+  gap: 12px;
+}
+
+.type-name {
+  font-size: 1.0625rem;
+}
+
+.version-line {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--slate-tint);
+  border-left: 4px solid var(--slate);
+}
+
+.version-line p {
+  margin: 0;
+}
+
+.good-mark,
+.flag-mark {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.good-mark {
+  background: var(--white);
+  border: 2px solid var(--tier-3);
+  color: var(--plum);
+}
+
+.flag-mark {
+  background: var(--gold);
+  color: var(--plum);
+}
+
+.unsure-line {
+  font-weight: 600;
+}
+
+.ask-block {
+  padding: 16px 18px;
+  border: 1px solid var(--hairline);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.ask-block p,
+.ask-block h4,
+.ask-block h5 {
+  margin: 0;
+}
+
+.ask-heading {
+  font-size: 1.0625rem;
+}
+
+.ask-plain {
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.text-toggle {
+  justify-self: start;
+  min-height: 44px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--plum);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.text-toggle::before {
+  content: "▸ ";
+}
+
+.text-toggle[aria-expanded="true"]::before {
+  content: "▾ ";
+}
+
+.text-toggle:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 3px;
+}
+
+.proposal {
+  display: grid;
+  gap: 10px;
+}
+
+.legal-caution {
+  color: var(--plum-muted);
+  font-size: 0.9375rem;
+}
+
+.legal-wording {
+  padding: 12px 14px;
+  background: #FCFBF8;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  font-family: var(--serif);
+}
+
+.proof {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--cream);
+}
+
+.proof-label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.proof-quote {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.proof-source,
+.proof-note {
+  margin: 6px 0 0;
+  font-size: 0.9375rem;
+  color: var(--plum-muted);
+}
+
+.proof-source a {
+  color: var(--plum);
+}
+
+.fallback h5 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.toggle-button {
+  margin-top: 16px;
+  min-height: 44px;
+  padding: 8px 18px;
+}
+
+.section-card > .lease-text {
+  margin-top: 12px;
+}
+
+/* "Risk summary first": larger type and more space, so it reads easily. */
+.version-C .explanation {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  gap: 16px;
+}
+
+.version-C .version-line {
+  padding: 16px 20px;
+}
+
+.unsorted-card {
+  border-left-style: dashed;
+}
+
+/* ---------- What to do next ---------- */
+
+.ask-list {
+  margin-top: 56px;
+}
+
+.ask-items {
+  margin: 16px 0 0;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 20px;
+}
+
+.ask-item {
+  display: grid;
+  gap: 8px;
+}
+
+.ask-item p {
+  margin: 0;
+}
+
+.ask-item-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.ask-item-top h3 {
+  font-size: 1.0625rem;
+}
+
+/* ---------- Laptop: lease text and explanation side by side ---------- */
+
+@media (min-width: 960px) {
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+}
+
+@media (max-width: 959px) {
+  .columns {
+    display: grid;
+    gap: 20px;
+  }
+
+  /* On a narrow screen the bar would cover too much, so it scrolls away. */
+  .reader-bar {
+    position: static;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Printing ---------- */
+
+@media print {
+  .draft-note,
+  .reader-bar,
+  .toggle-button,
+  .text-toggle,
+  .print-button {
+    display: none !important;
+  }
+
+  /* Printing the whole page opens every closed panel, such as the lease's
+     words and "Words to propose". Word meanings stay closed. */
+  body.print-page [data-print-open][hidden] {
+    display: block !important;
+  }
+
+  .section-card,
+  .ask-item {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  /* "Print this list" prints only the ask list. */
+  body.print-list .masthead,
+  body.print-list .site-footer,
+  body.print-list .version-view > :not(.ask-list),
+  body.print-list .tier-dialog {
+    display: none !important;
+  }
+}

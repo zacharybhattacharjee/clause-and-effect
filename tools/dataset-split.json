@@ -1,0 +1,38 @@
+{
+  "note": "Which research-dataset leases are used to build and tune the engine's rules, and which are held back for a fair score. Written on 2026-11-03, before any lease was read. Leases: Leivaditi, Rossi & Kanoulas (2020), DOI 10.21942/uva.19732993.v1, CC BY-NC 4.0. Only lease IDs are kept here, never lease text.",
+  "howChosen": "U.S.-style leases are the annotated leases with Landlord and Tenant wording and section-number labels, where American markers (dollar amounts, 'State of', 'County', 'U.S.', 'Commonwealth of', 'dollars') outnumber British or foreign ones ('undertenant', 'Service Charge', 'VAT', the pound sign, 'whilst', 'Leaser'). That gives 20, not the 36 the brief mentions. The workbook already quotes 8 of them as real examples (lease_553, lease_609, lease_637, lease_741, lease_747, lease_756, lease_907, lease_930), so those can't be held back. The other 12 were put in order by the SHA-1 of their IDs, and the first 7 are held back. The remaining 13 build the rules.",
+  "build": [
+    "lease_553",
+    "lease_609",
+    "lease_637",
+    "lease_641",
+    "lease_741",
+    "lease_747",
+    "lease_752",
+    "lease_756",
+    "lease_761",
+    "lease_907",
+    "lease_930",
+    "lease_933",
+    "lease_955"
+  ],
+  "heldBack": [
+    "lease_455",
+    "lease_495",
+    "lease_561",
+    "lease_578",
+    "lease_591",
+    "lease_725",
+    "lease_767"
+  ],
+  "alreadyQuotedInWorkbook": [
+    "lease_553",
+    "lease_609",
+    "lease_637",
+    "lease_741",
+    "lease_747",
+    "lease_756",
+    "lease_907",
+    "lease_930"
+  ]
+}
