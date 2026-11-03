@@ -199,21 +199,38 @@ Picture someone who runs a café or a salon, has never read a lease closely, and
 
 ## Workbook fixes from the first engine run (drafted 11/3)
 
-Status: **for you to paste into `library/clause-library.xlsx`.** I haven't changed the workbook. After you paste them, run `python3 tools/convert-workbook.py` (or ask me to), and the engine picks them up.
+Status: **for you to paste into `library/clause-library.xlsx`.** I haven't changed the workbook. After you paste them, run `python3 tools/convert-workbook.py` (or ask me to), and the engine picks them up. Until then, the same fixes are in `library/proposed-fixes.json`, so the check page can try them. Delete that file once they're in the workbook.
 
-I tested every fix below on the GBREB form and the 13 build leases, by applying them to a temporary copy:
+I tested every fix below on the GBREB form and the 13 build leases, by applying them to a temporary copy. Both columns include the engine fixes listed next:
 
-| | Before | After |
+| | Today's library | With these fixes |
 | --- | --- | --- |
-| GBREB form | 16 sorted, 3 unsure (first run) | 28 sorted, 0 unsure |
-| 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
+| GBREB form (31 pieces) | 18 sorted, 0 unsure, 13 not sorted | 27 sorted, 0 unsure, 4 not sorted |
+| 13 build leases | 459 sorted, 21 unsure | 511 sorted, 21 unsure |
 
-On the form, only 1 parties, 2 premises, 27 other provisions and the title area stay "not sorted". They have no clause type, which is accurate.
+On the form, only the title area, 1 parties, 2 premises and 27 other provisions stay "not sorted". They have no clause type, which is accurate.
+
+(Earlier I wrote "28 sorted, 3 not sorted". That was a counting mistake: it's 27 and 4.)
 
 ### Two engine fixes I already made (code, not the workbook)
 
 - **LESSOR and LESSEE now match Landlord and Tenant.** Every cue phrase in the workbook says "Landlord" and "Tenant", but the GBREB form says "LESSOR" and "LESSEE", so most versions couldn't match the form. The engine now reads the two pairs as the same words. Keep writing cues with Landlord and Tenant.
 - **Sections 6 and 11 no longer take their parts' text.** On the form, 6A's and 11A's text starts beside the parent heading. The engine now gives that text to 6A and 11A, and drops headings with no text of their own, such as 6 "RENT ADJUSTMENT".
+- **A phrase inside a longer matched phrase doesn't count again.** "maintenance" inside "Common Area Maintenance" now counts only for building costs, and "in good order" inside "good order and condition" counts once.
+- **The heading wins a close call.** When two types are close but only one of them appears in the section's heading, the heading's type wins. A section headed "BROKERS" that also mentions "indemnify" is now about brokers.
+
+### Why some build-lease sections became unsure
+
+With my first list of fixes, 13 build-lease sections became unsure and 8 stopped being unsure, so the count rose by 5, not by 5 particular sections. The 13 came from four phrases:
+
+| Phrase | Sections | What it was | Fix |
+| --- | --- | --- | --- |
+| "brokers", "brokerage" (new brokerage type) | 4 | Sections headed "BROKERS" also mention "indemnify" and "hold harmless". Brokerage was right. | The heading rule above. No change to the phrase. |
+| "maintenance" (repairs) | 5 | Three are one mixed section ("Repairs, Maintenance, Services and Utilities"), one is "Maintenance, Repairs and Alterations", and one is "Common Area Maintenance Charges". | The phrase-inside-a-phrase rule fixes the last one. The other two really are about two things, so "unsure" is honest. |
+| "use of the premises" (use) | 3 | Too common in lease text, such as inside subletting and rooftop sections. | Removed from the use triggers. "Use" is added instead, and as a single word it counts only in headings. |
+| "in good order" (repairs) | 1 | It counted twice, next to "good order and condition". | The phrase-inside-a-phrase rule. |
+
+With the changes below, the build leases' unsure count stays at 21. Three sections still change to unsure, and each heading names two topics: "Repairs, Maintenance, Services and Utilities", "Maintenance, Repairs and Alterations" and "Premises, Term and Use".
 
 ### Changes to existing rows
 
@@ -227,7 +244,7 @@ Paste each "new value" over the whole cell.
 | operating-costs | "Additional Rent", "Base Year" and "proportionate share" also appear in tax clauses, so 6A looked like both. The form's heading says "operating cost". | Operating Expenses; Operating Costs; operating cost; Common Area Maintenance; CAM |
 | repairs | The form's heading is "MAINTENANCE", and its wording is "agrees to maintain" and "in good order". | repair; maintain; maintenance; agrees to maintain; maintain the structure; good order and condition; in good order; in good repair; HVAC; structural; roof; exterior walls |
 | condition-premises | The form's heading is "CONDITION OF PREMISES", without "the". | as is; condition of the Premises; condition of premises; Landlord's Work; Tenant's Work |
-| use | The form's heading is "USE OF LEASED PREMISES". | Permitted Use; use the Premises for; use of leased premises; use of the premises; for no other purpose |
+| use | The form's heading is "USE OF LEASED PREMISES". "Use" counts only in headings, since it's a single word. | Use; Permitted Use; use the Premises for; use of leased premises; for no other purpose |
 | assignment-subletting | Only the heading counted before. Single words like "sublet" count only in headings. | assign; assignment; assign or sublet; sublet; sublease; transfer; change of control; recapture |
 
 **Versions sheet:**
@@ -241,7 +258,7 @@ Paste each "new value" over the whole cell.
 
 ### New clause types
 
-These fill the gaps on the form (sections 9, 22, 24 and 26). Add each as a new row on the Clause types sheet. The "Plain name" is owner-facing wording, so it's a draft for you to change. Tier stays blank for you.
+These fill the gaps on the form (sections 9, 10, 22, 24 and 26). Add each as a new row on the Clause types sheet. The "Plain name" is owner-facing wording, so it's a draft for you to change. Tier stays blank for you.
 
 | Clause type ID | Plain name (draft) | GBREB section | Trigger phrases | Tier | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -249,12 +266,13 @@ These fill the gaps on the form (sections 9, 22, 24 and 26). Add each as a new r
 | force-majeure | Delays no one can control | 24 | force majeure; beyond the control of; beyond its reasonable control; acts of God; unavoidable delays | | Draft (Claude) |
 | brokerage | The real estate broker | 22 | brokerage; broker; brokers; brokerage commission; real estate broker | | Draft (Claude) |
 | compliance-with-laws | Following laws and local rules | 9 | compliance with laws; comply with all laws; applicable laws; by-law or ordinance | | Draft (Claude) |
+| insurance-increase | Uses that raise the building's insurance | 10 | fire insurance; make voidable any insurance; extra insurance premiums; increase the rate of insurance; rate of fire insurance; increase in insurance premiums | | Draft (Claude) |
 
 These have no versions yet, so they'll show as sorted but with nothing to explain until you add versions.
 
 ### Your call
 
-- **Section 10, "FIRE INSURANCE",** sorts as "insurance" ("Insurance you must carry"). It's really about not doing anything that raises the building's insurance. Keep it there, or give it its own type.
+- **Section 10, "FIRE INSURANCE",** now has its own type, `insurance-increase` (you decided on 11/3). Section 17 still sorts as "insurance", and no build lease changed.
 - **Parties (1), premises (2) and other provisions (27)** stay "not sorted". That seems right to me, since they're basic terms and signatures, not risks. Add types only if you want them in the tier list.
 - **The 15 number blanks that can't be filled yet** wait for stage 2. I'll draft their cue phrases then.
 

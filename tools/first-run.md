@@ -65,3 +65,20 @@ The workbook fixes listed in `DRAFT-WORDING.md` were applied to a temporary copy
 | 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
 
 The held-back leases weren't run for this. They'll be scored once the fixes are in the workbook.
+
+## Two more sorting rules (11/3)
+
+Added after looking at the build leases only:
+- A trigger phrase inside a longer matched phrase, from any type, doesn't count again.
+- When two types are close but only the leading one appears in the heading, it wins.
+
+Also in the proposed fixes: "use of the premises" was removed and "Use" added (headings only), and `insurance-increase` was added for GBREB section 10.
+
+| | Today's library | With the proposed fixes |
+| --- | --- | --- |
+| GBREB form (31 pieces) | 18 sorted, 0 unsure, 13 not sorted | 27 sorted, 0 unsure, 4 not sorted |
+| 13 build leases | 459 sorted, 21 unsure | 511 sorted, 21 unsure |
+
+The earlier "28 sorted, 0 unsure, 3 not sorted" for the form was a counting mistake. The right numbers were 27 sorted and 4 not sorted.
+
+The Egleston lease is never run here. Zachary runs it on his own computer, on the check page.

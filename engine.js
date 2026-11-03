@@ -374,24 +374,44 @@ const LeaseEngine = (() => {
 
   // ---------- Sorting ----------
 
-  function scoreType(type, headingText, bodyText) {
-    let score = 0;
-    const matched = [];
-    for (const trigger of type.triggers) {
-      const pattern = wholePhrase(trigger);
-      const single = !forMatching(trigger).includes(" ");
-      const anywhere = !single || WORDS_THAT_COUNT_ANYWHERE.has(forMatching(trigger));
-      const inHeading = pattern.test(headingText);
-      const inBody = anywhere && pattern.test(bodyText);
-      if (inHeading) {
-        score += HEADING_POINTS;
-        matched.push({ trigger, where: "heading" });
-      } else if (inBody) {
-        score += BODY_POINTS;
-        matched.push({ trigger, where: "body" });
+  // Every place a trigger phrase appears, for every type. A phrase that sits
+  // inside a longer matched phrase doesn't count again, so "maintenance" in
+  // "common area maintenance" counts only for the longer phrase's type.
+  function triggerHits(types, headingText, bodyText) {
+    const hits = [];
+    for (const type of types) {
+      for (const trigger of type.triggers) {
+        const normalized = forMatching(trigger);
+        const anywhere = normalized.includes(" ") || WORDS_THAT_COUNT_ANYWHERE.has(normalized);
+        const places = [["heading", headingText]];
+        if (anywhere) places.push(["body", bodyText]);
+        for (const [where, text] of places) {
+          const pattern = new RegExp(wholePhrase(trigger).source, "g");
+          for (const match of text.matchAll(pattern)) {
+            const start = match.index + match[1].length;
+            hits.push({ type, trigger, where, start, end: start + match[2].length });
+          }
+        }
       }
     }
-    return { type, score, matched };
+    return hits.filter((hit) => !hits.some((other) =>
+      other !== hit && other.where === hit.where && other.start <= hit.start && other.end >= hit.end &&
+      other.end - other.start > hit.end - hit.start));
+  }
+
+  // A type's score: each trigger phrase counts once, in the heading if it's
+  // there, otherwise in the body.
+  function scoreType(type, hits) {
+    const own = hits.filter((hit) => hit.type === type);
+    let score = 0;
+    const matched = [];
+    for (const trigger of new Set(own.map((hit) => hit.trigger))) {
+      const inHeading = own.some((hit) => hit.trigger === trigger && hit.where === "heading");
+      score += inHeading ? HEADING_POINTS : BODY_POINTS;
+      matched.push({ trigger, where: inHeading ? "heading" : "body" });
+    }
+    const fromHeading = matched.some((m) => m.where === "heading");
+    return { type, score, matched, fromHeading };
   }
 
   function findVersions(type, bodyText, rows) {
@@ -430,16 +450,21 @@ const LeaseEngine = (() => {
   function sortSection(section, rows) {
     const headingText = forMatching(section.heading || "");
     const bodyText = forMatching(section.text || "");
+    const hits = triggerHits(rows.types, headingText, bodyText);
     const scores = rows.types
-      .map((type) => scoreType(type, headingText, bodyText))
+      .map((type) => scoreType(type, hits))
       .filter((result) => result.score > 0)
-      .sort((a, b) => b.score - a.score);
+      // On equal points, a type the heading names comes first.
+      .sort((a, b) => b.score - a.score || Number(b.fromHeading) - Number(a.fromHeading));
     const [best, second] = scores;
 
     let status = "not-sorted";
     let candidates = [];
     if (best && best.score >= MIN_SCORE) {
-      const close = second && second.score >= MIN_SCORE && second.score >= best.score * UNSURE_SHARE;
+      let close = second && second.score >= MIN_SCORE && second.score >= best.score * UNSURE_SHARE;
+      // The heading says what a section is about: when only the leading type
+      // was found in the heading, it wins a close call.
+      if (close && best.fromHeading && !second.fromHeading) close = false;
       status = close ? "unsure" : "sorted";
       candidates = close ? [best, second] : [best];
     }

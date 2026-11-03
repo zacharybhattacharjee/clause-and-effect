@@ -6,8 +6,26 @@ const PDFJS_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min
 const PDFJS_WORKER_URL = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs";
 
 let library = null;
+let fixedLibrary = null; // the library with library/proposed-fixes.json applied, if that file exists
 let lastLines = null;
 let lastName = "";
+
+// Applies the proposed workbook fixes to a copy of the library, in memory only.
+function withProposedFixes(base, fixes) {
+  const copy = structuredClone(base);
+  for (const [id, change] of Object.entries(fixes.clauseTypes || {})) {
+    const type = copy.types.find((t) => t.id === id);
+    if (type) Object.assign(type, change);
+  }
+  for (const [id, change] of Object.entries(fixes.versions || {})) {
+    const version = copy.versions.find((v) => v.id === id);
+    if (version) Object.assign(version, change);
+  }
+  for (const type of fixes.newClauseTypes || []) {
+    copy.types.push({ tier: null, massachusettsLaw: "", status: "Draft (Claude)", live: false, ...type });
+  }
+  return copy;
+}
 
 function make(tag, className, text) {
   const element = document.createElement(tag);
@@ -80,11 +98,13 @@ function answerKeyRows(result, leaseId) {
 function show() {
   if (!lastLines) return;
   const preview = document.getElementById("preview").checked;
-  const result = LeaseEngine.readLease(lastLines, library, { preview });
+  const useFixes = fixedLibrary && document.getElementById("fixes").checked;
+  const result = LeaseEngine.readLease(lastLines, useFixes ? fixedLibrary : library, { preview });
   const counts = { sorted: 0, unsure: 0, "not-sorted": 0 };
   for (const section of result.sections) counts[section.status]++;
   document.getElementById("summary").textContent =
-    `${lastName}: ${result.sections.length} sections. ${counts.sorted} sorted, ${counts.unsure} unsure, ${counts["not-sorted"]} not sorted.` +
+    `${useFixes ? "After tuning" : "First run"}: ${lastName}: ${result.sections.length} sections. ` +
+    `${counts.sorted} sorted, ${counts.unsure} unsure, ${counts["not-sorted"]} not sorted.` +
     (preview ? " Draft rows included." : " Approved rows only.");
 
   const table = make("table");
@@ -119,6 +139,13 @@ function show() {
 
 async function start() {
   library = await LeaseEngine.loadLibrary();
+  const fixesResponse = await fetch("library/proposed-fixes.json");
+  if (fixesResponse.ok) {
+    fixedLibrary = withProposedFixes(library, await fixesResponse.json());
+  } else {
+    document.getElementById("fixes-label").hidden = true;
+  }
+  document.getElementById("fixes").addEventListener("change", show);
   document.getElementById("file").addEventListener("change", async (event) => {
     const file = event.target.files[0];
     if (!file) return;
