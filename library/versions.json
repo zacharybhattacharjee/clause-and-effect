@@ -17,8 +17,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 1,
-      "tierReason": "Even with a warning, a payment you can't make in time can cost you the space.",
+      "suggestedTier": 3,
+      "tierReason": "Default rule: the usual warning and time to fix it, so no tier is raised. Rules and paperwork (tier 3).",
       "effectiveTier": null,
       "live": false
     },
@@ -38,7 +38,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "One late payment can cost you the space, with no warning first.",
+      "tierReason": "Default rule: sets its own default with no time to fix the problem, so it can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -61,8 +61,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 1,
-      "tierReason": "A missed payment or other problem not fixed in time can cost you the space.",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if the time to fix a missed payment is shorter than usual (the example gives 5 business days), tier 3 if it isn't.",
       "effectiveTier": null,
       "live": false
     },
@@ -85,7 +85,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Once the warnings run out, one late payment can cost you the space.",
+      "tierReason": "Default rule: after the warnings run out, there's no time to fix the problem, so it can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -106,8 +106,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 1,
-      "tierReason": "You get more time, but a problem you can't fix can still cost you the space.",
+      "suggestedTier": 3,
+      "tierReason": "Default rule: more time than usual to fix a problem, so no tier is raised. Rules and paperwork (tier 3).",
       "effectiveTier": null,
       "live": false
     },
@@ -124,8 +124,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 1,
-      "tierReason": "Less warning than the law gives makes losing the space more likely.",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if the lease's warning is shorter than the law's, tier 3 if it isn't. The wording says only that you \"may\" get less time.",
       "effectiveTier": null,
       "live": false
     },
@@ -145,7 +145,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Reaches your own savings and property, with no limit.",
+      "tierReason": "Can cost your personal assets (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -165,7 +165,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "The landlord can go straight to your own money.",
+      "tierReason": "Can cost your personal assets (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -186,8 +186,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Reaches your own money, but only up to a set amount.",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), even though the amount is capped. The rules stop at the first yes.",
       "effectiveTier": null,
       "live": false
     },
@@ -205,8 +205,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Reaches your own money, but the most you could owe goes down over time.",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), even though the most you could owe goes down.",
       "effectiveTier": null,
       "live": false
     },
@@ -227,8 +227,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Reaches your own money, but only for a limited time.",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1) until it ends.",
       "effectiveTier": null,
       "live": false
     },
@@ -251,8 +251,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Limited to rent up to the day you leave, if you follow every step.",
+      "suggestedTier": 1,
+      "tierReason": "Can cost your personal assets (tier 1), though it's limited to rent up to the day you leave.",
       "effectiveTier": null,
       "live": false
     },
@@ -270,7 +270,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Reaches your own money for the whole first term, with no cap stated.",
+      "tierReason": "Can cost your personal assets (tier 1) during the first term.",
       "effectiveTier": null,
       "live": false
     },
@@ -290,7 +290,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Can reach your own money for terms you never agreed to.",
+      "tierReason": "Can cost your personal assets (tier 1), including for changes you didn't agree to.",
       "effectiveTier": null,
       "live": false
     },
@@ -305,14 +305,13 @@
       "exampleSource": "Pier 1 Imports, 10-Q exhibit, 2008. https://www.sec.gov/Archives/edgar/data/0000278130/000095013408012504/d58236exv10w1.htm",
       "plain": "You pay your share of any increase in building costs above what they were in {base_year}.",
       "numbers": [
-        "base_year",
-        "share"
+        "base_year"
       ],
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Increases have no limit, and the brief puts \"no limit on what you could owe\" in tier 1. Consider tier 2 if increases are usually small.",
+      "tierReason": "No cap (tier 1): increases come from the landlord's costs, not from anything unusual you do.",
       "effectiveTier": null,
       "live": false
     },
@@ -333,7 +332,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "You pay a share of all building costs, with no limit.",
+      "tierReason": "No cap (tier 1): your share of all building costs, which come from running the building.",
       "effectiveTier": null,
       "live": false
     },
@@ -355,7 +354,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "Costs money, but the part the landlord controls has a yearly limit.",
+      "tierReason": "Costs money, but capped (tier 2).",
       "effectiveTier": null,
       "live": false
     },
@@ -375,7 +374,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "Costs money. The limit still applies, but unused room can be charged later.",
+      "tierReason": "Costs money, but still capped, even with unused room carried forward (tier 2).",
       "effectiveTier": null,
       "live": false
     },
@@ -395,7 +394,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Major upgrades can cost a lot, and the lease sets no limit.",
+      "tierReason": "No cap (tier 1): the landlord decides on upgrades, and the lease sets no limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -414,7 +413,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "The real amount can be higher than quoted, with no limit.",
+      "tierReason": "No cap (tier 1): the real amount can be any amount above the estimate.",
       "effectiveTier": null,
       "live": false
     },
@@ -433,8 +432,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "You may owe rent while you wait for consent, but the landlord needs a reason to refuse.",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): you ask, and the landlord needs a good reason to refuse.",
       "effectiveTier": null,
       "live": false
     },
@@ -454,7 +453,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "The landlord can block a sale of your business for any reason.",
+      "tierReason": "Can cost you the business (tier 1): the landlord can block a sale of the business for any reason.",
       "effectiveTier": null,
       "live": false
     },
@@ -475,7 +474,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Selling your business needs the landlord's permission.",
+      "tierReason": "Can cost you the business (tier 1): selling it needs the landlord's permission.",
       "effectiveTier": null,
       "live": false
     },
@@ -495,7 +494,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Asking to transfer can cost you the space.",
+      "tierReason": "Can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -505,7 +504,8 @@
       "cues": [
         "remain primarily liable",
         "shall not relieve Tenant",
-        "shall not release Tenant"
+        "shall not release Tenant",
+        "shall remain liable"
       ],
       "example": "Tenant will remain primarily liable on this Lease",
       "exampleSource": "Sentigen Holding, 10-K exhibit, 2003. https://www.sec.gov/Archives/edgar/data/0000864890/000095012304003671/y95462exv10w23.txt",
@@ -515,7 +515,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "You can owe the rest of the rent if the buyer stops paying, but the amount can be worked out from the lease.",
+      "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent if the buyer stops paying.",
       "effectiveTier": null,
       "live": false
     },
@@ -535,7 +535,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "Costs money, but only part of any extra rent you collect.",
+      "tierReason": "Costs money that can be calculated (tier 2): a share of the extra rent you collect.",
       "effectiveTier": null,
       "live": false
     },
@@ -553,7 +553,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 3,
-      "tierReason": "A deadline rule that helps you. It costs nothing unless a deadline is missed.",
+      "tierReason": "Rules and paperwork (tier 3): a deadline rule that helps you.",
       "effectiveTier": null,
       "live": false
     },
@@ -573,8 +573,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "A move can disrupt the business, but the landlord pays the moving costs.",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 2 if the move costs you sales, tier 3 if the landlord's paying for the move covers it.",
       "effectiveTier": null,
       "live": false
     },
@@ -593,7 +593,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "A move can cost you your location, with no limit on moving costs.",
+      "tierReason": "No cap (tier 1): the landlord's decision to move you sets moving costs, and the lease doesn't say who pays.",
       "effectiveTier": null,
       "live": false
     },
@@ -613,7 +613,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "Saying no to the new space ends your lease.",
+      "tierReason": "Can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -634,8 +634,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "You can be moved only once, with notice.",
+      "suggestedTier": null,
+      "tierReason": "Either way: it limits how often you can be moved, but doesn't say who pays the move.",
       "effectiveTier": null,
       "live": false
     },
@@ -653,8 +653,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "You can still be moved, but not until the new space is ready.",
+      "suggestedTier": null,
+      "tierReason": "Either way: it says when you move, but not who pays for it.",
       "effectiveTier": null,
       "live": false
     },
@@ -678,7 +678,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "The landlord can end the lease and take the space.",
+      "tierReason": "Can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -698,7 +698,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "You can still lose the space, even with some money back.",
+      "tierReason": "Can cost you the space (tier 1), even with some money back.",
       "effectiveTier": null,
       "live": false
     },
@@ -720,7 +720,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "Costs money, limited to refilling the deposit.",
+      "tierReason": "Costs money, capped at the deposit amount (tier 2).",
       "effectiveTier": null,
       "live": false
     },
@@ -739,8 +739,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Costs money each month. The amounts come from the meters and the lease.",
+      "suggestedTier": null,
+      "tierReason": "Either way: metered use can be calculated (tier 2), but unmetered utilities join your building-cost share, which has no cap (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -760,8 +760,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "An outage can cost you sales, but not the space.",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): outages come from others, and you get nothing back, even if you have to close.",
       "effectiveTier": null,
       "live": false
     },
@@ -779,8 +779,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "You pay full rent during an outage.",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): you pay full rent through an outage someone else caused, however long it lasts.",
       "effectiveTier": null,
       "live": false
     },
@@ -797,8 +797,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "You pay during outages the landlord didn't cause.",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): for outages the landlord didn't cause, you pay full rent however long they last.",
       "effectiveTier": null,
       "live": false
     },
@@ -817,7 +817,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 3,
-      "tierReason": "A move-out rule that protects you. It costs nothing if you leave the space in good shape.",
+      "tierReason": "Rules and paperwork (tier 3): a move-out rule that protects you.",
       "effectiveTier": null,
       "live": false
     },
@@ -836,7 +836,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "Removal costs money, but only for changes named in writing.",
+      "tierReason": "Costs money that can be calculated (tier 2): only the changes named in writing.",
       "effectiveTier": null,
       "live": false
     },
@@ -854,8 +854,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Removing changes and repairing the damage can cost a lot at move-out.",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): removal comes with every normal move-out, and covers even the landlord's improvements.",
       "effectiveTier": null,
       "live": false
     },
@@ -876,7 +876,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 3,
-      "tierReason": "The landlord handles the big repairs. Mostly a rule to know.",
+      "tierReason": "Rules and paperwork (tier 3): the landlord handles the big repairs.",
       "effectiveTier": null,
       "live": false
     },
@@ -897,7 +897,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 2,
-      "tierReason": "You pay for repairs the landlord makes after notice.",
+      "tierReason": "Costs money (tier 2). No cap doesn't count: it only happens if you skip a repair the lease requires.",
       "effectiveTier": null,
       "live": false
     },
@@ -905,7 +905,6 @@
       "id": "casualty-landlord-may-terminate",
       "type": "casualty-condemnation",
       "cues": [
-        "fire or other casualty",
         "Landlord may ... terminate this Lease",
         "days after the damage"
       ],
@@ -919,7 +918,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "After a fire or other damage, the landlord can end the lease and you lose the space.",
+      "tierReason": "Can cost you the space (tier 1).",
       "effectiveTier": null,
       "live": false
     },
@@ -937,8 +936,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 2,
-      "tierReason": "Rent stops while the space is rebuilt, but the damage can still cost the business money.",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3): a protection. Rent stops while the space is rebuilt.",
       "effectiveTier": null,
       "live": false
     },
@@ -958,7 +957,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 3,
-      "tierReason": "Paperwork: the lender must keep your lease. Your brief gives this as a tier 3 example.",
+      "tierReason": "Rules and paperwork (tier 3): the lender must keep your lease. Your brief gives this example.",
       "effectiveTier": null,
       "live": false
     },
@@ -966,7 +965,8 @@
       "id": "subordination-only",
       "type": "subordination-estoppel",
       "cues": [
-        "subject and subordinate to the lien of any mortgage"
+        "subject and subordinate to the lien of any mortgage",
+        "subject and subordinate to"
       ],
       "example": "",
       "exampleSource": "",
@@ -976,7 +976,7 @@
       "tier": null,
       "status": "Draft (Claude)",
       "suggestedTier": 1,
-      "tierReason": "If the landlord loses the building, you can lose the space. Your brief gives this as a tier 1 example.",
+      "tierReason": "Can cost you the space (tier 1): the landlord's lender may not have to keep your lease. Your brief gives this example.",
       "effectiveTier": null,
       "live": false
     },
@@ -995,8 +995,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
-      "suggestedTier": 1,
-      "tierReason": "You can owe years of rent after the business closes.",
+      "suggestedTier": 2,
+      "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent after you close.",
       "effectiveTier": null,
       "live": false
     }

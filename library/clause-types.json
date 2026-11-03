@@ -11,12 +11,16 @@
         "Minimum Rent",
         "Fixed Rent",
         "rent adjustment",
+        "rent at the rate of",
         "CPI",
-        "escalation"
+        "Consumer Price Index",
+        "Price Index"
       ],
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -33,6 +37,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -42,16 +48,15 @@
       "triggers": [
         "Operating Expenses",
         "Operating Costs",
+        "operating cost",
         "Common Area Maintenance",
-        "CAM",
-        "Additional Rent",
-        "proportionate share",
-        "pro rata share",
-        "Base Year"
+        "CAM"
       ],
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -68,6 +73,8 @@
       "tier": null,
       "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -84,6 +91,8 @@
       "tier": null,
       "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -102,6 +111,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -109,13 +120,17 @@
       "name": "What you can use the space for",
       "gbrebSection": "",
       "triggers": [
+        "Use",
         "Permitted Use",
         "use the Premises for",
+        "use of leased premises",
         "for no other purpose"
       ],
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -130,6 +145,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -139,12 +156,15 @@
       "triggers": [
         "as is",
         "condition of the Premises",
+        "condition of premises",
         "Landlord's Work",
         "Tenant's Work"
       ],
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -154,7 +174,11 @@
       "triggers": [
         "repair",
         "maintain",
+        "maintenance",
+        "agrees to maintain",
+        "maintain the structure",
         "good order and condition",
+        "in good order",
         "in good repair",
         "HVAC",
         "structural",
@@ -164,6 +188,8 @@
       "tier": null,
       "massachusettsLaw": "c. 186, § 19 repair duty after notice of unsafe condition; applied to a commercial lease (Bishop v. TES Realty Trust, 2011). Verify.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -179,6 +205,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -188,6 +216,7 @@
       "triggers": [
         "assign",
         "assignment",
+        "assign or sublet",
         "sublet",
         "sublease",
         "transfer",
@@ -197,6 +226,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -213,6 +244,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -228,6 +261,8 @@
       "tier": null,
       "massachusettsLaw": "c. 186, § 15 voids clauses making the tenant cover the landlord's own negligence; applied to commercial leases (Norfolk & Dedham v. Morrison, 2010). Get full cite, KeyCite.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -245,6 +280,8 @@
       "tier": null,
       "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -261,6 +298,8 @@
       "tier": null,
       "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -277,6 +316,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -291,6 +332,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -307,6 +350,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -322,6 +367,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -336,6 +383,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -354,6 +403,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -368,6 +419,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -386,6 +439,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -405,6 +460,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -420,6 +477,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -435,6 +494,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -449,6 +510,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -464,6 +527,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -482,6 +547,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -499,6 +566,8 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
       "live": false
     },
     {
@@ -515,6 +584,98 @@
       "tier": null,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "",
+      "live": false
+    },
+    {
+      "id": "liability-of-owner",
+      "name": "Limits on what the landlord owes you",
+      "gbrebSection": "26",
+      "triggers": [
+        "liability of owner",
+        "liability of landlord",
+        "landlord's liability",
+        "limitation of landlord's liability",
+        "no owner of the property"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if your losses from a landlord's broken promise could be large, tier 3 if it only limits whom you can sue.",
+      "live": false
+    },
+    {
+      "id": "force-majeure",
+      "name": "Delays no one can control",
+      "gbrebSection": "24",
+      "triggers": [
+        "force majeure",
+        "beyond the control of",
+        "beyond its reasonable control",
+        "acts of God",
+        "unavoidable delays"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "No cap (tier 1): on the GBREB form you keep paying full rent through delays no one controls, however long they last.",
+      "live": false
+    },
+    {
+      "id": "brokerage",
+      "name": "The real estate broker",
+      "gbrebSection": "22",
+      "triggers": [
+        "brokerage",
+        "broker",
+        "brokers",
+        "brokerage commission",
+        "real estate broker"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3). No cap doesn't count: the cost only comes if you used a broker you didn't name.",
+      "live": false
+    },
+    {
+      "id": "compliance-with-laws",
+      "name": "Following laws and local rules",
+      "gbrebSection": "9",
+      "triggers": [
+        "compliance with laws",
+        "comply with all laws",
+        "applicable laws",
+        "by-law or ordinance"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Rules and paperwork (tier 3). No cap doesn't count: the cost only comes if your use breaks a law.",
+      "live": false
+    },
+    {
+      "id": "insurance-increase",
+      "name": "Uses that raise the building's insurance",
+      "gbrebSection": "10",
+      "triggers": [
+        "fire insurance",
+        "make voidable any insurance",
+        "extra insurance premiums",
+        "increase the rate of insurance",
+        "rate of fire insurance",
+        "increase in insurance premiums"
+      ],
+      "tier": null,
+      "massachusettsLaw": "",
+      "status": "Draft (Claude)",
+      "suggestedTier": null,
+      "tierReason": "Either way: tier 1 if your normal business raises the building's insurance, such as cooking, since there's no cap. Tier 3 if it doesn't.",
       "live": false
     }
   ]

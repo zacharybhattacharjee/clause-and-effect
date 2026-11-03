@@ -132,16 +132,19 @@ def convert():
     types = []
     for r in records(sheets["Clause types"], {
         "id": "Clause type ID", "name": "Plain name", "gbreb": "GBREB section",
-        "triggers": "Trigger phrases", "tier": "Tier", "law": "Massachusetts law",
+        "triggers": "Trigger phrases", "tier": "Tier (", "law": "Massachusetts law",
         "status": "Status", "notes": "Notes",
-    }):
+    }, optional={"suggestedTier": "Suggested tier", "tierReason": "Reason for the suggested tier"}):
         if not r["id"]:
             problem("Clause types", r["_row"], "Row has no clause type ID, so it was skipped.")
             continue
         types.append({
             "id": r["id"], "name": r["name"], "gbrebSection": r["gbreb"],
             "triggers": split_list(r["triggers"]), "tier": tier_value(r["tier"]),
-            "massachusettsLaw": r["law"], "status": r["status"], "_row": r["_row"],
+            "massachusettsLaw": r["law"], "status": r["status"],
+            # Claude's suggestion, for Zachary to review. The page never uses it as a tier.
+            "suggestedTier": tier_value(r["suggestedTier"]), "tierReason": r["tierReason"],
+            "_row": r["_row"],
         })
     type_ids = {t["id"] for t in types}
 

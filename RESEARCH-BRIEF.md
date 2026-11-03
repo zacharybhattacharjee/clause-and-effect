@@ -8,7 +8,7 @@ Design question: How might we redesign small business contracts so that what is 
 
 - Every sentence an owner reads comes from the library. The page never writes its own.
 - Each row in the spreadsheet has a status. Only rows marked "Approved" go into the live files. Zachary approves every row.
-- Zachary sets every consequence tier. Leave tiers blank, and never suggest one.
+- Zachary sets every consequence tier. Claude may suggest tiers in the "Suggested tier" column only, with a reason, and never fills in the real Tier column or "Tier override".
 - Never copy text from licensed sources (Practical Law, Westlaw, Lexis, MCLE) into the repository. The repository is public.
 - Never add the Egleston lease, or any text from it, to the repository. Zachary tests it on his own computer.
 - A "real example" must be copied from a real lease and name its source. If there isn't one yet, leave the cell blank. Never invent an example.

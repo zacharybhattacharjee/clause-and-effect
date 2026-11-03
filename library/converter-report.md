@@ -8,16 +8,16 @@ A row is live when its status is Approved and, for clause types and versions, it
 
 | Sheet | Live | All rows |
 | --- | --- | --- |
-| Clause types | 0 | 32 |
+| Clause types | 0 | 37 |
 | Versions | 0 | 49 |
 | Warning phrases | 0 | 27 |
 | Asks | 0 | 24 |
 | Glossary | 0 | 30 |
 | Missing clauses | 0 | 8 |
 
-## Problems to fix in the workbook (1)
+## Problems to fix in the workbook (0)
 
-- **Versions, row 16:** opex-base-year: "Numbers to fill" lists share, but the sentence has no {share}.
+None.
 
 ## Blanks that can't be filled yet (15)
 

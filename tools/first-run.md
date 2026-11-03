@@ -82,3 +82,14 @@ Also in the proposed fixes: "use of the premises" was removed and "Use" added (h
 The earlier "28 sorted, 0 unsure, 3 not sorted" for the form was a counting mistake. The right numbers were 27 sorted and 4 not sorted.
 
 The Egleston lease is never run here. Zachary runs it on his own computer, on the check page.
+
+## Workbook fixes applied to the workbook (11/3)
+
+The fixes from `DRAFT-WORDING.md` and the five new clause types are now in `library/clause-library.xlsx`, as Draft rows. `library/proposed-fixes.json` was removed. The library has 37 clause types.
+
+| | Sorted | Unsure | Not sorted |
+| --- | --- | --- | --- |
+| GBREB form (31 pieces) | 27 | 0 | 4 |
+| 13 build leases | 511 | 21 | 663 |
+
+These match the in-memory test above. Flags on the GBREB form: 13 (transfer-tenant-stays-liable), 14 (subordination-only) and 18 (casualty-landlord-may-terminate).
