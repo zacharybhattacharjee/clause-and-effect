@@ -19,6 +19,12 @@ Zachary is not a software developer. Explain every change in plain words, withou
 - `index.html`, `style.css`, `app.js`: the page.
 - `PLAN.md`: the build plan once Zachary approves it.
 - `DRAFT-WORDING.md`: wording Claude drafted for Zachary to review, before it goes into the JSON files.
+- `ENGINE-PLAN.md` and `RESEARCH-BRIEF.md`: the plan and rules for the lease-reading engine.
+- `library/clause-library.xlsx`: Zachary's workbook, the source of the engine's library. `tools/convert-workbook.py` turns it into `library/*.json` and writes `library/converter-report.md`. Never edit the library JSON files by hand.
+- `engine.js`: the engine. It splits a lease into sections, sorts them into clause types, and finds versions and asks. The tester page doesn't use it yet.
+- `engine-check.html`: a check page for Zachary, not linked from the tester page.
+- `tools/dataset-split.json` and `tools/first-run.md`: which research-dataset leases build the rules and which are held back, and each run's results.
+- `CREDITS.md`: credit for the research dataset, the public lease filings, and pdf.js.
 
 ## Hosting
 

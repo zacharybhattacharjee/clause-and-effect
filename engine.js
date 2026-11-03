@@ -191,16 +191,21 @@ const LeaseEngine = (() => {
 
   const MARGIN_NUMBER = /^(\d{1,3})\.\s*(.*)$/;        // "13. ASSIGNMENT –"
   const MARGIN_LETTER = /^([A-Z])\.\s+(.*)$/;          // "B. OPERATING"
-  const INLINE_START =                                   // "13. ASSIGNMENT. Tenant shall…", "Section 4.2 Rent."
-    /^(?:(?:section|article|§)\s*)?(\d{1,3}(?:\.\d{1,2}){0,2}|[ivxlc]{1,6})[.)]?\s+([A-Z][^.:]{1,90}?)(?:[.:](?:\s+|$)|$)(.*)$/i;
+  const INLINE_START =                                   // "13. ASSIGNMENT. Tenant shall…", "Section 4.2 Rent.", "1.Premises."
+    /^(?:(?:section|article|§)\s*)?(\d{1,3}(?:\.\d{1,2}){0,2}|[ivxlc]{1,6})(?:[.)]\s*|\s+)([A-Z][^.:]{1,90}?)(?:[.:](?:\s+|$)|$)(.*)$/i;
+  const ARTICLE_ALONE = /^(?:ARTICLE|Article)\s+([IVXLC]{1,6}|\d{1,3})\.?\s*$/; // "ARTICLE 5", heading on the next line
   const ATTACHMENT_START = /^(RIDER|EXHIBIT|ADDENDUM|AMENDMENT|SCHEDULE)\b\s*([A-Z0-9-]*)[.:]?\s*(.*)$/;
   const TABLE_OF_CONTENTS_LINE = /(\.{4,}|\s{3,})\s*\d{1,3}\s*$/;
+  // "64 Sidney Street" is an address, not section 64.
+  const ADDRESS_HEADING = /\b(street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|place|pl|court|ct|square|sq|plaza|suite|floor|highway|parkway|pkwy)\.?$/i;
 
   // A heading is mostly capitalized words, so "Rent. Tenant shall pay" is a
-  // heading and "10 days after notice" is not.
-  function looksLikeHeading(text) {
+  // heading and "10 days after notice" is not. A short heading that is the
+  // whole line may be in sentence case, such as "Repairs and alterations".
+  function looksLikeHeading(text, wholeLine = false) {
     const words = text.split(/\s+/).filter((word) => /[A-Za-z]/.test(word));
     if (!words.length || words.length > 12) return false;
+    if (wholeLine && words.length <= 6 && /^[A-Z]/.test(words[0])) return true;
     const minor = /^(of|and|or|the|a|an|to|in|on|for|by|with|at|as)$/i;
     const significant = words.filter((word) => !minor.test(word));
     if (!significant.length) return false;
@@ -249,6 +254,7 @@ const LeaseEngine = (() => {
     let lastNumber = null;
     let headingLine = null; // the last margin line added to a heading
     let inParentheses = false;
+    let awaitingHeading = false; // just after "ARTICLE 5" on its own line
 
     const start = (number, heading, line) => {
       current = newSection(number, heading, line);
@@ -262,7 +268,9 @@ const LeaseEngine = (() => {
       // Attachments start their own section, whatever the layout.
       const attachment = ATTACHMENT_START.exec(text);
       if (attachment && text === text.toUpperCase() && text.length < 80) {
-        start(`${attachment[1][0]}${attachment[1].slice(1).toLowerCase()} ${attachment[2]}`.trim(), attachment[3], line);
+        const number = `${attachment[1][0]}${attachment[1].slice(1).toLowerCase()} ${attachment[2]}`.trim();
+        // The same exhibit name again is a page header inside that exhibit.
+        if (number !== current.number) start(number, attachment[3], line);
         headingLine = null;
         continue;
       }
@@ -296,8 +304,22 @@ const LeaseEngine = (() => {
       }
 
       if (!usesMargin && !TABLE_OF_CONTENTS_LINE.test(text)) {
+        // A line just after "ARTICLE 5" that looks like a heading is its heading.
+        if (awaitingHeading) {
+          awaitingHeading = false;
+          if (text.length <= 80 && looksLikeHeading(text.replace(/[.:]$/, ""), true)) {
+            current.heading = text;
+            continue;
+          }
+        }
+        const article = ARTICLE_ALONE.exec(text);
+        if (article) {
+          start(article[1], "", line);
+          awaitingHeading = true;
+          continue;
+        }
         const inline = INLINE_START.exec(text);
-        if (inline && looksLikeHeading(inline[2])) {
+        if (inline && looksLikeHeading(inline[2], !inline[3].trim()) && !ADDRESS_HEADING.test(inline[2].trim())) {
           start(inline[1].replace(/\.$/, ""), inline[2], line);
           if (inline[3].trim()) current.lines.push({ ...line, text: inline[3] });
           continue;

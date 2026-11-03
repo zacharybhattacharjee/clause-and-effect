@@ -29,3 +29,24 @@ A section counts as found when the engine finds a section with the same number t
   - utilities-metered (7)
   - casualty-landlord-may-terminate (18), matched by the general cue "fire or other casualty"
   - default-notice-and-cure (19)
+
+## After tuning the splitter (11/3)
+
+Tuned on the 13 build leases only. I didn't open the held-back leases. Their score was measured once, after tuning.
+
+What changed in the splitter:
+- A number with no space before the heading counts, such as "1.Premises.".
+- "ARTICLE 5" on its own line starts a section, and the next line is its heading if it looks like one.
+- A short heading that fills the whole line may be in sentence case, such as "7 Repairs and alterations".
+- A street address such as "64 Sidney Street" isn't a section.
+- An exhibit's name repeated at the top of its own pages doesn't start a new section.
+
+The sorting settings didn't change.
+
+| Leases | Labeled sections | Found | Share found | Everything reported | Of those, real sections or sub-parts |
+| --- | --- | --- | --- | --- | --- |
+| Build (13) | 336 | 335 | 100% | 875 | 739 (84%) |
+| Held back (7) | 228 | 150 | 66% | 387 | 348 (90%) |
+| GBREB form | 32 | 32 | 100% | 32 | 32 |
+
+The gap between 100% and 66% is the honest picture: the splitter works well on layouts like the ones it was tuned on, and less well on new ones.
