@@ -201,15 +201,15 @@
       "askFor": "",
       "fallback": "",
       "shortAsk": "Release from the lease once the landlord approves your buyer",
-      "shortWhy": "The buyer should owe the rent from then on.",
+      "shortWhy": "Once the landlord approves your buyer, the space is theirs to run. You shouldn't keep owing rent on a business you no longer control.",
       "plainAsk": "Ask to be released once the landlord approves the buyer.",
       "softerAsk": "Once you approve a buyer, could my business be released from obligations after that date?",
       "why": "Once the landlord approves a buyer, the buyer is the one who should answer for the rent.",
       "legalWording": "Upon any assignment approved by Landlord, Tenant and any Guarantor shall be released from all obligations arising after the date of the assignment.",
       "ownerBlanks": "",
       "nextStep": "Ask that the release start on the day of the approved transfer.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "version": "relocation-or-lease-ends",
@@ -321,15 +321,15 @@
       "askFor": "casualty-rent-abates",
       "fallback": "",
       "shortAsk": "No rent while the space is unusable, and a way out if repairs drag",
-      "shortWhy": "A real lease includes this.",
+      "shortWhy": "If you can't use the space, you can't earn money there. Without this, you could owe full rent for months with no way to leave.",
       "plainAsk": "Ask that rent stop while the space is unusable, and that you can end the lease if repairs take too long.",
       "softerAsk": "Could rent stop while the space can't be used, and could I end the lease if repairs take too long?",
       "why": "A real lease stops rent while the space is being rebuilt: see the example.",
       "legalWording": "Rent shall abate while the Premises are untenantable. If the Premises are not restored within [180] days after the casualty, Tenant may terminate this Lease.",
       "ownerBlanks": "number of days",
       "nextStep": "Ask what insurance the landlord carries to rebuild.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "version": "subordination-only",
@@ -343,8 +343,8 @@
       "legalWording": "Tenant's subordination is conditioned on Tenant receiving a non-disturbance agreement from each holder of a mortgage on the Building.",
       "ownerBlanks": "",
       "nextStep": "Ask whether the building has a mortgage now, and ask for the lender's non-disturbance agreement before you sign.",
-      "status": "Draft (Claude)",
-      "live": false
+      "status": "Approved",
+      "live": true
     },
     {
       "version": "no-early-exit",

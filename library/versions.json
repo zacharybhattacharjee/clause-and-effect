@@ -16,11 +16,11 @@
       ],
       "rating": "Best",
       "tier": 1,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 1,
       "tierReason": "The default clause itself is tier 1: even with the usual warning and time to fix, it decides when the landlord can end the lease.",
       "effectiveTier": 1,
-      "live": false
+      "live": true
     },
     {
       "id": "default-no-notice",
@@ -513,11 +513,11 @@
       "numbers": [],
       "rating": "Worst",
       "tier": 2,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 2,
       "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent if the buyer stops paying.",
       "effectiveTier": 2,
-      "live": false
+      "live": true
     },
     {
       "id": "transfer-profit-sharing",
@@ -738,11 +738,11 @@
       "numbers": [],
       "rating": "Middle",
       "tier": null,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": null,
       "tierReason": "Either way: metered use can be calculated (tier 2), but unmetered utilities join your building-cost share, which has no cap (tier 1).",
       "effectiveTier": 2,
-      "live": false
+      "live": true
     },
     {
       "id": "utilities-no-liability",
@@ -916,11 +916,11 @@
       ],
       "rating": "Worst",
       "tier": 1,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 1,
       "tierReason": "Can cost you the space (tier 1).",
       "effectiveTier": 1,
-      "live": false
+      "live": true
     },
     {
       "id": "casualty-rent-abates",
@@ -935,11 +935,11 @@
       "numbers": [],
       "rating": "Best",
       "tier": 3,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 3,
       "tierReason": "Rules and paperwork (tier 3): a protection. Rent stops while the space is rebuilt.",
       "effectiveTier": 3,
-      "live": false
+      "live": true
     },
     {
       "id": "subordination-with-non-disturbance",
@@ -955,11 +955,11 @@
       "numbers": [],
       "rating": "Best",
       "tier": 3,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 3,
       "tierReason": "Rules and paperwork (tier 3): the lender must keep your lease. Your brief gives this example.",
       "effectiveTier": 3,
-      "live": false
+      "live": true
     },
     {
       "id": "subordination-only",
@@ -974,11 +974,11 @@
       "numbers": [],
       "rating": "Worst",
       "tier": 1,
-      "status": "Draft (Claude)",
+      "status": "Approved",
       "suggestedTier": 1,
       "tierReason": "Can cost you the space (tier 1): the landlord's lender may not have to keep your lease. Your brief gives this example.",
       "effectiveTier": 1,
-      "live": false
+      "live": true
     },
     {
       "id": "no-early-exit",

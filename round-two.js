@@ -4,8 +4,9 @@
 //   A "Lease text first"   - annotated lease: the lease's words, with notes beside them
 //   B "What to ask first"  - plain checklist: short rows, short bullets
 //   C "Risk summary first" - summary first: counts, then one line per section
-// It includes draft rows from the library, and shows one "Draft" note at the
-// top. The live page (index.html) is unchanged and never reads draft rows.
+// It shows only approved rows from the library. With ?preview=1 it also shows
+// draft rows, with one "Draft" note at the top. The live page (index.html) is
+// unchanged and never reads draft rows.
 // Every word comes from content.json, content-round-two.json or the library.
 // The lease is read in this browser and never sent anywhere or kept.
 
@@ -17,6 +18,9 @@ let words = null;     // content-round-two.json: round 2 wording, some of it dra
 let library = null;   // the engine's library, made from the workbook
 let lease = null;     // the engine's reading of the uploaded lease
 let glossary = [];    // word meanings, from content.json and the library
+
+// ?preview=1 shows draft rows too, for checking wording before approving it.
+const PREVIEW = new URLSearchParams(location.search).get("preview") === "1";
 
 // ---------- Small helpers ----------
 
@@ -75,7 +79,8 @@ function testerCode() {
 function mergedGlossary() {
   const seen = new Set();
   const all = [];
-  for (const entry of [...(content.glossary || []), ...(library.glossary || [])]) {
+  const fromLibrary = (library.glossary || []).filter((entry) => PREVIEW || entry.live);
+  for (const entry of [...(content.glossary || []), ...fromLibrary]) {
     const key = entry.words.toLowerCase();
     if (!entry.words || !entry.meaning || seen.has(key)) continue;
     seen.add(key);
@@ -663,7 +668,7 @@ async function readLease(file) {
   const lines = await LeaseEngine.linesFromPdf(doc);
   await doc.destroy();
   if (!lines.some((line) => line.text.trim())) throw new Error("The PDF has no text to read.");
-  return LeaseEngine.readLease(lines, library, { preview: true });
+  return LeaseEngine.readLease(lines, library, { preview: PREVIEW });
 }
 
 function renderUploadScreen() {
@@ -743,7 +748,8 @@ function renderFrame() {
   setText("intro", page.intro);
   setText("footer-note", page.footer);
   setText("tester-code", testerCode());
-  setText("draft-note", words.page.draftNote);
+  setText("draft-note", PREVIEW ? words.page.draftNote : "");
+  document.getElementById("draft-note").hidden = !PREVIEW;
 }
 
 async function start() {

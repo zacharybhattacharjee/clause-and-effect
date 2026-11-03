@@ -1,5 +1,7 @@
 # Review sheet: the standard form
 
+**Done on 11/3.** Zachary approved everything here, set items 12 and 13 to Costs money and Highest stakes, and rewrote items 33, 35, 42, 46 and 48. Section 6C (item 2) now has its own clause type, "Increases tied to inflation", in Highest stakes, because the form puts no cap on the increases. The list below is the wording as it was before his changes.
+
 Everything below shows on the page when someone uploads the standard form lease, and it's all still a draft. Nothing else in the workbook shows for this lease, so the rest can wait.
 
 **How to answer:** reply with something like "approve all except 30 and 47", or "change 47 to …". I'll then mark those rows Approved in the workbook and take approved page wording off the draft list. Nothing changes until you say so.
