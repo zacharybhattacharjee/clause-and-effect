@@ -229,7 +229,7 @@ Your notes asked for six things. I've sorted them by size, smallest first.
 
 ### Step 10: Round 2 polish (planned, not built)
 
-Status: waiting for Zachary to choose a direction. Nothing is built.
+Status: built on branch `claude/simpler-asks` (11/3), not merged. Zachary chose one direction per version: Annotated lease for Lease text first, Plain checklist for What to ask first, and Summary first for Risk summary first. The asks use the short, round 1 style bullets from `DRAFT-WORDING.md`, stored as Draft columns ("Short ask" and "Short why") on the Asks sheet.
 
 **What the design critique found** (design-critique skill, 11/3, on the standard form at laptop width):
 

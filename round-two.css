@@ -1,10 +1,16 @@
-/* Round 2 test page. Builds on style.css, tuned for a laptop screen first. */
+/* Round 2 test page. Builds on style.css, tuned for a laptop screen first.
+   One accent per job: the tier dot carries the tier, gold marks an ask,
+   and everything else stays plum on cream. Rows are separated by hairlines,
+   not boxes inside boxes. */
 
 :root {
-  --tier-1: #A63A2B;      /* brick: white text, 6.6:1 */
-  --tier-2: #C9A227;      /* gold: plum text, 6.0:1 */
-  --tier-3: #2F6B45;      /* green: white text, 6.4:1 */
-  --tier-not-set: #6E6E6E;
+  --tier-1: #A63A2B;      /* brick */
+  --tier-2: #C9A227;      /* gold */
+  --tier-3: #2F6B45;      /* green */
+  --tier-not-set: #8A8A8A;
+  --rule: rgba(59, 35, 64, 0.14);
+  --paper: #FFFFFF;
+  --highlight: #F3E3A6;   /* plum text on it: 10.9:1 */
 }
 
 /* A closed panel stays closed, whatever layout its class gives it. */
@@ -12,63 +18,91 @@
   display: none !important;
 }
 
+.print-only {
+  display: none;
+}
+
 /* One note at the top: this page shows draft wording. */
 .draft-note {
   margin: 0;
-  padding: 10px 16px;
+  padding: 8px 16px;
   background: var(--plum);
   color: var(--cream);
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 500;
   text-align: center;
 }
 
 /* Use the full width of a laptop screen. */
 .wrap.wide {
-  max-width: 1240px;
+  max-width: 1200px;
 }
 
-/* ---------- Tier marks and chips ---------- */
+/* Once a lease is open, the title and intro step aside, so the content
+   starts near the top of the screen. */
+body.reading .masthead {
+  padding: 20px 0 8px;
+}
 
-.tier-mark,
-.tier-chip {
+body.reading .masthead h1,
+body.reading .masthead .intro {
+  display: none;
+}
+
+body.reading .app-name {
+  margin-bottom: 0;
+}
+
+/* ---------- Tier labels: a dot and a name ---------- */
+
+.tier-label {
   display: inline-flex;
   align-items: center;
-  min-height: 32px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  border: 2px solid transparent;
-  font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.tier-mark {
+  gap: 8px;
   min-height: 44px;
+  padding: 0 4px;
+  border: none;
+  background: none;
+  color: var(--plum);
+  font: inherit;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.tier-mark:focus-visible {
+.tier-label:hover span:last-child {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.tier-label:focus-visible {
   outline: 3px solid var(--slate);
-  outline-offset: 3px;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
-.tier-1 { background: var(--tier-1); color: var(--white); }
-.tier-2 { background: var(--tier-2); color: var(--plum); }
-.tier-3 { background: var(--tier-3); color: var(--white); }
-
-/* No color for a tier that isn't set: just its words. */
-.tier-not-set {
-  background: var(--white);
-  color: var(--plum);
-  border: 2px dashed var(--tier-not-set);
+.tier-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--tier-not-set);
 }
 
-.tier-unsorted {
-  background: var(--white);
-  color: var(--plum);
-  border: 2px solid var(--hairline);
+.tier-1 .tier-dot { background: var(--tier-1); }
+.tier-2 .tier-dot { background: var(--tier-2); }
+.tier-3 .tier-dot { background: var(--tier-3); }
+.tier-not-set .tier-dot { background: transparent; border: 2px solid var(--tier-not-set); }
+
+.tier-heading {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-left: -4px;
+}
+
+.tier-heading .tier-dot {
+  width: 12px;
+  height: 12px;
 }
 
 .tier-dialog {
@@ -92,23 +126,33 @@
 .tier-scale {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 12px 16px;
-  align-items: start;
-  margin: 0 0 24px;
+  gap: 12px 20px;
+  align-items: baseline;
+  margin: 16px 0 24px;
+}
+
+.tier-scale dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .tier-scale dd {
-  margin: 4px 0 0;
+  margin: 0;
+  color: var(--plum-muted);
 }
 
 /* ---------- Splash page ---------- */
 
 .splash {
-  max-width: 52rem;
+  max-width: 46rem;
+  padding-top: 8px;
 }
 
 .splash-title {
-  font-size: 1.875rem;
+  font-size: 2rem;
 }
 
 .splash-lead {
@@ -119,19 +163,12 @@
 .splash-part {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--rule);
 }
 
 .splash-part h3 {
   font-size: 1.25rem;
   margin-bottom: 8px;
-}
-
-.splash-groups {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
 }
 
 .splash-versions {
@@ -141,6 +178,11 @@
 
 .splash-versions li + li {
   margin-top: 8px;
+}
+
+.splash-note {
+  margin-top: 16px;
+  color: var(--plum-muted);
 }
 
 .splash-buttons {
@@ -158,12 +200,12 @@
   z-index: 5;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 8px 16px;
+  gap: 4px 16px;
   align-items: center;
   margin: 0 -16px 8px;
-  padding: 12px 16px;
+  padding: 10px 16px 6px;
   background: var(--cream);
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--rule);
 }
 
 .wide-switcher {
@@ -181,12 +223,7 @@
 
 .reader-tools {
   display: flex;
-  gap: 8px;
-}
-
-.reader-tools .button {
-  min-height: 44px;
-  padding: 8px 16px;
+  gap: 20px;
 }
 
 .tracker {
@@ -201,183 +238,32 @@
 .tracker-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 16px;
+  gap: 0 18px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .tracker a {
+  display: inline-block;
+  padding: 8px 0;
   color: var(--plum-muted);
   text-decoration: none;
-  padding: 6px 0;
-  display: inline-block;
 }
 
 .tracker a[aria-current="true"] {
   color: var(--plum);
   font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 4px;
+  box-shadow: inset 0 -2px 0 var(--plum);
 }
 
 .tracker-label {
   font-weight: 600;
 }
 
-/* ---------- Versions ---------- */
-
-.version-view {
-  padding-top: 24px;
-}
-
-.version-view .version-heading {
-  font-size: 1.75rem;
-  margin-bottom: 8px;
-}
-
-.version-view .version-description {
-  margin: 0 0 24px;
-}
-
-.flag-line {
-  color: var(--plum);
-  font-weight: 600;
-}
-
-.tier-group {
-  margin-top: 40px;
-  scroll-margin-top: 150px;
-}
-
-.group-title {
-  margin-bottom: 16px;
-  font-size: 1.25rem;
-}
-
-.group-title .tier-chip {
-  font-size: 1.0625rem;
-  padding: 6px 16px;
-}
-
-.group-intro {
-  margin: -8px 0 16px;
-  color: var(--plum-muted);
-}
-
-.section-card {
-  margin-top: 16px;
-  padding: 24px;
-  background: var(--white);
-  border: 1px solid var(--hairline);
-  border-left: 6px solid var(--hairline);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.section-card[data-tier="1"] { border-left-color: var(--tier-1); }
-.section-card[data-tier="2"] { border-left-color: var(--tier-2); }
-.section-card[data-tier="3"] { border-left-color: var(--tier-3); }
-
-.card-top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.section-title {
-  font-size: 1.1875rem;
-}
-
-.column-label {
-  margin-bottom: 8px;
-  font-family: var(--sans);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--plum-muted);
-}
-
-.section-card .lease-text {
-  box-shadow: none;
-  background: #FCFBF8;
-}
-
-.explanation {
-  display: grid;
-  gap: 12px;
-}
-
-.type-name {
-  font-size: 1.0625rem;
-}
-
-.version-line {
-  padding: 12px 16px;
-  border-radius: 10px;
-  background: var(--slate-tint);
-  border-left: 4px solid var(--slate);
-}
-
-.version-line p {
-  margin: 0;
-}
-
-.good-mark,
-.flag-mark {
-  display: inline-block;
-  margin-bottom: 6px;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-}
-
-.good-mark {
-  background: var(--white);
-  border: 2px solid var(--tier-3);
-  color: var(--plum);
-}
-
-.flag-mark {
-  background: var(--gold);
-  color: var(--plum);
-}
-
-.unsure-line {
-  font-weight: 600;
-}
-
-.ask-block {
-  padding: 16px 18px;
-  border: 1px solid var(--hairline);
-  border-left: 4px solid var(--gold);
-  border-radius: 10px;
-  display: grid;
-  gap: 10px;
-}
-
-.ask-block p,
-.ask-block h4,
-.ask-block h5 {
-  margin: 0;
-}
-
-.ask-heading {
-  font-size: 1.0625rem;
-}
-
-.ask-plain {
-  font-size: 1.0625rem;
-  font-weight: 500;
-}
+/* ---------- Shared pieces ---------- */
 
 .text-toggle {
-  justify-self: start;
   min-height: 44px;
   padding: 0;
   border: none;
@@ -386,26 +272,177 @@
   font: inherit;
   font-weight: 600;
   text-decoration: underline;
+  text-decoration-color: rgba(59, 35, 64, 0.35);
   text-underline-offset: 4px;
   cursor: pointer;
 }
 
-.text-toggle::before {
-  content: "▸ ";
-}
-
-.text-toggle[aria-expanded="true"]::before {
-  content: "▾ ";
+.text-toggle:hover {
+  text-decoration-color: var(--plum);
 }
 
 .text-toggle:focus-visible {
   outline: 3px solid var(--slate);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
-.proposal {
+.version-view {
+  padding-top: 24px;
+}
+
+.version-view .version-heading {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.version-view .version-description {
+  margin: 0 0 20px;
+  font-size: 1.125rem;
+}
+
+.version-notes {
+  margin-bottom: 8px;
+}
+
+.flag-line {
+  color: var(--plum);
+  font-weight: 600;
+}
+
+.tier-group {
+  margin-top: 48px;
+  scroll-margin-top: 140px;
+}
+
+.group-title {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+}
+
+.group-intro {
+  margin: 0 0 8px;
+  color: var(--plum-muted);
+}
+
+.row {
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.row-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.row-title {
+  font-size: 1.3125rem;
+  margin: 0;
+}
+
+.row-ref {
+  margin: 12px 0 0;
+  font-size: 0.875rem;
+  color: var(--plum-muted);
+  letter-spacing: 0.01em;
+}
+
+.row-links {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.flag-mark {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--plum);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.meaning {
+  margin-top: 8px;
+  max-width: 44rem;
+}
+
+.meaning-line {
+  margin: 6px 0 0;
+  font-size: 1.0625rem;
+}
+
+.unsure-line {
+  margin: 6px 0 0;
+  font-weight: 600;
+}
+
+.good-mark {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1.5px solid var(--tier-3);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  vertical-align: 1px;
+}
+
+/* The asks, as in round 1: one line, then short bullets. */
+.asks {
+  margin-top: 16px;
+  max-width: 44rem;
+}
+
+.asks-intro {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ask-bullets {
+  margin: 8px 0 0;
+  padding-left: 1.25em;
+}
+
+.ask-bullets li {
+  margin-top: 6px;
+}
+
+.ask-bullets li::marker {
+  color: var(--gold);
+  font-size: 1.2em;
+}
+
+.ask-text {
+  display: block;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.ask-why {
+  display: block;
+  color: var(--plum-muted);
+}
+
+.why-label {
+  font-weight: 600;
+}
+
+.what-to-say {
   display: grid;
   gap: 10px;
+  margin: 4px 0 8px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: 10px;
+}
+
+.what-to-say p {
+  margin: 0;
 }
 
 .legal-caution {
@@ -414,35 +451,30 @@
 }
 
 .legal-wording {
-  padding: 12px 14px;
-  background: #FCFBF8;
-  border: 1px solid var(--hairline);
-  border-radius: 8px;
   font-family: var(--serif);
 }
 
 .proof {
   margin: 0;
-  padding: 12px 14px;
-  border-radius: 8px;
-  background: var(--cream);
+  padding-left: 12px;
+  border-left: 2px solid var(--rule);
 }
 
 .proof-label {
   font-weight: 600;
-  margin-bottom: 4px;
+  font-size: 0.9375rem;
 }
 
 .proof-quote {
-  margin: 0;
+  margin: 2px 0 0;
   font-family: var(--serif);
   font-style: italic;
 }
 
 .proof-source,
 .proof-note {
-  margin: 6px 0 0;
-  font-size: 0.9375rem;
+  margin: 4px 0 0;
+  font-size: 0.875rem;
   color: var(--plum-muted);
 }
 
@@ -450,89 +482,208 @@
   color: var(--plum);
 }
 
-.fallback h5 {
-  font-size: 1rem;
-  margin-bottom: 4px;
-}
-
-.toggle-button {
-  margin-top: 16px;
-  min-height: 44px;
-  padding: 8px 18px;
-}
-
-.section-card > .lease-text {
+.lease-text {
   margin-top: 12px;
+  box-shadow: none;
+  border-radius: 10px;
 }
 
-/* "Risk summary first": larger type and more space, so it reads easily. */
-.version-C .explanation {
-  font-size: 1.0625rem;
+.cue-mark {
+  background: var(--highlight);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* ---------- A: annotated lease ---------- */
+
+.annotated-row {
+  display: grid;
+  gap: 20px 40px;
+}
+
+.lease-page .row-ref {
+  margin: 0 0 4px;
+}
+
+.lease-page .lease-text {
+  margin-top: 0;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 22px 24px;
+}
+
+.margin-note {
+  padding-left: 20px;
+  border-left: 2px solid var(--rule);
+}
+
+.margin-note .meaning,
+.margin-note .asks {
+  max-width: none;
+}
+
+/* ---------- B: plain checklist ---------- */
+
+.checklist-row .row-title {
+  font-size: 1.375rem;
+}
+
+/* ---------- C: summary first ---------- */
+
+.summary-counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 24px 0 0;
+}
+
+.count-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 18px;
+  background: var(--paper);
+  border-radius: 12px;
+  color: var(--plum);
+  text-decoration: none;
+  border-top: 4px solid var(--rule);
+}
+
+.count-tile.tier-1 { border-top-color: var(--tier-1); }
+.count-tile.tier-2 { border-top-color: var(--tier-2); }
+.count-tile.tier-asks { border-top-color: var(--plum); }
+
+.count-tile:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 3px;
+}
+
+.count-label {
+  color: var(--plum-muted);
+  font-weight: 500;
+}
+
+.count-number {
+  font-family: var(--serif);
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.summary-row {
+  padding: 0;
+}
+
+.summary-heading {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.125rem;
+}
+
+.summary-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 0;
+  border: none;
+  background: none;
+  color: var(--plum);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.summary-toggle::before {
+  content: "▸";
+  color: var(--plum-muted);
+}
+
+.summary-toggle[aria-expanded="true"]::before {
+  content: "▾";
+}
+
+.summary-toggle:hover .summary-name {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.summary-toggle:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 2px;
+}
+
+.summary-name {
+  flex: 1;
+}
+
+.summary-detail {
+  padding: 0 0 24px 24px;
+}
+
+/* "Risk summary first" reads at a larger size, so it's easy on the eyes. */
+.layout-C .meaning-line,
+.layout-C .ask-text {
+  font-size: 1.125rem;
   line-height: 1.65;
-  gap: 16px;
-}
-
-.version-C .version-line {
-  padding: 16px 20px;
-}
-
-.unsorted-card {
-  border-left-style: dashed;
 }
 
 /* ---------- What to do next ---------- */
 
 .ask-list {
-  margin-top: 56px;
+  margin-top: 64px;
 }
 
 .ask-items {
   margin: 16px 0 0;
-  padding-left: 1.4em;
+  padding-left: 1.6em;
   display: grid;
-  gap: 20px;
+  gap: 16px;
 }
 
-.ask-item {
-  display: grid;
-  gap: 8px;
+.ask-item::marker {
+  font-weight: 600;
 }
 
 .ask-item p {
   margin: 0;
 }
 
-.ask-item-top {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
+.ask-item-top .ask-text {
+  display: inline;
 }
 
-.ask-item-top h3 {
-  font-size: 1.0625rem;
+.ask-item-section {
+  margin-left: 10px;
+  font-size: 0.9375rem;
+  color: var(--plum-muted);
 }
 
-/* ---------- Laptop: lease text and explanation side by side ---------- */
+/* ---------- Laptop: lease text and note side by side ---------- */
 
 @media (min-width: 960px) {
-  .columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 28px;
+  .annotated-row {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
     align-items: start;
   }
 }
 
 @media (max-width: 959px) {
-  .columns {
-    display: grid;
-    gap: 20px;
-  }
-
   /* On a narrow screen the bar would cover too much, so it scrolls away. */
   .reader-bar {
     position: static;
+    grid-template-columns: 1fr;
+  }
+
+  .margin-note {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .summary-counts {
     grid-template-columns: 1fr;
   }
 }
@@ -542,22 +693,24 @@
 @media print {
   .draft-note,
   .reader-bar,
-  .toggle-button,
   .text-toggle,
   .print-button {
     display: none !important;
   }
 
+  .print-only {
+    display: block;
+  }
+
   /* Printing the whole page opens every closed panel, such as the lease's
-     words and "Words to propose". Word meanings stay closed. */
+     words and "See what to say". Word meanings stay closed. */
   body.print-page [data-print-open][hidden] {
     display: block !important;
   }
 
-  .section-card,
+  .row,
   .ask-item {
     break-inside: avoid;
-    box-shadow: none;
   }
 
   /* "Print this list" prints only the ask list. */

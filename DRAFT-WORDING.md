@@ -419,6 +419,13 @@ These would replace the longer "Plain-language ask" and "Why you can ask" drafts
 | subordination-only | A promise from the landlord's lender to keep your lease | Without it, a new owner might not keep your lease. |
 | no-early-exit | A way to end the lease early, with notice and a fee | It limits what closing could cost you. |
 
+### Two more page lines, for "Risk summary first" and the ask bullets
+
+| Field | Draft |
+| --- | --- |
+| `labels.thingsToAsk` | Things to ask for |
+| `labels.why` | Why |
+
 ### One new button label
 
 Buttons work best at 2 to 4 words, so the label is shorter than my first draft.
