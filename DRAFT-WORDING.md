@@ -276,6 +276,79 @@ These have no versions yet, so they'll show as sorted but with nothing to explai
 - **Parties (1), premises (2) and other provisions (27)** stay "not sorted". That seems right to me, since they're basic terms and signatures, not risks. Add types only if you want them in the tier list.
 - **The 15 number blanks that can't be filled yet** wait for stage 2. I'll draft their cue phrases then.
 
+## Round 2 test page wording (drafted 11/3)
+
+Status: **unverified.** These lines are in `content-round-two.json`, which only the round 2 test page (`round-two.html`) reads. The live page and `content.json` are unchanged. Once you approve them, they move into `content.json` when round 2 goes live.
+
+### My drafts, for you to approve
+
+| Field | Draft |
+| --- | --- |
+| `page.draftNote` | Test version. Some wording on this page is still a draft. |
+| `splash.title` | How this works |
+| `splash.whatItIs` | This tool reads your lease and sorts its sections by what they could cost you. For each section, it shows what the lease says, what it means, and what you can ask the landlord to change. |
+| `splash.sortingTitle` | How your lease is sorted |
+| `splash.sorting` | Each section gets a tier, shown in red, yellow or green, always with its name. Sections the tool couldn't match go in their own group at the end, with the lease's own words. |
+| `splash.versionsTitle` | Three ways to read it |
+| `splash.versionsIntro` | All three show the same sections and the same explanations, arranged differently. Try each one. |
+| `splash.scaleTitle` | What the tiers mean |
+| `splash.wholeLeaseTitle` | The whole lease, in order |
+| `splash.wholeLease` | To read every section in the lease's own order, choose “Whole lease, in order” at the top of any version. |
+| `splash.chooseTitle` | Choose a version to start |
+| `versions.A.name` | Lease text first |
+| `versions.A.description` | Each section starts with the lease's own words, with its explanation beside them. |
+| `versions.B.name` | What to ask first |
+| `versions.B.description` | In each tier, sections you can ask to change come first, each with what to ask and why. |
+| `versions.B.flagLine` | Flagged sections are ones you can ask the landlord to change. Each one shows what to ask, and why. |
+| `versions.C.name` | Risk summary first |
+| `versions.C.description` | Short summaries, highest stakes first. The lease's own words are one click away. |
+| `tiers.notSetMeaning` | This section's tier hasn't been set yet. |
+| `labels.flag` | You can ask about this |
+| `labels.leaseSays` | The lease says |
+| `labels.whatItMeans` | What it means |
+| `labels.showLeaseWords` | Show the lease's words |
+| `labels.hideLeaseWords` | Hide the lease's words |
+| `labels.whyYouCanAsk` | Why you can ask |
+| `labels.nextStep` | Next step |
+| `labels.realExample` | In a real lease |
+| `labels.wholeLease` | Whole lease, in order |
+| `labels.howItWorks` | How this works |
+| `labels.close` | Close |
+| `labels.printPage` | Print this page |
+| `labels.onThisPage` | On this page |
+| `labels.notSortedIntro` | The tool couldn't match these sections to a clause type. Read the lease's own words, and tap an underlined word to see what it means. |
+| `labels.blankNumber` | (see the lease) |
+| `labels.section` | Section |
+| `labels.startOfLease` | Start of the lease |
+
+### Your own wording, from your answers
+
+These come from your answers on 10/26 and the workbook's "How to use" sheet (the tier meanings). They need no approval, just a check that I copied them right.
+
+| Field | Wording |
+| --- | --- |
+| `tiers.1.name` | Highest stakes |
+| `tiers.2.name` | Costs money |
+| `tiers.3.name` | Rules and paperwork |
+| `tiers.1.meaning` | Could cost you the space, the business, or personal assets, or puts no limit on what you could owe. |
+| `tiers.2.meaning` | Costs money, but the amount is limited or can be worked out from the lease. |
+| `tiers.3.meaning` | Rules and paperwork that cost nothing directly unless you miss them. |
+| `tiers.notSet` | Tier not set |
+| `labels.goodForYou` | Good for you |
+| `labels.whatToAsk` | What to ask |
+| `labels.wordsToPropose` | Words to propose |
+| `labels.ifTheySayNo` | If they say no, ask for this instead |
+| `labels.legalCaution` | Wording to suggest to the landlord. It changes what the lease means, so read the final version carefully before you sign. |
+| `labels.proofLine` | From a lease a company filed publicly. Larger tenants often get better terms, so this shows the wording exists, not that your landlord will agree. |
+| `labels.datasetCredit` | From Leivaditi, Rossi & Kanoulas (2020), CC BY-NC 4.0. |
+| `labels.unsureLine` | This section could be either of these. Check the lease's own words. |
+| `labels.notSortedTitle` | Sections the tool couldn't sort |
+
+### In the workbook, also drafts
+
+- **Versions sheet:** "Suggested tier" and "Reason" for all 49 versions, in green cells. The real "Tier override" column is still blank. If you agree with a suggestion, copy it into "Tier override", or into the clause type's Tier.
+- **Asks sheet:** "Why you can ask", "Next step" and "Softer way to say it" for all 24 asks, in green cells. Each row keeps its "Draft (Claude)" status until you approve it.
+
 ## Still yours to decide
 
 - **9e. Translate.** I left it out, as you asked. It waits until after testing.

@@ -1,0 +1,133 @@
+{
+  "note": "Wording for the round 2 test page (round-two.html) only. The live page never reads this file. Fields named in 'drafts' are Claude's drafts, listed in DRAFT-WORDING.md for Zachary to approve. Fields named in 'zacharysWording' are his own words from his answers. Move approved fields into content.json when round 2 goes live.",
+  "zacharysWording": [
+    "tiers.1.name",
+    "tiers.2.name",
+    "tiers.3.name",
+    "tiers.1.meaning",
+    "tiers.2.meaning",
+    "tiers.3.meaning",
+    "tiers.notSet",
+    "labels.goodForYou",
+    "labels.whatToAsk",
+    "labels.wordsToPropose",
+    "labels.ifTheySayNo",
+    "labels.legalCaution",
+    "labels.proofLine",
+    "labels.datasetCredit",
+    "labels.unsureLine",
+    "labels.notSortedTitle"
+  ],
+  "drafts": [
+    "page.draftNote",
+    "splash.title",
+    "splash.whatItIs",
+    "splash.sortingTitle",
+    "splash.sorting",
+    "splash.versionsTitle",
+    "splash.versionsIntro",
+    "splash.scaleTitle",
+    "splash.wholeLeaseTitle",
+    "splash.wholeLease",
+    "splash.chooseTitle",
+    "versions.A.name",
+    "versions.A.description",
+    "versions.B.name",
+    "versions.B.description",
+    "versions.B.flagLine",
+    "versions.C.name",
+    "versions.C.description",
+    "tiers.notSetMeaning",
+    "labels.flag",
+    "labels.leaseSays",
+    "labels.whatItMeans",
+    "labels.showLeaseWords",
+    "labels.hideLeaseWords",
+    "labels.whyYouCanAsk",
+    "labels.nextStep",
+    "labels.realExample",
+    "labels.wholeLease",
+    "labels.howItWorks",
+    "labels.close",
+    "labels.printPage",
+    "labels.onThisPage",
+    "labels.notSortedIntro",
+    "labels.blankNumber",
+    "labels.section",
+    "labels.startOfLease"
+  ],
+  "page": {
+    "draftNote": "Test version. Some wording on this page is still a draft."
+  },
+  "splash": {
+    "title": "How this works",
+    "whatItIs": "This tool reads your lease and sorts its sections by what they could cost you. For each section, it shows what the lease says, what it means, and what you can ask the landlord to change.",
+    "sortingTitle": "How your lease is sorted",
+    "sorting": "Each section gets a tier, shown in red, yellow or green, always with its name. Sections the tool couldn't match go in their own group at the end, with the lease's own words.",
+    "versionsTitle": "Three ways to read it",
+    "versionsIntro": "All three show the same sections and the same explanations, arranged differently. Try each one.",
+    "scaleTitle": "What the tiers mean",
+    "wholeLeaseTitle": "The whole lease, in order",
+    "wholeLease": "To read every section in the lease's own order, choose “Whole lease, in order” at the top of any version.",
+    "chooseTitle": "Choose a version to start"
+  },
+  "versions": {
+    "A": {
+      "name": "Lease text first",
+      "description": "Each section starts with the lease's own words, with its explanation beside them."
+    },
+    "B": {
+      "name": "What to ask first",
+      "description": "In each tier, sections you can ask to change come first, each with what to ask and why.",
+      "flagLine": "Flagged sections are ones you can ask the landlord to change. Each one shows what to ask, and why."
+    },
+    "C": {
+      "name": "Risk summary first",
+      "description": "Short summaries, highest stakes first. The lease's own words are one click away."
+    }
+  },
+  "tiers": {
+    "1": {
+      "name": "Highest stakes",
+      "meaning": "Could cost you the space, the business, or personal assets, or puts no limit on what you could owe."
+    },
+    "2": {
+      "name": "Costs money",
+      "meaning": "Costs money, but the amount is limited or can be worked out from the lease."
+    },
+    "3": {
+      "name": "Rules and paperwork",
+      "meaning": "Rules and paperwork that cost nothing directly unless you miss them."
+    },
+    "notSet": "Tier not set",
+    "notSetMeaning": "This section's tier hasn't been set yet."
+  },
+  "labels": {
+    "goodForYou": "Good for you",
+    "flag": "You can ask about this",
+    "whatToAsk": "What to ask",
+    "wordsToPropose": "Words to propose",
+    "ifTheySayNo": "If they say no, ask for this instead",
+    "legalCaution": "Wording to suggest to the landlord. It changes what the lease means, so read the final version carefully before you sign.",
+    "proofLine": "From a lease a company filed publicly. Larger tenants often get better terms, so this shows the wording exists, not that your landlord will agree.",
+    "datasetCredit": "From Leivaditi, Rossi & Kanoulas (2020), CC BY-NC 4.0.",
+    "unsureLine": "This section could be either of these. Check the lease's own words.",
+    "notSortedTitle": "Sections the tool couldn't sort",
+    "notSortedIntro": "The tool couldn't match these sections to a clause type. Read the lease's own words, and tap an underlined word to see what it means.",
+    "leaseSays": "The lease says",
+    "whatItMeans": "What it means",
+    "showLeaseWords": "Show the lease's words",
+    "hideLeaseWords": "Hide the lease's words",
+    "whyYouCanAsk": "Why you can ask",
+    "nextStep": "Next step",
+    "realExample": "In a real lease",
+    "wholeLease": "Whole lease, in order",
+    "howItWorks": "How this works",
+    "close": "Close",
+    "printPage": "Print this page",
+    "onThisPage": "On this page",
+    "blankNumber": "(see the lease)",
+    "section": "Section",
+    "startOfLease": "Start of the lease"
+  }
+}
