@@ -65,7 +65,9 @@ const LeaseEngine = (() => {
 
   // Joins words split by a hyphen at the end of a line, turns line breaks and
   // runs of spaces into single spaces, straightens curly quotes, and lowers
-  // the case. The result is only used for matching, never shown.
+  // the case. Leases call the parties either Landlord and Tenant or Lessor
+  // and Lessee, so Lessor and Lessee are read as Landlord and Tenant. The
+  // result is only used for matching, never shown.
   function forMatching(text) {
     return text
       .replace(/(\w)-[ \t]*\n\s*(\w)/g, "$1$2")
@@ -74,7 +76,9 @@ const LeaseEngine = (() => {
       .replace(/[–—]/g, "-")
       .replace(/\s+/g, " ")
       .trim()
-      .toLowerCase();
+      .toLowerCase()
+      .replace(/\blessor\b/g, "landlord")
+      .replace(/\blessee\b/g, "tenant");
   }
 
   // The same tidying, keeping the case, for the lease text the page shows.
@@ -286,7 +290,15 @@ const LeaseEngine = (() => {
           continue;
         }
         if (lettered && lastNumber) {
+          // On the GBREB form, part A's text starts beside its parent's
+          // heading, so the parent's text so far belongs to part A when it
+          // stops mid-sentence.
+          const parent = current;
+          const carried = parent.number === lastNumber && !/[.:;]\s*$/.test(parent.lines.map((l) => l.text).join(" ").trim())
+            ? parent.lines.splice(0)
+            : [];
           start(`${lastNumber}${lettered[1]}`, "", line);
+          current.lines.push(...carried);
           appendHeading(lettered[2]);
           headingLine = line;
           continue;
@@ -349,6 +361,14 @@ const LeaseEngine = (() => {
         lines: section.lines,
         text: tidy(section.lines.map((line) => line.text).join("\n")),
       }))
+      // A heading with no text of its own, such as GBREB 6 "RENT ADJUSTMENT"
+      // above 6A, 6B and 6C, isn't a separate piece of the lease.
+      .filter((section, index, all) => {
+        if (section.text) return true;
+        const next = all[index + 1];
+        const isItsPart = next && section.number && next.number && new RegExp(`^${section.number}[A-Z]$`).test(next.number);
+        return !isItsPart;
+      })
       .filter((section) => section.text || section.number);
   }
 

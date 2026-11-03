@@ -50,3 +50,18 @@ The sorting settings didn't change.
 | GBREB form | 32 | 32 | 100% | 32 | 32 |
 
 The gap between 100% and 66% is the honest picture: the splitter works well on layouts like the ones it was tuned on, and less well on new ones.
+
+## Engine fixes, and workbook fixes tested in memory (11/3)
+
+Engine changes:
+- LESSOR and LESSEE are read as Landlord and Tenant when matching.
+- On the GBREB form, a lettered part's text that starts beside its parent's heading goes to the part, and headings with no text of their own are dropped. The form now splits into 31 pieces: 32 sections and parts, minus 6 and 11, plus the title area.
+
+The workbook fixes listed in `DRAFT-WORDING.md` were applied to a temporary copy of the library, not to the workbook:
+
+| | Engine fixes only | Engine and workbook fixes |
+| --- | --- | --- |
+| GBREB form | 21 sorted, 2 unsure, 8 not sorted | 28 sorted, 0 unsure, 3 not sorted |
+| 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
+
+The held-back leases weren't run for this. They'll be scored once the fixes are in the workbook.

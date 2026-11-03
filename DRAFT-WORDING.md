@@ -197,6 +197,67 @@ Picture someone who runs a café or a salon, has never read a lease closely, and
 5. **"Upload a different lease" is the first button after the upload.** A first-timer might press it, thinking it's the next step. Moving it below the versions would be a layout change.
 6. **Many Boston owners read English as a second language.** That's 9e (translate), which you set aside until after testing. Worth noting as something to watch in testing.
 
+## Workbook fixes from the first engine run (drafted 11/3)
+
+Status: **for you to paste into `library/clause-library.xlsx`.** I haven't changed the workbook. After you paste them, run `python3 tools/convert-workbook.py` (or ask me to), and the engine picks them up.
+
+I tested every fix below on the GBREB form and the 13 build leases, by applying them to a temporary copy:
+
+| | Before | After |
+| --- | --- | --- |
+| GBREB form, 31 pieces | 16 sorted, 3 unsure | 28 sorted, 0 unsure |
+| 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
+
+On the form, only 1 parties, 2 premises, 27 other provisions and the title area stay "not sorted". They have no clause type, which is accurate.
+
+### Two engine fixes I already made (code, not the workbook)
+
+- **LESSOR and LESSEE now match Landlord and Tenant.** Every cue phrase in the workbook says "Landlord" and "Tenant", but the GBREB form says "LESSOR" and "LESSEE", so most versions couldn't match the form. The engine now reads the two pairs as the same words. Keep writing cues with Landlord and Tenant.
+- **Sections 6 and 11 no longer take their parts' text.** On the form, 6A's and 11A's text starts beside the parent heading. The engine now gives that text to 6A and 11A, and drops headings with no text of their own, such as 6 "RENT ADJUSTMENT".
+
+### Changes to existing rows
+
+Paste each "new value" over the whole cell.
+
+**Clause types sheet, "Trigger phrases" column:**
+
+| Clause type ID | Why | New value |
+| --- | --- | --- |
+| rent-base | "escalation" made 6A and 6B unsure. Rent on the form is "fixed rent at the rate of", and 6C is about the Price Index. | Base Rent; Annual Rent; Minimum Rent; Fixed Rent; rent adjustment; rent at the rate of; CPI; Consumer Price Index; Price Index |
+| operating-costs | "Additional Rent", "Base Year" and "proportionate share" also appear in tax clauses, so 6A looked like both. The form's heading says "operating cost". | Operating Expenses; Operating Costs; operating cost; Common Area Maintenance; CAM |
+| repairs | The form's heading is "MAINTENANCE", and its wording is "agrees to maintain" and "in good order". | repair; maintain; maintenance; agrees to maintain; maintain the structure; good order and condition; in good order; in good repair; HVAC; structural; roof; exterior walls |
+| condition-premises | The form's heading is "CONDITION OF PREMISES", without "the". | as is; condition of the Premises; condition of premises; Landlord's Work; Tenant's Work |
+| use | The form's heading is "USE OF LEASED PREMISES". | Permitted Use; use the Premises for; use of leased premises; use of the premises; for no other purpose |
+| assignment-subletting | Only the heading counted before. Single words like "sublet" count only in headings. | assign; assignment; assign or sublet; sublet; sublease; transfer; change of control; recapture |
+
+**Versions sheet:**
+
+| Version ID | Column | Why | New value |
+| --- | --- | --- | --- |
+| casualty-landlord-may-terminate | Cue phrases | "fire or other casualty" is in every casualty clause, so it doesn't tell this version apart. The form still matches through "Landlord may … terminate this Lease". | Landlord may ... terminate this Lease; days after the damage |
+| transfer-tenant-stays-liable | Cue phrases | The form says "shall remain liable". | remain primarily liable; shall not relieve Tenant; shall not release Tenant; shall remain liable |
+| subordination-only | Cue phrases | The form says "subject and subordinate to any and all mortgages". A lease that also has a non-disturbance promise will match both versions, and both will show. | subject and subordinate to the lien of any mortgage; subject and subordinate to |
+| opex-base-year | Numbers to fill | The converter's one problem: `share` is listed, but the sentence has no `{share}`. | base_year |
+
+### New clause types
+
+These fill the gaps on the form (sections 9, 22, 24 and 26). Add each as a new row on the Clause types sheet. The "Plain name" is owner-facing wording, so it's a draft for you to change. Tier stays blank for you.
+
+| Clause type ID | Plain name (draft) | GBREB section | Trigger phrases | Tier | Status |
+| --- | --- | --- | --- | --- | --- |
+| liability-of-owner | Limits on what the landlord owes you | 26 | liability of owner; liability of landlord; landlord's liability; limitation of landlord's liability; no owner of the property | | Draft (Claude) |
+| force-majeure | Delays no one can control | 24 | force majeure; beyond the control of; beyond its reasonable control; acts of God; unavoidable delays | | Draft (Claude) |
+| brokerage | The real estate broker | 22 | brokerage; broker; brokers; brokerage commission; real estate broker | | Draft (Claude) |
+| compliance-with-laws | Following laws and local rules | 9 | compliance with laws; comply with all laws; applicable laws; by-law or ordinance | | Draft (Claude) |
+
+These have no versions yet, so they'll show as sorted but with nothing to explain until you add versions.
+
+### Your call
+
+- **Section 10, "FIRE INSURANCE",** sorts as "insurance" ("Insurance you must carry"). It's really about not doing anything that raises the building's insurance. Keep it there, or give it its own type.
+- **Parties (1), premises (2) and other provisions (27)** stay "not sorted". That seems right to me, since they're basic terms and signatures, not risks. Add types only if you want them in the tier list.
+- **The 15 number blanks that can't be filled yet** wait for stage 2. I'll draft their cue phrases then.
+
 ## Still yours to decide
 
 - **9e. Translate.** I left it out, as you asked. It waits until after testing.
