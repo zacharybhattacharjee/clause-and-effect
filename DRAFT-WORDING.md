@@ -205,7 +205,7 @@ I tested every fix below on the GBREB form and the 13 build leases, by applying 
 
 | | Before | After |
 | --- | --- | --- |
-| GBREB form, 31 pieces | 16 sorted, 3 unsure | 28 sorted, 0 unsure |
+| GBREB form | 16 sorted, 3 unsure (first run) | 28 sorted, 0 unsure |
 | 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
 
 On the form, only 1 parties, 2 premises, 27 other provisions and the title area stay "not sorted". They have no clause type, which is accurate.

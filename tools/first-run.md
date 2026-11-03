@@ -61,7 +61,7 @@ The workbook fixes listed in `DRAFT-WORDING.md` were applied to a temporary copy
 
 | | Engine fixes only | Engine and workbook fixes |
 | --- | --- | --- |
-| GBREB form | 21 sorted, 2 unsure, 8 not sorted | 28 sorted, 0 unsure, 3 not sorted |
+| GBREB form (31 pieces) | 16 sorted, 2 unsure, 13 not sorted | 28 sorted, 0 unsure, 3 not sorted |
 | 13 build leases | 451 sorted, 29 unsure | 487 sorted, 34 unsure |
 
 The held-back leases weren't run for this. They'll be scored once the fixes are in the workbook.
