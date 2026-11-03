@@ -93,3 +93,16 @@ The fixes from `DRAFT-WORDING.md` and the five new clause types are now in `libr
 | 13 build leases | 511 | 21 | 663 |
 
 These match the in-memory test above. Flags on the GBREB form: 13 (transfer-tenant-stays-liable), 14 (subordination-only) and 18 (casualty-landlord-may-terminate).
+
+## Zachary's tiers entered (11/3)
+
+For round 2 only, Zachary set the tiers and had Claude enter them in the real Tier column and "Tier override". Statuses are unchanged (all Draft). The default clause and all six default versions are tier 1, per his correction. On the GBREB form:
+
+| Group | Sections |
+| --- | --- |
+| Highest stakes | 6A, 6B, 10, 14, 16, 18, 19, 23 |
+| Costs money | 4, 5, 6C, 7, 11A, 11B, 13, 17, 21, 24, 25, 26 |
+| Rules and paperwork | 3, 8, 9, 12, 15, 20, 22 |
+| Couldn't sort | title area, 1, 2, 27 |
+
+Still blank: clause types assignment-subletting, relocation, subordination-estoppel and riders-amendments; versions relocation-landlord-pays, relocation-limited, relocation-move-when-ready and utilities-metered.

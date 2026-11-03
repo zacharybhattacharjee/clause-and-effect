@@ -16,7 +16,7 @@
         "Consumer Price Index",
         "Price Index"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -34,7 +34,7 @@
         "Base Tax Year",
         "Tenant's share of taxes"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -52,7 +52,7 @@
         "Common Area Maintenance",
         "CAM"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -70,7 +70,7 @@
         "service charge",
         "past due"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -88,7 +88,7 @@
         "as security for",
         "original amount"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "Residential deposit and late-fee rules (c. 186, § 15B) don't cover commercial leases. Verify scope.",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -108,7 +108,7 @@
         "Extension Term",
         "Option Period"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -126,7 +126,7 @@
         "use of leased premises",
         "for no other purpose"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -142,7 +142,7 @@
         "Landlord shall not lease",
         "competing business"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -160,7 +160,7 @@
         "Landlord's Work",
         "Tenant's Work"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -185,7 +185,7 @@
         "roof",
         "exterior walls"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "c. 186, § 19 repair duty after notice of unsafe condition; applied to a commercial lease (Bishop v. TES Realty Trust, 2011). Verify.",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -202,7 +202,7 @@
         "additions",
         "Landlord's prior written consent"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -241,7 +241,7 @@
         "certificate of insurance",
         "waiver of subrogation"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -258,7 +258,7 @@
         "hold harmless",
         "defend"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "c. 186, § 15 voids clauses making the tenant cover the landlord's own negligence; applied to commercial leases (Norfolk & Dedham v. Morrison, 2010). Get full cite, KeyCite.",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -277,11 +277,11 @@
         "re-enter",
         "terminate this Lease"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
       "status": "Draft (Claude)",
-      "suggestedTier": 3,
-      "tierReason": "Default rule: the general default clause doesn't raise a tier by itself (tier 3). Versions that set their own default have their own tiers.",
+      "suggestedTier": 1,
+      "tierReason": "The default clause itself is tier 1: it decides when the landlord can end the lease.",
       "live": false
     },
     {
@@ -295,7 +295,7 @@
         "liquidated damages",
         "reletting"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "275 Washington St. Corp. v. Hudson River Int'l (SJC 2013): remedy clause read literally. Get full cite, KeyCite.",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -313,7 +313,7 @@
         "individually",
         "jointly and severally"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -347,7 +347,7 @@
         "sale of the Building",
         "terminate this Lease upon"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -364,7 +364,7 @@
         "inspect",
         "show the Premises"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -380,7 +380,7 @@
         "signage",
         "storefront"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -400,7 +400,7 @@
         "eminent domain",
         "condemnation"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -416,7 +416,7 @@
         "hold over",
         "remain in possession"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -436,7 +436,7 @@
         "wear and tear",
         "expiration or termination"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -474,7 +474,7 @@
         "certified mail",
         "address for notices"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -491,7 +491,7 @@
         "costs of collection",
         "costs of enforcement"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 2,
@@ -507,7 +507,7 @@
         "jury trial",
         "waiver of jury"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -524,7 +524,7 @@
         "early termination",
         "right to terminate"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -544,7 +544,7 @@
         "interruption",
         "failure to furnish"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -563,7 +563,7 @@
         "expansion space",
         "option to purchase"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -599,7 +599,7 @@
         "limitation of landlord's liability",
         "no owner of the property"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
@@ -617,7 +617,7 @@
         "acts of God",
         "unavoidable delays"
       ],
-      "tier": null,
+      "tier": 2,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 1,
@@ -635,7 +635,7 @@
         "brokerage commission",
         "real estate broker"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -652,7 +652,7 @@
         "applicable laws",
         "by-law or ordinance"
       ],
-      "tier": null,
+      "tier": 3,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": 3,
@@ -671,7 +671,7 @@
         "rate of fire insurance",
         "increase in insurance premiums"
       ],
-      "tier": null,
+      "tier": 1,
       "massachusettsLaw": "",
       "status": "Draft (Claude)",
       "suggestedTier": null,
