@@ -17,6 +17,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Even with a warning, a payment you can't make in time can cost you the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -35,6 +37,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "One late payment can cost you the space, with no warning first.",
       "effectiveTier": null,
       "live": false
     },
@@ -57,6 +61,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "A missed payment or other problem not fixed in time can cost you the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -78,6 +84,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Once the warnings run out, one late payment can cost you the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -98,6 +106,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "You get more time, but a problem you can't fix can still cost you the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -114,6 +124,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Less warning than the law gives makes losing the space more likely.",
       "effectiveTier": null,
       "live": false
     },
@@ -132,6 +144,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Reaches your own savings and property, with no limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -150,6 +164,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The landlord can go straight to your own money.",
       "effectiveTier": null,
       "live": false
     },
@@ -170,6 +186,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Reaches your own money, but only up to a set amount.",
       "effectiveTier": null,
       "live": false
     },
@@ -187,6 +205,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Reaches your own money, but the most you could owe goes down over time.",
       "effectiveTier": null,
       "live": false
     },
@@ -207,6 +227,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Reaches your own money, but only for a limited time.",
       "effectiveTier": null,
       "live": false
     },
@@ -229,6 +251,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Limited to rent up to the day you leave, if you follow every step.",
       "effectiveTier": null,
       "live": false
     },
@@ -245,6 +269,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Reaches your own money for the whole first term, with no cap stated.",
       "effectiveTier": null,
       "live": false
     },
@@ -263,6 +289,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Can reach your own money for terms you never agreed to.",
       "effectiveTier": null,
       "live": false
     },
@@ -283,6 +311,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Increases have no limit, and the brief puts \"no limit on what you could owe\" in tier 1. Consider tier 2 if increases are usually small.",
       "effectiveTier": null,
       "live": false
     },
@@ -302,6 +332,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "You pay a share of all building costs, with no limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -322,6 +354,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, but the part the landlord controls has a yearly limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -340,6 +374,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money. The limit still applies, but unused room can be charged later.",
       "effectiveTier": null,
       "live": false
     },
@@ -358,6 +394,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Major upgrades can cost a lot, and the lease sets no limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -375,6 +413,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The real amount can be higher than quoted, with no limit.",
       "effectiveTier": null,
       "live": false
     },
@@ -393,6 +433,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You may owe rent while you wait for consent, but the landlord needs a reason to refuse.",
       "effectiveTier": null,
       "live": false
     },
@@ -411,6 +453,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The landlord can block a sale of your business for any reason.",
       "effectiveTier": null,
       "live": false
     },
@@ -430,6 +474,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Selling your business needs the landlord's permission.",
       "effectiveTier": null,
       "live": false
     },
@@ -448,6 +494,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Asking to transfer can cost you the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -466,6 +514,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You can owe the rest of the rent if the buyer stops paying, but the amount can be worked out from the lease.",
       "effectiveTier": null,
       "live": false
     },
@@ -484,6 +534,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, but only part of any extra rent you collect.",
       "effectiveTier": null,
       "live": false
     },
@@ -500,6 +552,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "A deadline rule that helps you. It costs nothing unless a deadline is missed.",
       "effectiveTier": null,
       "live": false
     },
@@ -519,6 +573,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "A move can disrupt the business, but the landlord pays the moving costs.",
       "effectiveTier": null,
       "live": false
     },
@@ -536,6 +592,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "A move can cost you your location, with no limit on moving costs.",
       "effectiveTier": null,
       "live": false
     },
@@ -554,6 +612,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "Saying no to the new space ends your lease.",
       "effectiveTier": null,
       "live": false
     },
@@ -574,6 +634,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You can be moved only once, with notice.",
       "effectiveTier": null,
       "live": false
     },
@@ -591,6 +653,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You can still be moved, but not until the new space is ready.",
       "effectiveTier": null,
       "live": false
     },
@@ -613,6 +677,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "The landlord can end the lease and take the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -631,6 +697,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "You can still lose the space, even with some money back.",
       "effectiveTier": null,
       "live": false
     },
@@ -651,6 +719,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money, limited to refilling the deposit.",
       "effectiveTier": null,
       "live": false
     },
@@ -669,6 +739,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Costs money each month. The amounts come from the meters and the lease.",
       "effectiveTier": null,
       "live": false
     },
@@ -688,6 +760,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "An outage can cost you sales, but not the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -705,6 +779,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You pay full rent during an outage.",
       "effectiveTier": null,
       "live": false
     },
@@ -721,6 +797,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You pay during outages the landlord didn't cause.",
       "effectiveTier": null,
       "live": false
     },
@@ -738,6 +816,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "A move-out rule that protects you. It costs nothing if you leave the space in good shape.",
       "effectiveTier": null,
       "live": false
     },
@@ -755,6 +835,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Removal costs money, but only for changes named in writing.",
       "effectiveTier": null,
       "live": false
     },
@@ -772,6 +854,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Removing changes and repairing the damage can cost a lot at move-out.",
       "effectiveTier": null,
       "live": false
     },
@@ -791,6 +875,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "The landlord handles the big repairs. Mostly a rule to know.",
       "effectiveTier": null,
       "live": false
     },
@@ -810,6 +896,8 @@
       "rating": "Middle",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "You pay for repairs the landlord makes after notice.",
       "effectiveTier": null,
       "live": false
     },
@@ -830,6 +918,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "After a fire or other damage, the landlord can end the lease and you lose the space.",
       "effectiveTier": null,
       "live": false
     },
@@ -847,6 +937,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 2,
+      "tierReason": "Rent stops while the space is rebuilt, but the damage can still cost the business money.",
       "effectiveTier": null,
       "live": false
     },
@@ -865,6 +957,8 @@
       "rating": "Best",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 3,
+      "tierReason": "Paperwork: the lender must keep your lease. Your brief gives this as a tier 3 example.",
       "effectiveTier": null,
       "live": false
     },
@@ -881,6 +975,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "If the landlord loses the building, you can lose the space. Your brief gives this as a tier 1 example.",
       "effectiveTier": null,
       "live": false
     },
@@ -899,6 +995,8 @@
       "rating": "Worst",
       "tier": null,
       "status": "Draft (Claude)",
+      "suggestedTier": 1,
+      "tierReason": "You can owe years of rent after the business closes.",
       "effectiveTier": null,
       "live": false
     }

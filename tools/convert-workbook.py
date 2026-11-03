@@ -82,14 +82,18 @@ def read_sheets(path):
     return sheets
 
 
-def records(rows, columns):
+def records(rows, columns, optional=None):
     """Turns a sheet's rows into dicts, finding each column by the start of
-    its header text, so moving or renaming the end of a header still works."""
+    its header text, so moving or renaming the end of a header still works.
+    Optional columns read as blank when a sheet doesn't have them."""
     header = rows[0]
     where = {}
-    for key, start in columns.items():
+    for key, start in {**columns, **(optional or {})}.items():
         found = [i for i, text in enumerate(header) if text.lower().startswith(start.lower())]
         if not found:
+            if optional and key in optional:
+                where[key] = len(header) + 1000  # past the end, so it reads as blank
+                continue
             raise SystemExit(f'Column starting "{start}" not found in header: {header}')
         where[key] = found[0]
     result = []
@@ -149,7 +153,7 @@ def convert():
         "plain": "Plain-language sentence", "numbers": "Numbers to fill",
         "rating": "Worst, middle, or best", "tier": "Tier override",
         "status": "Status", "notes": "Notes",
-    }):
+    }, optional={"suggestedTier": "Suggested tier", "tierReason": "Reason for the suggested tier"}):
         if not r["id"]:
             problem("Versions", r["_row"], "Row has no version ID, so it was skipped.")
             continue
@@ -163,7 +167,10 @@ def convert():
             "id": r["id"], "type": r["type"], "cues": split_list(r["cues"]),
             "example": example, "exampleSource": source, "plain": r["plain"],
             "numbers": split_list(r["numbers"]), "rating": rating,
-            "tier": tier_value(r["tier"]), "status": r["status"], "_row": r["_row"],
+            "tier": tier_value(r["tier"]), "status": r["status"],
+            # Claude's suggestion, for Zachary to review. The page never uses it as a tier.
+            "suggestedTier": tier_value(r["suggestedTier"]), "tierReason": r["tierReason"],
+            "_row": r["_row"],
         })
     version_ids = {v["id"] for v in versions}
 
@@ -189,11 +196,12 @@ def convert():
         "version": "Risky version ID", "askFor": "Ask for", "fallback": "Fallback",
         "plainAsk": "Plain-language ask", "legalWording": "Legal wording to propose",
         "ownerBlanks": "Blanks for the owner", "status": "Status",
-    }):
+    }, optional={"why": "Why you can ask", "nextStep": "Next step", "softerAsk": "Softer way to say it"}):
         asks.append({
             "version": r["version"], "askFor": r["askFor"], "fallback": r["fallback"],
-            "plainAsk": r["plainAsk"], "legalWording": r["legalWording"],
-            "ownerBlanks": r["ownerBlanks"], "status": r["status"], "_row": r["_row"],
+            "plainAsk": r["plainAsk"], "softerAsk": r["softerAsk"], "why": r["why"],
+            "legalWording": r["legalWording"], "ownerBlanks": r["ownerBlanks"],
+            "nextStep": r["nextStep"], "status": r["status"], "_row": r["_row"],
         })
 
     # Glossary
