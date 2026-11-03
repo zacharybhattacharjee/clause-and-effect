@@ -349,6 +349,77 @@ These come from your answers on 10/26 and the workbook's "How to use" sheet (the
 - **Versions sheet:** "Suggested tier" and "Reason" for all 49 versions, in green cells. The real "Tier override" column is still blank. If you agree with a suggestion, copy it into "Tier override", or into the clause type's Tier.
 - **Asks sheet:** "Why you can ask", "Next step" and "Softer way to say it" for all 24 asks, in green cells. Each row keeps its "Draft (Claude)" status until you approve it.
 
+## Simpler asks, like round 1 (drafted 11/3)
+
+Status: **for you to approve.** Nothing on the page or in the workbook has changed yet.
+
+Round 1 testers liked short, clear bullets under one line: "Before you sign, ask the landlord in writing for:". Round 2 stacks six parts under every ask. This draft brings back the bullet and puts everything else behind one click.
+
+### How a flagged section would look
+
+> **Before you sign, ask the landlord in writing for:**
+> - A cap on your personal guaranty, or an end date for it
+>
+> *Why:* It keeps your own savings apart from the business's debts.
+>
+> ▸ What to say, a real example, and if they say no
+
+- **The bullet** finishes the sentence "ask the landlord in writing for:". That line is your round 1 wording (`tags.negotiable.askIntro`), already approved.
+- **"Why"** is one short line.
+- **One closed button holds the rest:** the words to propose with your caution line, the real lease example, the fallback, and the next step. The button's label is a new draft line.
+
+### How "What to do next" would look
+
+> **What to do next**
+>
+> Everything to ask for, in one list. Email it to your landlord or broker before you sign, and keep a copy.
+>
+> 1. A cap on your personal guaranty, or an end date for it. *Why:* It keeps your own savings apart from the business's debts.
+> 2. Written notice and time to pay before a late payment counts as a default. *Why:* A real lease gives tenants this.
+> 3. …
+>
+> [Print this list]
+
+- It's numbered, highest stakes first, with one ask and one short "why" per line.
+- The printed list adds the words to propose under each ask, so you can hand it to the landlord. Say if you'd rather print only the bullets.
+
+### The short asks and why lines
+
+Each ask finishes "Before you sign, ask the landlord in writing for:". Each "why" is one short line. These would replace the longer "Plain-language ask" and "Why you can ask" drafts in the workbook. The longer versions would move behind the button.
+
+| Version | Ask for | Why |
+| --- | --- | --- |
+| default-no-notice | Written notice and time to pay before a late payment counts as a default | A real lease gives tenants this. |
+| default-notice-limited | Written notice every time, not just the first few times | A real lease gives notice before every default. |
+| default-statutory-notice-replaced | The lease's notice to add to the law's notice, not replace it | Otherwise you could get less time than the law gives. |
+| guaranty-unlimited | A cap on your personal guaranty, or an end date for it | It keeps your own savings apart from the business's debts. |
+| guaranty-payment-not-collection | The landlord to try the business first, before coming to you | You should be the backup, not the first stop. |
+| guaranty-survives-changes | Your written OK before your guaranty covers any renewal or change | You shouldn't be bound by changes you never saw. |
+| opex-full-share | Paying only increases above a starting year, or a yearly cap | A real lease charges only the increases. |
+| opex-includes-capital | Leaving major upgrades, like a new roof, out of your share | They last longer than your lease. |
+| opex-estimates-only | A limit on how far costs can go over the estimate, and a look at the records | So you can plan, and check the bill. |
+| opex-cap-carryforward | A yearly limit that doesn't carry unused room forward | Carrying it forward weakens the limit. |
+| transfer-sole-discretion | A rule that the landlord needs a good reason to say no | Otherwise the landlord can block a sale of your business. |
+| transfer-change-of-control | The right to sell your business without the landlord's permission | It's how many small businesses grow or move on. |
+| transfer-recapture | No right for the landlord to take back the space when you ask to transfer | Asking permission shouldn't cost you the space. |
+| transfer-tenant-stays-liable | Release from the lease once the landlord approves your buyer | The buyer should answer for the rent from then on. |
+| relocation-or-lease-ends | No move without your agreement | A move can cost you customers who know where you are. |
+| relocation-cost-unstated | The landlord to pay for any move and finish the new space first | A real lease has the landlord pay. |
+| termination-on-notice | More notice, and repayment of what you spent on the space | A real lease pays the tenant back. |
+| deposit-top-up | More time to refill the deposit, such as 30 days | A few days may not be enough. |
+| utilities-no-liability | Lower rent when the landlord causes an outage of more than a few days | You shouldn't pay full rent for space you can't use. |
+| utilities-no-rent-reduction | Lower rent when a service is out for more than a few days | You shouldn't pay full rent for space you can't use. |
+| surrender-remove-all | Removing only the changes the landlord names in writing | Then you know your move-out costs from the start. |
+| casualty-landlord-may-terminate | No rent while the space can't be used, and a way out if repairs drag on | A real lease stops rent during rebuilding. |
+| subordination-only | A promise from the landlord's lender to keep your lease | Without it, a new owner might not have to keep your lease. |
+| no-early-exit | A way to end the lease early, with notice and a fee | It limits what closing the business could cost you. |
+
+### One new page line
+
+| Field | Draft |
+| --- | --- |
+| `labels.moreAboutAsk` | What to say, a real example, and if they say no |
+
 ## Still yours to decide
 
 - **9e. Translate.** I left it out, as you asked. It waits until after testing.
