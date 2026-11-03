@@ -1,12 +1,12 @@
-// Clause & Effect, round 2 test page.
+// Clause & Effect, the main page (index.html), built for round 2.
 // The engine (engine.js) reads the uploaded lease and sorts every section.
 // This page shows the result in three versions, each with its own layout:
 //   A "Lease text first"   - annotated lease: the lease's words, with notes beside them
 //   B "What to ask first"  - plain checklist: short rows, short bullets
 //   C "Risk summary first" - summary first: counts, then one line per section
 // It shows only approved rows from the library. With ?preview=1 it also shows
-// draft rows, with one "Draft" note at the top. The live page (index.html) is
-// unchanged and never reads draft rows.
+// draft rows, with one "Draft" note at the top. The round 1 page
+// (round-one.html) is unchanged and never reads draft rows.
 // Every word comes from content.json, content-round-two.json or the library.
 // The lease is read in this browser and never sent anywhere or kept.
 
