@@ -223,7 +223,7 @@ function openTierDialog(opener) {
 // the page, so the uploaded lease is still here when it closes. The video
 // is loaded only when opened, and removed on close, which stops it.
 function videoButton(className) {
-  const button = make("button", className, words.labels.seeWhatItDoes);
+  const button = make("button", className, words.labels.watchVideo);
   button.type = "button";
   button.addEventListener("click", () => openVideo(button));
   return button;
@@ -231,12 +231,12 @@ function videoButton(className) {
 
 function openVideo(opener) {
   const dialog = document.getElementById("video-dialog");
-  dialog.setAttribute("aria-label", words.labels.seeWhatItDoes);
+  dialog.setAttribute("aria-label", words.labels.watchVideo);
   const close = make("button", "button button-secondary video-close", words.labels.close);
   close.type = "button";
   close.addEventListener("click", () => dialog.close());
   const frame = make("iframe", "video-frame");
-  frame.title = words.labels.seeWhatItDoes;
+  frame.title = words.labels.watchVideo;
   frame.allow = "fullscreen";
   frame.src = "hype.html?embed=1";
   dialog.replaceChildren(close, frame);
@@ -776,7 +776,8 @@ function showSplash() {
   const s = words.splash;
   const splash = document.getElementById("splash");
   const video = make("p", "splash-video");
-  video.append(videoButton("button button-secondary"));
+  // "[Watch a video] or read how it works below."
+  video.append(videoButton("button button-secondary"), make("span", "", s.videoOr));
   const parts = [make("h2", "splash-title", s.title), make("p", "splash-lead", s.whatItIs), video];
 
   const sorting = make("section", "splash-part");

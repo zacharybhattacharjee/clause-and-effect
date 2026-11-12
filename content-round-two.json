@@ -26,7 +26,8 @@
     "labels.leaseSays",
     "labels.whatItMeans",
     "labels.whyYouCanAsk",
-    "labels.seeWhatItDoes"
+    "labels.watchVideo",
+    "splash.videoOr"
   ],
   "page": {
     "draftNote": "Test version. Some wording on this page is still a draft."
@@ -34,6 +35,7 @@
   "splash": {
     "title": "How this works",
     "whatItIs": "This tool reads your lease and sorts its sections by what they could cost you. For each section, it shows what the lease says, what it means, and what you can ask the landlord to change. It isn't legal advice.",
+    "videoOr": "or read how it works below.",
     "sortingTitle": "How your lease is sorted",
     "sorting": "Each section is sorted into one of three tiers, shown in red, yellow or green and always labeled with the tier's name. Sections the tool couldn't match go in their own group at the end, with the lease's own words.",
     "versionsTitle": "Three ways to read it",
@@ -104,6 +106,6 @@
     "moreAboutAsk": "See what to say",
     "thingsToAsk": "Things to ask for",
     "why": "Why",
-    "seeWhatItDoes": "See what it does"
+    "watchVideo": "Watch a video"
   }
 }
