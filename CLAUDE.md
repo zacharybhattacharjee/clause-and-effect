@@ -85,15 +85,16 @@ The page uses pdf.js (Mozilla's free PDF reader) to read uploaded PDFs, loaded a
 
 ## Look
 
-The page should feel calm, credible, and finished, like a well-designed legal aid site, not a template.
+The page should feel calm, credible, and finished, and easy to use like a consumer app (Zachary, 11/12), not a legal tool or a template. The main page's look follows the Wise and Airbnb DESIGN.md files from github.com/voltagent/awesome-design-md, set out in `app-look.css`.
 
 - Colors: cream `#F7F3EA` background, plum `#3B2340` text, slate `#5B7083` for plain language, gold `#C9A227` for the negotiable tag, brick `#A63A2B` for risk.
-- Type: a serif from Google Fonts for headings (Source Serif 4) and a clean sans for body text (Inter), each with a system fallback.
+- Type: Inter for headings and body text on the main page, with one heavy headline per screen. Source Serif 4 stays for the logo and the lease's own words. Each has a system fallback. `round-one.html` keeps serif headings.
 - Lease text looks like a document: slightly smaller, set apart on a white panel. Plain-language lines sit beside or under it on a light slate tint, so the two never blur together.
-- Generous spacing. One idea per card. Soft corners and light shadows, nothing loud.
+- Generous spacing. One idea per card. Soft 24 px corners, white cards on cream, and one soft shadow used only on floating things. Nothing loud.
+- Motion stays small and meaningful: the highlighter sweep, the sliding version pill, and cards easing in. All of it is off when the device asks for reduced motion.
 - Color never carries meaning alone. The negotiable tag always shows its words from `tags.negotiable.label` (now "Ask before you sign"). The risk mark always shows the number and level name, such as "1 Highest risk".
 - Text meets WCAG AA contrast. Gold is a background only, with plum text on it.
-- Design for a phone first (375 px wide), then make sure it looks good on a laptop, since the class demo runs on one. Body text at least 16 px. Tap targets at least 44 px.
+- Zachary cares most about the laptop version (11/12), since the class demo runs on one. It must still work on a phone (375 px wide). Body text at least 16 px. Tap targets at least 44 px.
 - Use real headings, real buttons, and `aria-expanded` on anything that opens and closes. The version switcher works with a keyboard and a screen reader.
 
 ## How to work with Zachary

@@ -331,3 +331,22 @@ What you'd check:
    - Sections 18 and 19 show "(see the lease)" where the lease's number should go. The page shows that when it can't fill in the number.
    - Checked 11/12: it isn't a bug. The page doesn't fill in the lease's own numbers yet. That's stage 2 of the clause library plan in `ENGINE-PLAN.md`. Until then, every number in a plain-language line shows `labels.blankNumber`.
 3. **"Lender paperwork" in "Highest stakes".** The word "paperwork" echoes the lowest tier, "Rules and paperwork". This one is for testers to react to, not necessarily something to fix.
+
+### Step 12: App look (11/12)
+
+Zachary wanted the page to feel like an easy-to-use app, not a legal tool, keeping the name and logo. He cares most about the laptop version.
+
+- **Look:** `app-look.css` follows the Wise and Airbnb DESIGN.md files from github.com/voltagent/awesome-design-md, in our own colors:
+  - one heavy Inter headline per screen
+  - white 24 px cards on cream
+  - a floating pill bar for the versions
+  - tinted tier badges
+  - a plum footer
+- **Upload screen:** the headline on the left and the upload card on the right on a laptop.
+- **How this works:** the versions are cards that carry their own descriptions, and the tiers sit in four columns. Same words.
+- **Motion,** borrowed in spirit from react-bits but written in plain CSS and JavaScript, and off for reduced motion:
+  - an arcade-style opening screen of about 3 seconds that any click or key skips. The gold highlight sweeps behind the "&" last, as the finale
+  - the highlighter sweep on key phrases
+  - the sliding version pill
+  - cards easing in
+- `round-one.html` is unchanged.

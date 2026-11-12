@@ -567,10 +567,102 @@ function showView(view) {
   // On a phone the buttons swipe sideways: slide the chosen one into view.
   const chosen = reader.querySelector(`[data-view="${view}"]`);
   chosen.parentElement.scrollLeft = chosen.offsetLeft - 16;
+  movePill(chosen);
   buildTracker(built);
+  easeIn(built);
   setTabTitle(view === "whole" ? words.labels.wholeLease : words.versions[view].name);
   window.scrollTo(0, 0);
   built.querySelector(".version-heading").focus({ preventScroll: true });
+}
+
+// ---------- Motion: small touches, off for anyone who asks for less ----------
+
+const lessMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// The dark pill behind the chosen version slides to it instead of jumping.
+function movePill(chosen) {
+  const pill = chosen.parentElement.querySelector(".switch-pill");
+  if (!pill) return;
+  const firstMove = !pill.style.width;
+  if (firstMove) pill.classList.add("no-slide");
+  pill.style.width = `${chosen.offsetWidth}px`;
+  pill.style.height = `${chosen.offsetHeight}px`;
+  pill.style.transform = `translate(${chosen.offsetLeft}px, ${chosen.offsetTop}px)`;
+  if (firstMove) requestAnimationFrame(() => pill.classList.remove("no-slide"));
+}
+
+// The opening screen: the logo types itself out like an arcade title,
+// then, as the finale, the gold highlighter sweeps behind the "&" (what
+// the tool does to a lease), and the screen wipes away.
+// About 3 seconds; any click, tap or key skips it.
+function playOpening() {
+  const screen = document.getElementById("opening");
+  if (!screen) return;
+  if (lessMotion()) {
+    screen.remove();
+    return;
+  }
+  const step = 0.07;
+  let delay = 0.25;
+  const typed = (text) => [...text.trim()].map((letter) => {
+    const span = make("span", "opening-letter", letter);
+    span.style.animationDelay = `${delay}s`;
+    delay += step;
+    return span;
+  });
+  const logo = make("p", "opening-logo");
+  const [before, ...rest] = content.page.appName.split("&");
+  logo.append(...typed(before));
+  if (rest.length) {
+    delay += 0.12;
+    const amp = make("span", "opening-amp", "&");
+    amp.style.setProperty("--d", `${delay}s`);
+    delay += 0.35;
+    logo.append(amp, ...typed(rest.join("&")));
+    // The finale: once the whole name is typed, the highlight sweeps in.
+    delay += 0.2;
+    amp.style.setProperty("--sweep", `${delay}s`);
+    delay += 0.55;
+  }
+  const line = make("p", "opening-line", content.page.title);
+  line.style.animationDelay = `${delay + 0.1}s`;
+  screen.replaceChildren(logo, line);
+
+  let done = false;
+  const finish = () => {
+    if (done) return;
+    done = true;
+    window.removeEventListener("keydown", finish);
+    screen.classList.add("leaving");
+    setTimeout(() => screen.remove(), 650);
+  };
+  setTimeout(finish, (delay + 0.9) * 1000);
+  screen.addEventListener("pointerdown", finish);
+  window.addEventListener("keydown", finish);
+}
+
+window.addEventListener("resize", () => {
+  const chosen = document.querySelector('#reader [data-view][aria-pressed="true"]');
+  if (chosen) movePill(chosen);
+});
+
+// Cards ease in as they scroll into view, and the gold highlight sweeps
+// across the key phrase in the lease's words.
+let easer = null;
+
+function easeIn(view) {
+  const pieces = [...view.querySelectorAll(".row, .count-tile, .cue-mark")];
+  if (easer) easer.disconnect();
+  if (lessMotion() || !("IntersectionObserver" in window)) return;
+  for (const piece of pieces) piece.classList.add("waiting");
+  easer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.remove("waiting");
+      easer.unobserve(entry.target);
+    }
+  }, { rootMargin: "0px 0px -12% 0px" });
+  for (const piece of pieces) easer.observe(piece);
 }
 
 // "On this page": a list of the groups, with the one being read marked.
@@ -605,6 +697,9 @@ function renderReader(firstView) {
   const reader = document.getElementById("reader");
   const bar = make("div", "reader-bar");
   const switcher = make("div", "version-switcher wide-switcher");
+  const pill = make("span", "switch-pill");
+  pill.setAttribute("aria-hidden", "true");
+  switcher.append(pill);
   for (const letter of versionOrder()) {
     const button = make("button", "switch-button", words.versions[letter].name);
     button.type = "button";
@@ -652,33 +747,27 @@ function showSplash() {
   const sorting = make("section", "splash-part");
   sorting.append(make("h3", "", s.sortingTitle), make("p", "", s.sorting), tierScale());
 
-  const versions = make("section", "splash-part");
-  versions.append(make("h3", "", s.versionsTitle), make("p", "", s.versionsIntro));
-  const list = make("ul", "splash-versions");
-  for (const letter of versionOrder()) {
-    const item = make("li");
-    item.append(make("strong", "", words.versions[letter].name), make("span", "", ` ${words.versions[letter].description}`));
-    list.append(item);
-  }
-  versions.append(list, make("p", "splash-note", s.wholeLease));
-
+  // The choice comes first, so no one has to scroll past the explanation.
+  // Each version is a card with its name and what it shows.
   const choose = make("section", "splash-part splash-choose");
-  choose.append(make("h3", "", s.chooseTitle));
-  const buttons = make("div", "splash-buttons");
+  choose.append(make("h3", "", s.chooseTitle), make("p", "", s.versionsIntro));
+  const cards = make("div", "version-cards");
   for (const letter of versionOrder()) {
-    const button = make("button", "button button-primary", words.versions[letter].name);
-    button.type = "button";
-    button.addEventListener("click", () => renderReader(letter));
-    buttons.append(button);
+    const card = make("button", "version-card");
+    card.type = "button";
+    card.append(make("span", "version-card-name", words.versions[letter].name),
+      make("span", "version-card-text", words.versions[letter].description));
+    card.addEventListener("click", () => renderReader(letter));
+    cards.append(card);
   }
   const wholeButton = make("button", "button button-secondary", words.labels.wholeLease);
   wholeButton.type = "button";
   wholeButton.addEventListener("click", () => renderReader("whole"));
-  buttons.append(wholeButton);
-  choose.append(buttons);
+  const whole = make("div", "splash-whole");
+  whole.append(wholeButton, make("p", "splash-note", s.wholeLease));
+  choose.append(cards, whole);
 
-  // The choice comes first, so no one has to scroll past the explanation.
-  splash.replaceChildren(...parts, choose, sorting, versions);
+  splash.replaceChildren(...parts, choose, sorting);
   document.getElementById("upload-screen").hidden = true;
   document.getElementById("reader").hidden = true;
   splash.hidden = false;
@@ -804,6 +893,7 @@ async function start() {
     glossary = mergedGlossary();
     renderFrame();
     renderUploadScreen();
+    playOpening();
   } catch (problem) {
     console.error("The page could not start.", problem);
   }

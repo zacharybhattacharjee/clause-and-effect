@@ -1,0 +1,760 @@
+/* App look for the main page, loaded after style.css and round-two.css.
+   Borrowed from two real design systems (awesome-design-md):
+   - Wise: one heavy display headline, 24 px rounded cards and buttons,
+     white cards on a tinted canvas (the surface contrast is the depth),
+     tinted status badges, a dark footer band.
+   - Airbnb: modest section headings, one soft shadow used only on
+     floating things, a pill-shaped bar holding the main controls.
+   Our own colors stay: cream canvas, plum ink, gold for asks, brick,
+   gold and green for the tiers. The logo and the lease's words keep the
+   serif; everything else is Inter. */
+
+:root {
+  --card: #FFFFFF;
+  --canvas-deep: #EFE8D9;   /* secondary buttons and quiet fills */
+  --ask-tint: #FBF3D9;      /* pale gold behind an ask */
+  --card-radius: 24px;
+  --float-shadow: 0 0 0 1px rgba(59, 35, 64, 0.04), 0 2px 6px rgba(59, 35, 64, 0.05), 0 6px 16px rgba(59, 35, 64, 0.08);
+  --tier-1-bg: #F6E3DF;  --tier-1-ink: #7A2A1F;  /* 8.4:1 */
+  --tier-2-bg: #F7EDCB;  --tier-2-ink: #5C4A0E;  /* 7.9:1 */
+  --tier-3-bg: #DCEBDF;  --tier-3-ink: #1F4D30;  /* 8.6:1 */
+}
+
+body {
+  font-feature-settings: "calt", "cv11";
+}
+
+h1,
+h2,
+h3,
+.tier-heading,
+.count-number {
+  font-family: var(--sans);
+}
+
+/* ---------- Headings: one heavy headline, modest everything else ---------- */
+
+.masthead h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.intro {
+  margin-top: 20px;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.splash-title,
+.version-view .version-heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.splash-part h3,
+.group-title,
+.tier-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.row-title,
+.checklist-row .row-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.row-ref {
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* ---------- Buttons: 48 px tall, fully rounded ---------- */
+
+.button {
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.button-secondary {
+  border-color: transparent;
+  background: var(--canvas-deep);
+}
+
+.button:hover {
+  box-shadow: var(--float-shadow);
+}
+
+/* ---------- Upload screen: headline left, card right on a laptop ---------- */
+
+.upload-card {
+  border: none;
+  border-radius: var(--card-radius);
+  box-shadow: var(--float-shadow);
+  padding: 28px 24px;
+}
+
+.upload-title {
+  font-family: var(--sans);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.privacy-note {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--cream);
+  color: var(--plum-muted);
+  font-size: 0.9375rem;
+}
+
+/* ---------- The reader's bar: one floating pill, like a search bar ---------- */
+
+.reader-bar {
+  margin: 0 0 8px;
+  padding: 10px 0;
+  border-bottom: none;
+}
+
+.wide-switcher {
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background: var(--card);
+  box-shadow: var(--float-shadow);
+}
+
+.wide-switcher .switch-button {
+  min-height: 44px;
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+}
+
+.wide-switcher .switch-button:hover {
+  background: var(--cream);
+}
+
+.wide-switcher .switch-button[aria-pressed="true"] {
+  background: var(--plum);
+  color: var(--cream);
+}
+
+/* ---------- Motion ---------- */
+
+/* The sliding pill: it sits behind the buttons and moves to the chosen
+   one. When it's there, the chosen button lets it show through. */
+.wide-switcher {
+  position: relative;
+}
+
+.switch-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--plum);
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.2, 1), width 0.35s cubic-bezier(0.3, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.switch-pill.no-slide {
+  transition: none;
+}
+
+.wide-switcher .switch-button {
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease;
+}
+
+.wide-switcher:has(.switch-pill[style]) .switch-button[aria-pressed="true"] {
+  background: transparent;
+}
+
+/* Cards rise into place as they scroll into view. */
+.row.waiting,
+.count-tile.waiting {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.row,
+.count-tile {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* The highlighter sweep: the gold stroke draws across the key phrase,
+   like the stroke behind the logo's ampersand. */
+.cue-mark {
+  background: linear-gradient(var(--highlight), var(--highlight)) no-repeat 0 0 / 100% 100%;
+  transition: background-size 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.15s;
+}
+
+.cue-mark.waiting {
+  background-size: 0% 100%;
+}
+
+/* ---------- The opening screen: an arcade-style title card ---------- */
+
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  background: var(--cream);
+  color: var(--plum);
+  cursor: pointer;
+  /* If the script never runs, the screen still goes away on its own. */
+  animation: opening-fallback 0s linear 5s forwards;
+}
+
+/* Faint scanlines, like an old arcade screen. */
+.opening::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, rgba(59, 35, 64, 0.05) 0 1px, transparent 1px 4px);
+  pointer-events: none;
+}
+
+.opening.leaving {
+  animation: opening-wipe 0.6s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+.opening-logo {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 9vw, 6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  animation: opening-flicker 0.45s steps(3) both;
+}
+
+/* Each letter appears as a plum block, then turns into the letter, so a
+   block cursor seems to travel across the word like an arcade title. */
+.opening-letter {
+  animation: opening-type 0.16s linear both;
+}
+
+/* The "&" pops in. Its gold highlighter stroke sweeps in last, once the
+   whole name is typed, as the finale. */
+.opening-amp {
+  position: relative;
+  isolation: isolate;
+  margin: 0 0.16em;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.45em;
+  color: var(--plum);
+  opacity: 0;
+  animation: opening-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) var(--d) forwards;
+}
+
+.opening-amp::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.2em;
+  right: -0.26em;
+  top: 0.36em;
+  height: 0.5em;
+  background: var(--gold-highlight);
+  transform: rotate(-3deg) scaleX(0);
+  transform-origin: left center;
+  animation: opening-sweep 0.55s cubic-bezier(0.65, 0, 0.35, 1) var(--sweep) forwards;
+}
+
+.opening-line {
+  margin: 0;
+  font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: opening-rise 0.5s ease forwards;
+}
+
+@keyframes opening-type {
+  0% { opacity: 0; }
+  1%, 60% { opacity: 1; color: transparent; background: var(--plum); }
+  61%, 100% { opacity: 1; color: inherit; background: transparent; }
+}
+@keyframes opening-pop {
+  from { opacity: 0; transform: scale(0.3) rotate(-12deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes opening-sweep { to { transform: rotate(-3deg) scaleX(1); } }
+@keyframes opening-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 0.85; transform: none; }
+}
+@keyframes opening-flicker {
+  0% { opacity: 0; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+@keyframes opening-wipe { to { clip-path: inset(0 0 100% 0); } }
+@keyframes opening-fallback { to { visibility: hidden; pointer-events: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .opening {
+    display: none;
+  }
+
+  .switch-pill,
+  .row,
+  .count-tile,
+  .cue-mark {
+    transition: none;
+  }
+}
+
+@media print {
+  .row.waiting,
+  .count-tile.waiting {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cue-mark.waiting {
+    background-size: 100% 100%;
+  }
+}
+
+.tracker a[aria-current="true"] {
+  box-shadow: none;
+  color: var(--plum);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* ---------- Notes, tiers and badges ---------- */
+
+.version-notes {
+  border: none;
+  border-radius: var(--card-radius);
+  background: var(--canvas-deep);
+  padding: 20px 24px;
+}
+
+/* Tier labels read as tinted badges, always with their name. */
+.tier-label:not(.tier-heading) {
+  min-height: 32px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+}
+
+.tier-label.tier-1:not(.tier-heading) { background: var(--tier-1-bg); color: var(--tier-1-ink); }
+.tier-label.tier-2:not(.tier-heading) { background: var(--tier-2-bg); color: var(--tier-2-ink); }
+.tier-label.tier-3:not(.tier-heading) { background: var(--tier-3-bg); color: var(--tier-3-ink); }
+.tier-label.tier-not-set:not(.tier-heading) { background: var(--canvas-deep); }
+
+.flag-mark {
+  padding: 4px 12px;
+  font-size: 0.875rem;
+}
+
+/* ---------- Sections: white cards on cream ---------- */
+
+.tier-group {
+  margin-top: 56px;
+}
+
+.group-title {
+  margin-bottom: 16px;
+}
+
+.row {
+  border-top: none;
+}
+
+.checklist-row,
+.unsorted-row,
+.whole-row {
+  margin-top: 12px;
+  padding: 24px 28px;
+  border-radius: var(--card-radius);
+  background: var(--card);
+}
+
+/* Inside a white card the lease's words sit on cream, so they still read
+   as a separate page. */
+.checklist-row .lease-text,
+.unsorted-row .lease-text,
+.whole-row .lease-text,
+.summary-detail .lease-text {
+  background: var(--cream);
+  border: none;
+  border-radius: 16px;
+}
+
+/* A: the lease's words are the white page; the note sits beside it. */
+.annotated-row {
+  padding: 28px 0;
+}
+
+.annotated-row + .annotated-row {
+  border-top: 1px solid var(--rule);
+}
+
+.lease-page .lease-text {
+  border: none;
+  border-radius: 20px;
+  box-shadow: var(--float-shadow);
+  padding: 28px 32px;
+}
+
+.margin-note {
+  border-left: none;
+  padding-left: 0;
+}
+
+/* C: each tier is one white card, its sections a list inside it. */
+.layout-C .tier-group {
+  padding: 8px 28px 8px;
+  border-radius: var(--card-radius);
+  background: var(--card);
+}
+
+.layout-C .tier-group .group-title {
+  margin: 16px 0 4px;
+}
+
+.summary-row + .summary-row {
+  border-top: 1px solid var(--rule);
+}
+
+.count-tile {
+  border: none;
+  border-radius: var(--card-radius);
+  background: var(--card);
+  padding: 20px 24px;
+}
+
+.count-tile.tier-1 { box-shadow: inset 0 4px 0 var(--tier-1); }
+.count-tile.tier-2 { box-shadow: inset 0 4px 0 var(--tier-2); }
+.count-tile.tier-asks { box-shadow: inset 0 4px 0 var(--plum); }
+
+.count-number {
+  font-size: 2.75rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+/* The asks: a pale gold card, not a ruled box. */
+.asks {
+  padding: 18px 20px;
+  border: none;
+  border-radius: 18px;
+  background: var(--ask-tint);
+}
+
+.what-to-say {
+  border-radius: 14px;
+}
+
+/* ---------- Footer: a plum band ---------- */
+
+.site-footer {
+  margin-top: 64px;
+  padding: 40px 0 48px;
+  border-top: none;
+  background: var(--plum);
+  color: var(--cream);
+}
+
+.site-footer .tester-code {
+  color: var(--cream);
+}
+
+/* ---------- How this works: version cards ---------- */
+
+.splash-part {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 40px;
+}
+
+.version-cards {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.version-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 44px;
+  padding: 22px 24px;
+  border: none;
+  border-radius: var(--card-radius);
+  background: var(--card);
+  color: var(--plum);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--float-shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.version-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(59, 35, 64, 0.06), 0 4px 10px rgba(59, 35, 64, 0.08), 0 12px 28px rgba(59, 35, 64, 0.12);
+}
+
+.version-card:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 3px;
+}
+
+.version-card-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* An arrow on each card, drawn in CSS so it adds no words. */
+.version-card-name::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-top: 2.5px solid currentColor;
+  border-right: 2.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.version-card-text {
+  color: var(--plum-muted);
+  line-height: 1.5;
+}
+
+.splash-whole {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.splash-whole .splash-note {
+  margin: 0;
+  flex: 1 1 20rem;
+}
+
+/* The tiers, as four small cards. */
+.splash .tier-scale {
+  gap: 8px;
+}
+
+.splash .tier-scale dt,
+.splash .tier-scale dd {
+  margin: 0;
+  background: var(--card);
+}
+
+.splash .tier-scale dt {
+  padding: 16px 18px 4px;
+  border-radius: 18px 18px 0 0;
+}
+
+.splash .tier-scale dd {
+  padding: 0 18px 16px;
+  border-radius: 0 0 18px 18px;
+  margin-bottom: 4px;
+}
+
+/* ---------- Laptop ---------- */
+
+@media (min-width: 1024px) {
+  .masthead h1 {
+    font-size: 4rem;
+  }
+
+  .splash-title,
+  .version-view .version-heading {
+    font-size: 3rem;
+  }
+
+  /* Upload screen: the headline on the left, the upload card on the right. */
+  body:not(.reading) {
+    display: grid;
+    grid-template-columns: minmax(32px, 1fr) minmax(0, 600px) minmax(0, 480px) minmax(32px, 1fr);
+    grid-template-rows: auto 1fr auto;
+    column-gap: 64px;
+  }
+
+  body:not(.reading) > .draft-note {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  /* The logo sits at the top like an app's nav bar; the headline is
+     centered in the space below it. */
+  body:not(.reading) > .masthead {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 28px 0 96px;
+  }
+
+  body:not(.reading) > .masthead .wrap {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  body:not(.reading) .masthead .intro {
+    margin-bottom: auto;
+  }
+
+  body:not(.reading) > main {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: center;
+    padding: 96px 0;
+  }
+
+  body:not(.reading) > .masthead .wrap,
+  body:not(.reading) > main.wrap {
+    max-width: none;
+    padding: 0;
+  }
+
+  body:not(.reading) > .site-footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 0;
+  }
+
+  body:not(.reading) .app-name {
+    margin-bottom: auto;
+    padding-bottom: 40px;
+  }
+
+  .upload-card {
+    padding: 36px 32px;
+  }
+
+  .upload-buttons {
+    flex-direction: column;
+  }
+
+  /* How this works uses the full width: three version cards side by side,
+     and the four tiers in four columns. Text lines stay readable. */
+  .splash {
+    max-width: none;
+  }
+
+  .splash p {
+    max-width: 46rem;
+  }
+
+  .version-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .version-card {
+    padding: 28px;
+  }
+
+  .splash .tier-scale {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: auto 1fr;
+    grid-auto-flow: column;
+    align-items: stretch;
+    column-gap: 12px;
+    row-gap: 0;
+  }
+
+  .splash .tier-scale dd {
+    margin-bottom: 0;
+  }
+
+  /* B: on a wide card, what it means sits on the left and the ask on
+     the right. The lease's words open across the full card. */
+  .checklist-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  .checklist-row > * {
+    grid-column: 1;
+  }
+
+  .checklist-row > .asks {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    margin-top: 0;
+  }
+
+  .checklist-row > .lease-text {
+    grid-column: 1 / -1;
+  }
+
+  .checklist-row .row-top {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- Phone ---------- */
+
+@media (max-width: 959px) {
+  /* Stays pinned at the top (sticky also holds the sliding pill). */
+  .wide-switcher {
+    position: sticky;
+    top: 0;
+    margin: 0 -16px;
+    padding: 8px 16px;
+    border-radius: 0;
+    background: var(--cream);
+    box-shadow: 0 1px 0 var(--rule);
+  }
+
+  .wide-switcher .switch-button {
+    background: var(--card);
+  }
+
+  .checklist-row,
+  .unsorted-row,
+  .whole-row {
+    padding: 20px;
+  }
+
+  .layout-C .tier-group {
+    padding: 4px 16px;
+  }
+
+  .lease-page .lease-text {
+    padding: 20px;
+  }
+}
