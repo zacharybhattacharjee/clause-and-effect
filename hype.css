@@ -629,6 +629,199 @@ body.playing {
   color: var(--plum-muted);
 }
 
+/* ---------- Matching the site's new look (11/12) ---------- */
+
+/* Scene 5 matches the site: its top row (logo and links), the version
+   pill as a segmented control on a soft track, and room for the cards. */
+.scene-versions {
+  padding-top: 40px;
+}
+
+.app-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1320px;
+  margin-bottom: 28px;
+}
+
+.mini-logo {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.mini-amp {
+  position: relative;
+  margin: 0 0.18em;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.7em;
+  line-height: 1;
+}
+
+.mini-amp::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.22em;
+  right: -0.28em;
+  top: 0.4em;
+  height: 0.5em;
+  background: var(--gold-highlight);
+  transform: rotate(-3deg);
+  clip-path: polygon(3% 8%, 100% 0, 98% 100%, 0 94%);
+}
+
+.app-links {
+  display: flex;
+  gap: 36px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.app-links span {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+}
+
+.switcher {
+  gap: 4px;
+  padding: 6px;
+  background: rgba(59, 35, 64, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(59, 35, 64, 0.04);
+}
+
+.switch-pill {
+  box-shadow: 0 1px 2px rgba(59, 35, 64, 0.2), 0 3px 8px rgba(59, 35, 64, 0.16);
+}
+
+.description {
+  margin: 28px 0 26px;
+}
+
+.layouts {
+  height: 520px;
+}
+
+/* Scenes 4 and 7 sit on the dark plum band, like the site's upload
+   screen, with fine print drifting slowly behind. */
+.scene-dark {
+  isolation: isolate;
+  color: var(--cream);
+}
+
+.scene-dark::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -600px -900px;
+  background: var(--plum);
+}
+
+.logo-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.scene-dark .logo-line,
+.scene-dark .credit {
+  color: rgba(247, 243, 234, 0.82);
+}
+
+/* On plum, the typing cursor is a cream block. */
+.scene-dark .logo-letter {
+  animation-name: logo-type-dark;
+}
+
+@keyframes logo-type-dark {
+  0% { opacity: 0; }
+  1%, 60% { opacity: 1; color: transparent; background: var(--cream); }
+  61%, 100% { opacity: 1; color: inherit; background: transparent; }
+}
+
+/* The "&" starts cream, and turns plum as the gold stroke sweeps in
+   behind it. The stroke covers the whole "&", as on the site's band. */
+.scene-dark .logo-amp {
+  color: var(--cream);
+  animation: logo-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) var(--d, 0s) forwards,
+    amp-ink 0.3s ease var(--sweep, 0s) forwards;
+}
+
+.scene-dark .logo-amp::before {
+  top: 0.06em;
+  height: 0.94em;
+  left: -0.14em;
+  right: -0.2em;
+}
+
+@keyframes amp-ink { to { color: var(--plum); } }
+
+.drift {
+  position: absolute;
+  z-index: -1;
+  inset: -420px -400px auto;
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  transform: perspective(1500px) rotateX(24deg);
+  transform-origin: 50% 0;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 30%, transparent 75%);
+}
+
+.drift-col {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.on .drift-col {
+  animation: drift-up 40s linear forwards;
+}
+
+.drift-col:nth-child(even) {
+  margin-top: -340px;
+}
+
+@keyframes drift-up {
+  to { transform: translateY(-800px); }
+}
+
+.drift .page {
+  background: rgba(247, 243, 234, 0.045);
+  box-shadow: none;
+}
+
+.drift .bar {
+  background: rgba(247, 243, 234, 0.09);
+}
+
+.drift .bar.head {
+  background: rgba(247, 243, 234, 0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .on .drift-col {
+    animation: none;
+  }
+
+  .scene-dark .logo-amp {
+    animation: none;
+    opacity: 1;
+    color: var(--plum);
+  }
+}
+
 /* ---------- The start screen (not part of the recording) ---------- */
 
 .start {
