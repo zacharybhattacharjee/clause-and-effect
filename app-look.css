@@ -933,3 +933,194 @@ body.stuck .reader-bar::before {
     box-shadow: 0 1px 0 rgba(59, 35, 64, 0.12);
   }
 }
+
+/* ---------- Step 14 Group B: Apple touches (11/12) ----------
+   Blended into the Wise and Airbnb look, not replacing it. Same colors,
+   same serif logo and lease text, same highlighter. */
+
+/* Apple's own font (SF Pro) on Macs and iPhones, built into the device,
+   so nothing extra downloads. Other computers keep Inter. */
+:root {
+  --sans: -apple-system, BlinkMacSystemFont, Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Bigger, tighter headlines, and more room between sections. */
+.masthead h1 {
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 1024px) {
+  .masthead h1 {
+    font-size: 4.75rem;
+    line-height: 0.98;
+  }
+
+  .splash-title,
+  .version-view .version-heading {
+    font-size: 3.5rem;
+  }
+}
+
+.tier-group {
+  margin-top: 64px;
+}
+
+/* Headline words rise in one by one, like the video's design question. */
+.rising .rise-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.35em);
+  transition: opacity 0.5s ease, transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.rising.risen .rise-word {
+  opacity: 1;
+  transform: none;
+}
+
+/* The version pill as an Apple-style segmented control: a soft track,
+   with the plum pill sliding under the chosen version. */
+@media (min-width: 960px) {
+  .wide-switcher {
+    padding: 4px;
+    background: rgba(59, 35, 64, 0.07);
+    box-shadow: inset 0 0 0 1px rgba(59, 35, 64, 0.04);
+  }
+
+  .wide-switcher .switch-button:hover {
+    background: rgba(59, 35, 64, 0.06);
+  }
+
+  .switch-pill {
+    box-shadow: 0 1px 2px rgba(59, 35, 64, 0.2), 0 3px 8px rgba(59, 35, 64, 0.16);
+  }
+}
+
+/* The notes at the top of each version: a quiet white card with room
+   between the lines, instead of a beige block. Same words. */
+.version-notes {
+  background: var(--card);
+  padding: 24px 28px;
+}
+
+.version-notes p {
+  line-height: 1.6;
+}
+
+.version-notes p + p {
+  margin-top: 10px;
+}
+
+/* ---------- The upload screen: a dark plum band ----------
+   Like an Apple product page that opens on a dark band: the headline in
+   cream, the upload card floating in white, and the video's fine print
+   drifting slowly behind. */
+
+body:not(.reading) {
+  background: var(--plum);
+  color: var(--cream);
+}
+
+body:not(.reading) .masthead h1 {
+  color: var(--cream);
+}
+
+body:not(.reading) .masthead .intro {
+  color: rgba(247, 243, 234, 0.82); /* about 10:1 on plum */
+}
+
+body:not(.reading) .app-name .amp {
+  color: var(--plum); /* plum on the gold stroke, as everywhere */
+}
+
+body:not(.reading) .home-button:focus-visible {
+  outline-color: var(--gold);
+}
+
+body:not(.reading) .upload-card {
+  color: var(--plum);
+  box-shadow: 0 24px 64px rgba(20, 8, 24, 0.35), 0 4px 12px rgba(20, 8, 24, 0.2);
+}
+
+body:not(.reading) .site-footer,
+body:not(.reading) .draft-note {
+  border-top: 1px solid rgba(247, 243, 234, 0.14);
+}
+
+body:not(.reading) .draft-note {
+  border-top: none;
+  border-bottom: 1px solid rgba(247, 243, 234, 0.14);
+}
+
+/* Everything on the upload screen sits above the drifting fine print. */
+body:not(.reading) > :not(.fine-print):not(.opening):not(dialog):not(script) {
+  position: relative;
+  z-index: 1;
+}
+
+.fine-print {
+  display: none;
+}
+
+body:not(.reading) .fine-print {
+  position: fixed;
+  inset: -20vh -10vw auto;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  pointer-events: none;
+  transform: perspective(1400px) rotateX(22deg);
+  transform-origin: 50% 0;
+  /* Fades out toward the edges, so it reads as texture, not content. */
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%);
+}
+
+.fine-print-column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  animation: fine-print-drift 140s linear infinite;
+}
+
+.fine-print-column:nth-child(even) {
+  margin-top: -300px;
+  animation-duration: 170s;
+}
+
+.fine-print-page {
+  width: 380px;
+  padding: 36px 32px;
+  border-radius: 10px;
+  background: rgba(247, 243, 234, 0.045);
+}
+
+.fine-print-bar {
+  height: 9px;
+  margin-bottom: 13px;
+  border-radius: 5px;
+  background: rgba(247, 243, 234, 0.09);
+}
+
+.fine-print-bar.head {
+  height: 12px;
+  margin-top: 22px;
+  background: rgba(247, 243, 234, 0.14);
+}
+
+.fine-print-bar.head:first-child {
+  margin-top: 0;
+}
+
+/* The column holds two copies of its pages: moving up by one copy
+   (half its height) loops without a jump. */
+@keyframes fine-print-drift {
+  to { transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fine-print-column {
+    animation: none;
+  }
+}
