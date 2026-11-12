@@ -25,7 +25,8 @@
     "splash.wholeLeaseTitle",
     "labels.leaseSays",
     "labels.whatItMeans",
-    "labels.whyYouCanAsk"
+    "labels.whyYouCanAsk",
+    "labels.seeWhatItDoes"
   ],
   "page": {
     "draftNote": "Test version. Some wording on this page is still a draft."
@@ -50,7 +51,7 @@
     "B": {
       "name": "What to ask first",
       "description": "In each tier, sections you can ask to change come first, each with what to ask and why.",
-      "flagLine": "Flagged sections are ones you can ask the landlord to change. Each one shows what to ask, and why."
+      "flagLine": "You can ask the landlord to change any part of a lease. The flagged sections are the ones this tool has a ready ask for, with what to ask and why."
     },
     "C": {
       "name": "Risk summary first",
@@ -102,6 +103,7 @@
     "startOfLease": "Start of the lease",
     "moreAboutAsk": "See what to say",
     "thingsToAsk": "Things to ask for",
-    "why": "Why"
+    "why": "Why",
+    "seeWhatItDoes": "See what it does"
   }
 }

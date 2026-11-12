@@ -9,7 +9,7 @@ A row is live when its status is Approved and, for clause types and versions, it
 | Sheet | Live | All rows |
 | --- | --- | --- |
 | Clause types | 26 | 38 |
-| Versions | 7 | 49 |
+| Versions | 8 | 50 |
 | Warning phrases | 0 | 27 |
 | Asks | 3 | 24 |
 | Glossary | 9 | 30 |
@@ -19,7 +19,7 @@ A row is live when its status is Approved and, for clause types and versions, it
 
 None.
 
-## Blanks that can't be filled yet (15)
+## Blanks that can't be filled yet (14)
 
 Not mistakes. These sentences show without their number until a cue phrase has the same blank.
 
@@ -37,4 +37,3 @@ Not mistakes. These sentences show without their number until a cue phrase has t
 - termination-on-notice: {days} can't be filled yet, because no cue phrase has {days} in it. The sentence shows without the number until one does.
 - deposit-top-up: {days} can't be filled yet, because no cue phrase has {days} in it. The sentence shows without the number until one does.
 - repairs-landlord-self-help: {days} can't be filled yet, because no cue phrase has {days} in it. The sentence shows without the number until one does.
-- casualty-landlord-may-terminate: {days} can't be filled yet, because no cue phrase has {days} in it. The sentence shows without the number until one does.

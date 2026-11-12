@@ -56,10 +56,10 @@ function toggle(showLabel, hideLabel, panel, className = "text-toggle") {
   return button;
 }
 
-// The lease's numbers aren't filled in yet, so a blank in braces such as
-// {days} shows the stand-in words instead, pointing to the lease.
-function sentence(text) {
-  return (text || "").replace(/\{\w+\}/g, words.labels.blankNumber);
+// A blank in braces, such as {days}, gets the lease's own number when the
+// tool found one. Otherwise it shows the stand-in words, pointing to the lease.
+function sentence(text, numbers = {}) {
+  return (text || "").replace(/\{(\w+)\}/g, (blank, name) => numbers[name] || words.labels.blankNumber);
 }
 
 // ?order= sets which version comes first, as on the live page.
@@ -217,6 +217,37 @@ function openTierDialog(opener) {
   close.focus();
 }
 
+// ---------- The video ----------
+
+// "See what it does" plays the hype video (hype.html) in a pop-up over
+// the page, so the uploaded lease is still here when it closes. The video
+// is loaded only when opened, and removed on close, which stops it.
+function videoButton(className) {
+  const button = make("button", className, words.labels.seeWhatItDoes);
+  button.type = "button";
+  button.addEventListener("click", () => openVideo(button));
+  return button;
+}
+
+function openVideo(opener) {
+  const dialog = document.getElementById("video-dialog");
+  dialog.setAttribute("aria-label", words.labels.seeWhatItDoes);
+  const close = make("button", "button button-secondary video-close", words.labels.close);
+  close.type = "button";
+  close.addEventListener("click", () => dialog.close());
+  const frame = make("iframe", "video-frame");
+  frame.title = words.labels.seeWhatItDoes;
+  frame.allow = "fullscreen";
+  frame.src = "hype.html?embed=1";
+  dialog.replaceChildren(close, frame);
+  dialog.addEventListener("close", () => {
+    dialog.replaceChildren();
+    opener.focus();
+  }, { once: true });
+  dialog.showModal();
+  frame.addEventListener("load", () => frame.focus(), { once: true });
+}
+
 // ---------- Pieces of a section ----------
 
 // "Section 13 · ASSIGNMENT – SUBLEASING". The text before the first
@@ -277,7 +308,7 @@ function meaning(section) {
   for (const found of allVersions(section)) {
     const line = make("p", "meaning-line");
     if (found.goodForYou) line.append(make("span", "good-mark", words.labels.goodForYou), " ");
-    line.append(sentence(found.version.plain));
+    line.append(sentence(found.version.plain, found.numbers));
     box.append(line);
   }
   return box.childNodes.length ? box : null;
@@ -423,7 +454,9 @@ function groupsFor(version) {
 function versionNotes(version) {
   const notes = make("div", "version-notes");
   notes.append(make("p", "governs-note", content.page.governsSample), make("p", "", content.page.youMeans));
-  if (version === "B") notes.append(make("p", "flag-line", words.versions.B.flagLine));
+  // Every version says that any term can be asked about, not only the
+  // flagged ones.
+  notes.append(make("p", "flag-line", words.versions.B.flagLine));
   notes.append(make("p", "", content.page.glossaryHint));
   return notes;
 }
@@ -723,7 +756,7 @@ function renderReader(firstView) {
     document.body.classList.add("print-page");
     window.print();
   });
-  tools.append(back, printPage);
+  tools.append(back, videoButton("text-toggle"), printPage);
 
   const nav = make("nav", "tracker");
   nav.id = "tracker";
@@ -742,7 +775,9 @@ function renderReader(firstView) {
 function showSplash() {
   const s = words.splash;
   const splash = document.getElementById("splash");
-  const parts = [make("h2", "splash-title", s.title), make("p", "splash-lead", s.whatItIs)];
+  const video = make("p", "splash-video");
+  video.append(videoButton("button button-secondary"));
+  const parts = [make("h2", "splash-title", s.title), make("p", "splash-lead", s.whatItIs), video];
 
   const sorting = make("section", "splash-part");
   sorting.append(make("h3", "", s.sortingTitle), make("p", "", s.sorting), tierScale());
