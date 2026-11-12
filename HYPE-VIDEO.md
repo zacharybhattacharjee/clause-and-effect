@@ -29,10 +29,10 @@ Opened on its own, the video's start screen has a "Try it yourself" link back to
 | 0–4 s | One line fades in on cream. |
 | 4–9 s | Pages of fake fine print scroll by faster and faster. A signature draws itself on a line. |
 | 9–15 s | The fine print stops and fades. The two questions get the highlighter sweep: gold for the first, brick for the second. |
-| 15–19 s | The logo types itself out, and the highlighter sweeps behind the "&" last, as on the opening screen. |
-| 19–31 s | The three versions, about 4 seconds each: the sliding version pill, each version's description line, and cards easing in. |
+| 15–19 s | On the dark plum band, with fine print drifting behind, the logo types itself out. The gold sweeps behind the "&" last, and the "&" turns plum as it lands. |
+| 19–31 s | The site as it looks now: its top row with the logo and links, and the segmented version pill. Each of the three versions gets about 4 seconds, with its description line and cards easing in. |
 | 31–37 s | The design question appears a few words at a time. "Negotiable" and "consequential" get the highlighter. |
-| 37–40 s | Logo and credit, held on screen. |
+| 37–40 s | Logo and credit on the dark plum band, held on screen. |
 
 ## Where the words come from
 

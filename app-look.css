@@ -1033,6 +1033,15 @@ body:not(.reading) .app-name .amp {
   color: var(--plum); /* plum on the gold stroke, as everywhere */
 }
 
+/* On the dark band a plum "&" would vanish wherever it leaves the gold,
+   so the stroke grows to sit behind the whole "&". */
+body:not(.reading) .app-name .amp::before {
+  top: 0.06em;
+  height: 0.94em;
+  left: -0.14em;
+  right: -0.2em;
+}
+
 body:not(.reading) .home-button:focus-visible {
   outline-color: var(--gold);
 }

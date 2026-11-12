@@ -149,11 +149,22 @@ function build() {
   card.append(s.push.line, s.cost.line);
   s.questions.append(card);
 
-  // 4. The logo (typed when its cue comes).
-  s.logo = scene("scene-logo");
+  // 4. The logo (typed when its cue comes), on the dark plum band with
+  // fine print drifting behind, like the site's upload screen.
+  s.logo = scene("scene-logo scene-dark");
+  s.logoBox = make("div", "logo-box");
+  s.logo.append(drift(), s.logoBox);
 
   // 5. The three versions.
   s.versions = scene("scene-versions");
+  // The site's top row: the logo on the left, its links on the right.
+  s.appTop = make("div", "app-top rise");
+  const miniLogo = make("p", "mini-logo");
+  const [before, ...after] = appName.split("&");
+  miniLogo.append(before.trim(), make("span", "mini-amp", "&"), after.join("&").trim());
+  const links = make("div", "app-links");
+  links.append(...[labels.howItWorks, labels.watchVideo, labels.printPage].map((text) => make("span", "", text)));
+  s.appTop.append(miniLogo, links);
   s.switcher = make("div", "switcher rise");
   s.pill = make("span", "switch-pill");
   s.switcher.append(s.pill);
@@ -173,7 +184,7 @@ function build() {
     <svg viewBox="0 0 20 26" aria-hidden="true">
       <path d="M2 1 L2 20 L7 15.5 L10.5 23.5 L14 22 L10.6 14.2 L17 14 Z" fill="#3B2340" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round"/>
     </svg>`;
-  s.versions.append(s.switcher, s.description, s.layouts, s.pointer);
+  s.versions.append(s.appTop, s.switcher, s.description, s.layouts, s.pointer);
 
   // 6. The design question, a few words at a time.
   s.design = scene("scene-design");
@@ -198,14 +209,26 @@ function build() {
   });
   s.design.append(question);
 
-  // 7. Logo and credit.
-  s.end = scene("scene-end");
+  // 7. Logo and credit, back on the dark plum band.
+  s.end = scene("scene-end scene-dark");
   s.endLogo = make("div", "rise");
   s.credit = make("p", "credit rise", lines.credit);
-  s.end.append(s.endLogo, s.credit);
+  s.end.append(drift(), s.endLogo, s.credit);
   s.appName = appName;
   s.appTitle = appTitle;
   return s;
+}
+
+// Pages of fine print drifting slowly upward behind a dark scene, like
+// the site's upload screen. Gray bars only, no lease text.
+function drift() {
+  const layer = make("div", "drift");
+  for (let c = 0; c < 5; c++) {
+    const column = make("div", "drift-col");
+    for (let p = 0; p < 4; p++) column.append(fakePage());
+    layer.append(column);
+  }
+  return layer;
 }
 
 function layoutA(cards, labels) {
@@ -341,7 +364,7 @@ function play() {
   at(15.0, () => {
     const { logo, length } = typedLogo(s.appName, { typed: !lessMotion() });
     const line = make("p", "logo-line rise", s.appTitle);
-    s.logo.replaceChildren(logo, line);
+    s.logoBox.replaceChildren(logo, line);
     on(s.logo);
     at(clock + length + 0.1, () => reveal(line));
   });
@@ -349,7 +372,7 @@ function play() {
 
   // 5. The three versions (19–31 s)
   at(19.2, () => on(s.versions));
-  at(19.3, () => reveal(s.switcher));
+  at(19.3, () => { reveal(s.appTop); reveal(s.switcher); });
   at(19.7, () => chooseVersion(s, 0, "A", s.layoutA));
   at(23.5, () => chooseVersion(s, 1, "B", s.layoutB));
   at(27.3, () => chooseVersion(s, 2, "C", s.layoutC));
