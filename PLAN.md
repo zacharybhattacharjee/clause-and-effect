@@ -258,7 +258,14 @@ The real page would keep 16 px body text and 44 px tap targets.
 
 ### Step 11: Fixes from the 11/12 design critique (planned, not built)
 
-Status: Group A built on branch `claude/critique-fixes` (11/12), not committed yet. Groups B and C wait for Zachary.
+Status: Group A is live (merged in PR #7, 11/12). Groups B and C were decided by Zachary on 11/12 and are built on `claude/critique-b-c`:
+- **B1:** no gray line. The empty box is simply left out.
+- **B2:** nothing built. The PDF stays on the laptop's desktop, with `round-one.html` as the backup.
+- **B3:** reworded to "Print it and bring it to your landlord or broker before you sign, and keep a copy."
+- **B4:** "Try all three versions" became "Try each version."
+- **B5:** the version names stay, and CLAUDE.md is updated.
+- **C1:** the Section 19 row now looks for "continue for {days} days after written notice" first.
+- **Also (11/12):** sections drop the form's capital-letter heading. They show "Section 14" above the plain name. Sections the tool couldn't sort keep the lease's heading, since they have no other name.
 
 The critique ran on the main page, `?preview=1` and `round-one.html`, at phone width (375 px) and laptop width (1366 px), with the standard form uploaded. The fixes are in three groups:
 
