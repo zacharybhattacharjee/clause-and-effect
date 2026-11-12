@@ -603,6 +603,8 @@ function showView(view) {
   movePill(chosen);
   buildTracker(built);
   easeIn(built);
+  fadeIn(area);
+  riseWords(built.querySelector(".version-heading"));
   setTabTitle(view === "whole" ? words.labels.wholeLease : words.versions[view].name);
   window.scrollTo(0, 0);
   built.querySelector(".version-heading").focus({ preventScroll: true });
@@ -622,6 +624,65 @@ function movePill(chosen) {
   pill.style.height = `${chosen.offsetHeight}px`;
   pill.style.transform = `translate(${chosen.offsetLeft}px, ${chosen.offsetTop}px)`;
   if (firstMove) requestAnimationFrame(() => pill.classList.remove("no-slide"));
+}
+
+// Like the video's design question: a headline's words rise in one by
+// one. The words stay the same; each is wrapped so it can move.
+function riseWords(element, startNow = true) {
+  if (!element || lessMotion()) return;
+  const parts = element.textContent.trim().split(/\s+/);
+  element.replaceChildren(...parts.flatMap((word, i) => {
+    const span = make("span", "rise-word", word);
+    span.style.transitionDelay = `${i * 0.08}s`;
+    return i < parts.length - 1 ? [span, " "] : [span];
+  }));
+  element.classList.add("rising");
+  if (startNow) requestAnimationFrame(() => requestAnimationFrame(() => element.classList.add("risen")));
+}
+
+// Like the video's version switch: the new version fades up into place.
+function fadeIn(element) {
+  if (lessMotion() || !element.animate) return;
+  element.animate(
+    [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+    { duration: 380, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+  );
+}
+
+// Behind the dark band on the upload screen, pages of fine print drift
+// slowly upward, like the opening of the video. They're gray bars, not
+// lease text, and screen readers skip them.
+function addFinePrint() {
+  let seed = 11;
+  const width = (min, max) => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return Math.round(min + (seed / 233280) * (max - min));
+  };
+  const page = () => {
+    const sheet = make("div", "fine-print-page");
+    for (let p = 0; p < 4; p++) {
+      const head = make("div", "fine-print-bar head");
+      head.style.width = `${width(28, 52)}%`;
+      sheet.append(head);
+      const lines = width(4, 7);
+      for (let i = 0; i < lines; i++) {
+        const bar = make("div", "fine-print-bar");
+        bar.style.width = `${i === lines - 1 ? width(30, 60) : width(80, 100)}%`;
+        sheet.append(bar);
+      }
+    }
+    return sheet;
+  };
+  const layer = make("div", "fine-print");
+  layer.setAttribute("aria-hidden", "true");
+  for (let c = 0; c < 5; c++) {
+    const column = make("div", "fine-print-column");
+    // Two copies of the same pages, so the drift loops without a jump.
+    const pages = Array.from({ length: 4 }, page);
+    column.append(...pages, ...pages.map((sheet) => sheet.cloneNode(true)));
+    layer.append(column);
+  }
+  document.body.prepend(layer);
 }
 
 // The opening screen: the logo types itself out like an arcade title,
@@ -667,6 +728,7 @@ function playOpening() {
     done = true;
     window.removeEventListener("keydown", finish);
     screen.classList.add("leaving");
+    setTimeout(() => document.getElementById("title").classList.add("risen"), 250);
     setTimeout(() => screen.remove(), 650);
   };
   setTimeout(finish, (delay + 0.9) * 1000);
@@ -827,6 +889,7 @@ function showSplash() {
   setTabTitle(s.title);
   document.body.classList.add("reading");
   window.scrollTo(0, 0);
+  riseWords(splash.querySelector(".splash-title"));
   splash.querySelector(".splash-title").tabIndex = -1;
   splash.querySelector(".splash-title").focus({ preventScroll: true });
 }
@@ -925,6 +988,8 @@ function renderFrame() {
   home.addEventListener("click", goHome);
   name.replaceChildren(home, label);
   setText("title", page.title);
+  riseWords(document.getElementById("title"), false);
+  addFinePrint();
   setText("intro", page.intro);
   setText("footer-note", page.footer);
   setText("tester-code", testerCode());

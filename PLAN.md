@@ -366,7 +366,7 @@ Claude drafted the wording for 2, 4 and 6. It's marked Approved in the workbook 
 
 ### Step 14: Design audit and an Apple-style look (11/12)
 
-Status: Group A is built on `claude/audit-fixes`, for Zachary to check. Group B is next.
+Status: Group A is live (merged in PR #14, 11/12). Group B is built on `claude/apple-look`, for Zachary to check.
 
 Zachary asked for another audit because the video and the top bar have visible flaws, and for a look that's easy on the eyes and cool and techy, like Apple, keeping our other design choices. He likes the hype video a lot.
 
