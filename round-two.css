@@ -350,6 +350,12 @@ body.reading .app-name {
   letter-spacing: 0.01em;
 }
 
+/* In every version the section number sits above the section's name. */
+.checklist-row .row-ref,
+.summary-detail .row-ref {
+  margin: 0 0 4px;
+}
+
 .row-links {
   display: flex;
   gap: 24px;
@@ -504,6 +510,11 @@ body.reading .app-name {
 
 .lease-page .row-ref {
   margin: 0 0 4px;
+}
+
+/* A section with no explanation yet: its name sits above the lease's words. */
+.lease-page .row-title {
+  margin: 0 0 12px;
 }
 
 .lease-page .lease-text {
@@ -672,10 +683,67 @@ body.reading .app-name {
 }
 
 @media (max-width: 959px) {
-  /* On a narrow screen the bar would cover too much, so it scrolls away. */
+  /* On a narrow screen the whole bar would cover too much. Only the
+     version buttons stay at the top, in one row that swipes sideways.
+     The tools and "On this page" scroll away. */
   .reader-bar {
-    position: static;
+    display: contents;
+  }
+
+  .wide-switcher {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* the cut-off last button shows there's more */
+    margin: 0 -16px;
+    padding: 10px 16px;
+    background: var(--cream);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .wide-switcher .switch-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .reader-tools {
+    margin-top: 4px;
+  }
+
+  .tracker {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tier-group {
+    scroll-margin-top: 80px;
+  }
+
+  /* Each tier's meaning sits under its name, not in a narrow column. */
+  .tier-scale {
     grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .tier-scale dd {
+    margin-bottom: 12px;
+  }
+
+  /* The "You can ask about this" tag goes under the section's name. */
+  .summary-toggle {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px;
+  }
+
+  .summary-toggle .flag-mark {
+    grid-column: 2;
+    justify-self: start;
   }
 
   .margin-note {

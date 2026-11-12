@@ -255,3 +255,72 @@ These could also map one direction to each version, which would make the three v
 - Links are underlined.
 
 The real page would keep 16 px body text and 44 px tap targets.
+
+### Step 11: Fixes from the 11/12 design critique (planned, not built)
+
+Status: Group A built on branch `claude/critique-fixes` (11/12), not committed yet. Groups B and C wait for Zachary.
+
+The critique ran on the main page, `?preview=1` and `round-one.html`, at phone width (375 px) and laptop width (1366 px), with the standard form uploaded. The fixes are in three groups:
+
+- **Group A:** layout only. No new words, so I can build these as soon as you approve.
+- **Group B:** each needs words or a choice from you first.
+- **Group C:** content in the clause library, for you to check. I don't change it.
+
+I'd build Group A as one step, show it to you, and then do Group B once you've given me the words.
+
+#### Group A: layout fixes (no new words)
+
+1. **Sections with no explanation.**
+   - The problem: 22 of the 31 sections have no plain-language line yet. "Lease text first" still draws an empty explanation box beside them, and "Risk summary first" opens to almost nothing.
+   - The fix: when a section has no explanation and no ask, the page leaves out the empty box.
+     - In "Lease text first", the section name sits above the lease text, and the right column stays clear.
+     - In "Risk summary first", the card opens straight to "Show the lease's words".
+   - If you'd rather show a gray "not written yet" line instead, that's question 1 in Group B.
+2. **Version buttons on a phone.**
+   - The problem: on a phone, the bar with the version buttons scrolls away. It was set that way on purpose, because the whole bar covers too much of a small screen. But "Lease text first" is about 28 phone screens long, so switching versions means scrolling all the way up.
+   - The fix: on a phone, only the four version buttons stay pinned at the top, in one row you can swipe sideways. "How this works", "Print this page" and "On this page" still scroll away. Laptops don't change.
+3. **The "How this works" screen.**
+   - The problem: on a phone, you scroll about 2½ screens before you can pick a version.
+   - The fix: move "Choose a version to start" and its four buttons up, right under the first paragraph, so the explanation comes after them. On a phone, each tier's description would sit under its name instead of in a narrow column beside it.
+   - The words stay the same. Only the order changes.
+4. **Where the section number sits.**
+   - The problem: "Section 14 · SUBORDINATION" sits above the lease text in "Lease text first", but at the bottom of each section in the other two versions.
+   - The fix: put it above the section name in every version, so it reads like a label.
+5. **The browser tab title.** The tab says "How this works" while you're still on the upload screen. The fix: show only "Clause & Effect" until a lease is read.
+6. **The "You can ask about this" tag on a phone.** In "Risk summary first", the gold tag squeezes long section names onto three lines. The fix: on a phone, put the tag on its own line under the name.
+
+What you'd check:
+- On your phone, scroll deep into "Lease text first" and switch versions without scrolling back up.
+- On the "How this works" screen, the version buttons show without scrolling.
+- Sections with no explanation look finished, not broken.
+
+#### Group B: needs your words or a choice
+
+1. **A gray line for sections with no explanation?**
+   - If you want testers to see that an explanation is still to come, write the words for a new label, for example under `labels` in `content-round-two.json`.
+   - If you don't, the empty box is simply left out (A1).
+2. **A backup for the class demo.**
+   - Round 1 had "Try it with a sample lease", and the main page has none.
+   - The round 2 page needs the whole lease's text to work. The only lease text the repo can hold is the three short excerpts in `content.json`, because the form is copyrighted.
+   - Choices:
+     - **(a)** keep the PDF on the laptop's desktop and use `round-one.html` as the backup. Nothing is built.
+     - **(b)** a sample button on the main page that shows only the three saved excerpts, with your wording for the button and a note saying it's a short sample.
+   - My suggestion: (a) for the demo, since it needs no new code.
+3. **"Email it" with only a print button.**
+   - "What to do next" says "Email it to your landlord or broker", but the button is "Print this list".
+   - Choices:
+     - **(a)** you reword the line.
+     - **(b)** I add a "Copy the list" button. That's a new feature, and you'd write its label and the "Copied" message.
+4. **"Try all three versions".** The headline line says three, but there are four buttons, counting "Whole lease, in order". Change the wording, or leave it if you think of the whole lease as something other than a version.
+5. **Version names and CLAUDE.md.** CLAUDE.md still says testers only see "Version 1, 2, 3". The page now shows "Lease text first", "What to ask first" and "Risk summary first". If that was your choice, I update CLAUDE.md to match. If it wasn't, I switch back to the numbers.
+
+#### Group C: clause library content, for you to check
+
+1. **Section 19's highlight and explanation don't match.**
+   - The library row `default-notice-and-cure` finds its spot by the words "within {days} days after written notice". In the standard form, those words come in part (b), about breaking other rules, which gives 30 days.
+   - The explanation beside it is about missed payments, which part (a) covers with "ten (10) days". A tester could think they have 30 days to pay rent.
+   - Likely fix, in the workbook: point that row's finding words at part (a), for example "continue for {days} days after written notice", or write a separate row for part (b).
+2. **"(see the lease) days".**
+   - Sections 18 and 19 show "(see the lease)" where the lease's number should go. The page shows that when it can't fill in the number.
+   - Checked 11/12: it isn't a bug. The page doesn't fill in the lease's own numbers yet. That's stage 2 of the clause library plan in `ENGINE-PLAN.md`. Until then, every number in a plain-language line shows `labels.blankNumber`.
+3. **"Lender paperwork" in "Highest stakes".** The word "paperwork" echoes the lowest tier, "Rules and paperwork". This one is for testers to react to, not necessarily something to fix.

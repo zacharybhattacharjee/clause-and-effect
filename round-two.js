@@ -261,7 +261,8 @@ function proofExample(version) {
 }
 
 // What a section means: each version's plain sentence, with "Good for you"
-// on the versions that help the tenant.
+// on the versions that help the tenant. Nothing, if no explanation is
+// written yet, so the page never shows an empty box.
 function meaning(section) {
   const box = make("div", "meaning");
   if (section.status === "unsure") box.append(make("p", "unsure-line", words.labels.unsureLine));
@@ -271,7 +272,12 @@ function meaning(section) {
     line.append(sentence(found.version.plain));
     box.append(line);
   }
-  return box;
+  return box.childNodes.length ? box : null;
+}
+
+// Appends only the pieces that exist.
+function appendAll(parent, ...pieces) {
+  parent.append(...pieces.filter(Boolean));
 }
 
 // Everything behind "See what to say": the words to propose, a real lease
@@ -330,26 +336,35 @@ function checklistRow(section) {
   const top = make("div", "row-top");
   top.append(make("h3", "row-title", sectionName(section)));
   if (hasFlag(section)) top.append(make("span", "flag-mark", words.labels.flag));
-  row.append(top, meaning(section));
-  const asks = askBullets(section);
-  if (asks) row.append(asks);
+  appendAll(row, make("p", "row-ref", sectionRef(section)), top, meaning(section), askBullets(section));
   const text = leaseWords(section);
   const links = make("div", "row-links");
   links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
-  row.append(links, text, make("p", "row-ref", sectionRef(section)));
+  row.append(links, text);
   return row;
 }
 
 // A, annotated lease: the lease's words on a page, with a note beside them.
+// With no explanation and no ask, there's no note: the name sits above
+// the lease's words instead.
 function annotatedRow(section) {
   const row = make("article", "row annotated-row");
   const page = make("div", "lease-page");
-  page.append(make("p", "row-ref", sectionRef(section)), leaseWords(section, { highlight: true }));
-  const note = make("aside", "margin-note");
-  note.append(make("h3", "row-title", sectionName(section)), meaning(section));
+  const title = make("h3", "row-title", sectionName(section));
+  const explained = meaning(section);
   const asks = askBullets(section);
-  if (asks) note.append(asks);
-  row.append(page, note);
+  page.append(make("p", "row-ref", sectionRef(section)));
+  if (!explained && !asks) {
+    row.classList.add("no-note");
+    page.append(title);
+  }
+  page.append(leaseWords(section, { highlight: true }));
+  row.append(page);
+  if (explained || asks) {
+    const note = make("aside", "margin-note");
+    appendAll(note, title, explained, asks);
+    row.append(note);
+  }
   return row;
 }
 
@@ -357,13 +372,11 @@ function annotatedRow(section) {
 function summaryRow(section) {
   const row = make("article", "row summary-row");
   const panel = make("div", "summary-detail");
-  panel.append(meaning(section));
-  const asks = askBullets(section);
-  if (asks) panel.append(asks);
+  appendAll(panel, make("p", "row-ref", sectionRef(section)), meaning(section), askBullets(section));
   const text = leaseWords(section);
   const links = make("div", "row-links");
   links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
-  panel.append(links, text, make("p", "row-ref", sectionRef(section)));
+  panel.append(links, text);
 
   const opener = toggle(sectionName(section), sectionName(section), panel, "summary-toggle");
   opener.replaceChildren(make("span", "summary-name", sectionName(section)));
@@ -541,6 +554,7 @@ function showView(view) {
     button.setAttribute("aria-pressed", String(button.dataset.view === view));
   }
   buildTracker(built);
+  setTabTitle(view === "whole" ? words.labels.wholeLease : words.versions[view].name);
   window.scrollTo(0, 0);
   built.querySelector(".version-heading").focus({ preventScroll: true });
 }
@@ -649,10 +663,12 @@ function showSplash() {
   buttons.append(wholeButton);
   choose.append(buttons);
 
-  splash.replaceChildren(...parts, sorting, versions, choose);
+  // The choice comes first, so no one has to scroll past the explanation.
+  splash.replaceChildren(...parts, choose, sorting, versions);
   document.getElementById("upload-screen").hidden = true;
   document.getElementById("reader").hidden = true;
   splash.hidden = false;
+  setTabTitle(s.title);
   document.body.classList.add("reading");
   window.scrollTo(0, 0);
   splash.querySelector(".splash-title").tabIndex = -1;
@@ -717,7 +733,14 @@ function renderUploadScreen() {
   screen.replaceChildren(card);
 }
 
+// The browser tab names the screen being shown: just the app name on the
+// upload screen, then "Clause & Effect: How this works" and so on.
+function setTabTitle(screenName) {
+  document.title = screenName ? `${content.page.appName}: ${screenName}` : content.page.appName;
+}
+
 function goHome() {
+  setTabTitle();
   lease = null;
   document.body.classList.remove("reading");
   document.getElementById("reader").hidden = true;
@@ -732,7 +755,7 @@ function goHome() {
 
 function renderFrame() {
   const page = content.page;
-  document.title = `${page.appName}: ${words.splash.title}`;
+  setTabTitle();
   const name = document.getElementById("app-name");
   const home = make("button", "home-button");
   home.type = "button";
