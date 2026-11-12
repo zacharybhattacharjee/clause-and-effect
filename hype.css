@@ -64,7 +64,9 @@ body.playing {
   left: 50%;
   width: 1600px;
   height: 900px;
-  overflow: hidden;
+  /* Backgrounds such as the fine print run past the 16:9 frame to the
+     edges of any screen; the words and cards stay inside the frame. */
+  overflow: visible;
   background: var(--cream);
   transform: translate(-50%, -50%) scale(var(--s));
 }
@@ -145,7 +147,7 @@ body.playing {
 
 .wall {
   position: absolute;
-  inset: -60px -200px auto;
+  inset: -420px -400px auto;
   display: flex;
   justify-content: center;
   gap: 56px;
@@ -311,6 +313,8 @@ body.playing {
   top: 0.36em;
   height: 0.5em;
   background: var(--gold-highlight);
+  /* A marker stroke, not a box: slightly uneven, the same shape as the page's logo. */
+  clip-path: polygon(3% 8%, 100% 0, 98% 100%, 0 94%);
   transform: rotate(-3deg) scaleX(0);
   transform-origin: left center;
   animation: logo-sweep 0.55s cubic-bezier(0.65, 0, 0.35, 1) var(--sweep, 0s) forwards;
