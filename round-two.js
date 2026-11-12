@@ -674,6 +674,19 @@ function playOpening() {
   window.addEventListener("keydown", finish);
 }
 
+// While reading, a hairline shows under the frosted top bar once it's
+// stuck to the top of the window. On a phone only the version row sticks.
+function markStuck() {
+  const bar = document.querySelector("#reader:not([hidden]) .reader-bar");
+  let stuck = false;
+  if (bar) {
+    const pinned = getComputedStyle(bar).display === "contents" ? bar.querySelector(".wide-switcher") : bar;
+    stuck = pinned.getBoundingClientRect().top <= 0.5 && window.scrollY > 0;
+  }
+  document.body.classList.toggle("stuck", stuck);
+}
+window.addEventListener("scroll", markStuck, { passive: true });
+
 window.addEventListener("resize", () => {
   const chosen = document.querySelector('#reader [data-view][aria-pressed="true"]');
   if (chosen) movePill(chosen);
@@ -757,12 +770,15 @@ function renderReader(firstView) {
     window.print();
   });
   tools.append(back, videoButton("text-toggle"), printPage);
+  // The links sit in the logo's row at the top, like a website's nav, so
+  // the version pill below has room to stay on one line.
+  document.getElementById("top-links").replaceChildren(tools);
 
   const nav = make("nav", "tracker");
   nav.id = "tracker";
   nav.setAttribute("aria-label", words.labels.onThisPage);
 
-  bar.append(switcher, tools, nav);
+  bar.append(switcher, nav);
   reader.replaceChildren(bar, make("div", "view-area"));
   document.getElementById("splash").hidden = true;
   document.getElementById("upload-screen").hidden = true;
@@ -779,6 +795,7 @@ function showSplash() {
   // "[Watch a video] or read how it works below."
   video.append(videoButton("button button-secondary"), make("span", "", s.videoOr));
   const parts = [make("h2", "splash-title", s.title), make("p", "splash-lead", s.whatItIs), video];
+  document.getElementById("top-links").replaceChildren();
 
   const sorting = make("section", "splash-part");
   sorting.append(make("h3", "", s.sortingTitle), make("p", "", s.sorting), tierScale());
@@ -881,6 +898,7 @@ function setTabTitle(screenName) {
 function goHome() {
   setTabTitle();
   lease = null;
+  document.getElementById("top-links").replaceChildren();
   document.body.classList.remove("reading");
   document.getElementById("reader").hidden = true;
   document.getElementById("reader").replaceChildren();

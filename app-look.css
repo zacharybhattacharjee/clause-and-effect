@@ -281,6 +281,8 @@ h3,
   top: 0.36em;
   height: 0.5em;
   background: var(--gold-highlight);
+  /* A marker stroke, not a box: slightly uneven, the same shape as the logo's. */
+  clip-path: polygon(3% 8%, 100% 0, 98% 100%, 0 94%);
   transform: rotate(-3deg) scaleX(0);
   transform-origin: left center;
   animation: opening-sweep 0.55s cubic-bezier(0.65, 0, 0.35, 1) var(--sweep) forwards;
@@ -653,7 +655,7 @@ h3,
     margin-top: 0;
   }
 
-  body:not(.reading) .app-name {
+  body:not(.reading) .masthead-row {
     margin-bottom: auto;
     padding-bottom: 40px;
   }
@@ -796,4 +798,138 @@ h3,
   border: none;
   border-radius: 16px;
   background: var(--cream);
+}
+
+/* ---------- Step 14 fixes (11/12 audit) ---------- */
+
+/* The logo's row: the logo on the left, and while reading, the links
+   on the right, like a website's nav. The version pill below then has
+   room to stay on one line. */
+.masthead-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+}
+
+.top-links:empty {
+  display: none;
+}
+
+.top-links .reader-tools {
+  display: flex;
+  gap: 24px;
+}
+
+.top-links .text-toggle {
+  white-space: nowrap;
+}
+
+/* On a laptop the pill keeps its own width instead of stretching across
+   the bar. (On a phone it fills the row and swipes sideways.) */
+@media (min-width: 960px) {
+  .wide-switcher {
+    justify-self: start;
+  }
+}
+
+/* The bar is frosted glass, like apple.com's: see-through cream with a
+   blur behind it, across the whole window. A hairline shows under it
+   only once it's stuck to the top. */
+.reader-bar {
+  isolation: isolate;
+  background: transparent;
+}
+
+.reader-bar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  background: rgba(247, 243, 234, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 0 1px 0 transparent;
+  transition: box-shadow 0.2s ease;
+}
+
+body.reading {
+  overflow-x: clip; /* the frosted bar reaches the window's edges */
+}
+
+body.stuck .reader-bar::before {
+  box-shadow: 0 1px 0 rgba(59, 35, 64, 0.12);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .reader-bar::before {
+    background: rgba(247, 243, 234, 0.97);
+  }
+}
+
+/* The count tiles: a colored dot before each label, instead of a
+   colored top edge that bent into crescents at the rounded corners. */
+.count-tile.tier-1,
+.count-tile.tier-2,
+.count-tile.tier-asks {
+  box-shadow: none;
+}
+
+.count-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.count-label::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+
+.count-tile.tier-1 .count-label::before { background: var(--tier-1); }
+.count-tile.tier-2 .count-label::before { background: var(--tier-2); }
+.count-tile.tier-asks .count-label::before { background: var(--plum); }
+
+@media (max-width: 959px) {
+  /* The links get their own row under the logo, one line each, and the
+     row swipes sideways if it doesn't fit. */
+  .top-links {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .top-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .top-links .reader-tools {
+    gap: 20px;
+    margin: 0;
+  }
+
+  .reader-bar::before {
+    display: none;
+  }
+
+  /* The pinned version row is frosted too, with the hairline once stuck. */
+  .wide-switcher {
+    background: rgba(247, 243, 234, 0.72);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: 0 1px 0 transparent;
+    transition: box-shadow 0.2s ease;
+  }
+
+  body.stuck .wide-switcher {
+    box-shadow: 0 1px 0 rgba(59, 35, 64, 0.12);
+  }
 }

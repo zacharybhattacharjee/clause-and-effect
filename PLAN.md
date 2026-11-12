@@ -363,3 +363,79 @@ From `Clause_and_Effect_Expert_Feedback.docx`. These are the things all three AI
 6. **Every version** now says that any term can be asked about, and the flagged ones are just those with a ready ask.
 
 Claude drafted the wording for 2, 4 and 6. It's marked Approved in the workbook so it shows, with a note in each row's Notes column. Zachary confirms it by merging.
+
+### Step 14: Design audit and an Apple-style look (11/12)
+
+Status: Group A is built on `claude/audit-fixes`, for Zachary to check. Group B is next.
+
+Zachary asked for another audit because the video and the top bar have visible flaws, and for a look that's easy on the eyes and cool and techy, like Apple, keeping our other design choices. He likes the hype video a lot.
+
+The audit ran on the main page with the standard form uploaded, at 1024, 1280, 1440 and 1680 px wide and at phone width (375 px), and on the video at a MacBook's full-screen shape (1440 × 900).
+
+#### Group A: fix what's broken (no new words)
+
+The top bar:
+
+1. **The version pill breaks onto two rows on every laptop.**
+   - The problem: since "Watch a video" joined "How this works" and "Print this page" beside it, the pill no longer fits. "Whole lease, in order" drops to a second row, so the pill is 104 px tall and lumpy. It happens even at 1680 px, because the page's content stops at 1136 px wide.
+   - The fix: move the three links up into the logo's row, at the top right, the way Apple's site puts its links beside the logo. The pill gets its own row and stays on one line.
+2. **The bar has no edge when it sticks.**
+   - The problem: when you scroll, the bar stays at the top in plain cream, with no line or shadow. The lease text slides right up under "On this page", so the two run together.
+   - The fix: a frosted-glass bar, like the one on apple.com. It's see-through cream with a blur behind it, and a hairline appears under it once you scroll.
+3. **On a phone, each link breaks onto two lines** ("How this / works", "Watch a / video", "Print this / page").
+   - The fix: the links stay on one line each, in one row you can swipe sideways, like the version buttons.
+
+The rest of the page:
+
+4. **The colored lines on the "Risk summary first" count tiles bend into thin crescents** at the rounded corners.
+   - The fix: a small colored dot before each tile's label, like the dots before the tier headings.
+
+The video:
+
+5. **Hard edges on a MacBook screen.**
+   - The problem: the video is 16:9, and a MacBook screen is a bit taller (16:10). The fine-print pages stop in a hard line above the bottom and below the top of the screen.
+   - The fix: the backgrounds fill the whole screen. The words and cards stay in the 16:9 middle, so nothing important is cut off on any screen.
+6. **In the three-versions scene, the second "Lease text first" card runs into the bottom edge.** The fix: fit both cards inside the frame.
+7. **The pointer covers the letters of the version it clicks.** The fix: it clicks near the end of the button's name instead.
+8. **A stray red dot under the "c" of "consequential".** On a second look, this was the brick underline caught just as it started to draw, during a test run where the clock stuttered. It isn't a flaw of its own, and fix 10 takes care of it.
+9. **The gold block behind the big "&" looks pasted on.** At the logo's large size, its hard rectangle edges show.
+   - The fix: a softer marker stroke with rounded, slightly uneven ends, like a real highlighter.
+   - The same stroke would go behind the "&" in the page's logo, so the two match.
+10. **The scenes run on separate timers.** If the laptop stutters, or the video plays in a background tab, scenes can bunch up. In one test run here, the three-versions scene was skipped ahead.
+    - The fix: one clock that plays the scenes in order and pauses when the video isn't on screen.
+
+#### Group B: an Apple-style look
+
+This adds Apple to the look rules in CLAUDE.md, beside Wise and Airbnb. These stay the same:
+- the colors, with cream, plum, slate, gold and brick
+- the Source Serif logo and lease text
+- the highlighter, with gold for asks and brick for risk
+- the rule that color never carries meaning alone
+- the contrast and tap-target rules
+- motion turned off for reduced motion
+
+1. **The frosted top bar** from A2, and a cleaner logo row.
+2. **The version pill as an Apple-style segmented control.** It sits on a soft see-through track, with the plum pill sliding under the chosen version.
+3. **Type closer to Apple's.**
+   - Macs and iPhones get Apple's own system font, SF Pro. It's built into the device, so the page downloads nothing extra. Other computers keep Inter.
+   - Bigger, tighter headlines, and more space between sections.
+4. **The video's motion on the page.** It's what Zachary likes most, so it carries into the site, quietly:
+   - the headline's words rise in one by one, like the design question
+   - the highlighter sweeps across key phrases
+   - cards rise into place
+   - versions fade from one to the next, like the video's pill switch
+5. **A dark opening band** on the upload screen. It's plum, with "What can I ask?" in cream and the video's fine-print pages drifting slowly behind it, blurred, like Apple's product pages that open on a dark band.
+6. **The notes box** at the top of each version is now a beige block of four lines. It becomes a quieter white card with more space between lines. Same words.
+7. **The opening screen** keeps the logo typing out, but drops the faint arcade scanlines, which feel retro rather than Apple.
+
+#### Zachary's answers (11/12)
+
+1. **Look:** Group A for sure. Group B blends Apple touches into the Wise and Airbnb look; it doesn't replace it. CLAUDE.md's look section adds Apple as a third reference.
+2. **Font:** Apple's SF Pro on Macs and iPhones, Inter elsewhere.
+3. **Dark band** on the upload screen: yes.
+4. **Scanlines:** keep them, so B7 is dropped.
+
+#### Order
+
+1. Group A as one step. Check it, then merge.
+2. Group B as a second step, after the answers above. Check it on the class laptop before merging.

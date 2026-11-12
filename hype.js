@@ -13,7 +13,14 @@ const playButton = document.getElementById("play");
 const EMBEDDED = new URLSearchParams(location.search).get("embed") === "1";
 
 let words = null;   // everything loaded from the JSON files
-let timers = [];
+
+// One clock runs the whole video. It counts only time the video is on
+// screen: if the laptop stutters or the tab is in the background, the
+// video pauses instead of letting scenes bunch up.
+let cues = [];       // { t: seconds from the start, run: what to do }
+let clock = 0;
+let lastFrame = null;
+let frame = null;
 
 const lessMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -207,7 +214,7 @@ function layoutA(cards, labels) {
     const pair = make("div", "card pair rise");
     pair.style.setProperty("--i", String(i + 1));
     const doc = make("div", "doc");
-    doc.append(make("p", "label", labels.leaseSays), make("p", "card-title", clause.name), ...bars(4));
+    doc.append(make("p", "label", labels.leaseSays), make("p", "card-title", clause.name), ...bars(3));
     const meaning = make("div", "meaning");
     meaning.append(make("p", "label", labels.whatItMeans), ...bars(3, 70, 95));
     pair.append(doc, meaning);
@@ -249,7 +256,17 @@ function layoutC(cards, labels, tiers) {
 // ---------- Playing ----------
 
 function at(seconds, action) {
-  timers.push(setTimeout(action, seconds * 1000));
+  cues.push({ t: seconds, run: action });
+  cues.sort((a, b) => a.t - b.t);
+}
+
+function tick(now) {
+  // A long gap between frames means the video wasn't on screen, so the
+  // clock moves on by at most a tenth of a second.
+  if (lastFrame !== null) clock += Math.min(now - lastFrame, 100) / 1000;
+  lastFrame = now;
+  while (cues.length && cues[0].t <= clock) cues.shift().run();
+  frame = cues.length ? requestAnimationFrame(tick) : null;
 }
 
 const on = (el) => el.classList.add("on");
@@ -260,11 +277,13 @@ const reveal = (el) => el.classList.add("in");
 function chooseVersion(s, index, key, layout) {
   const button = s.switches[index];
   const switcherBox = s.switcher.offsetTop;
-  s.pointer.style.setProperty("--x", `${s.switcher.offsetLeft + button.offsetLeft + button.offsetWidth * 0.55}px`);
-  s.pointer.style.setProperty("--y", `${switcherBox + button.offsetTop + button.offsetHeight * 0.55}px`);
+  // The pointer clicks just past the end of the name, so it never
+  // covers the letters.
+  s.pointer.style.setProperty("--x", `${s.switcher.offsetLeft + button.offsetLeft + button.offsetWidth - 26}px`);
+  s.pointer.style.setProperty("--y", `${switcherBox + button.offsetTop + button.offsetHeight * 0.62}px`);
   s.pointer.classList.add("shown");
   const clickDelay = lessMotion() ? 0 : 0.75;
-  at(clickDelay, () => {
+  at(clock + clickDelay, () => {
     s.pointer.classList.add("pressing");
     setTimeout(() => s.pointer.classList.remove("pressing"), 140);
     s.switches.forEach((b, i) => b.classList.toggle("chosen", i === index));
@@ -280,7 +299,7 @@ function chooseVersion(s, index, key, layout) {
       }
     });
   });
-  at(clickDelay + 0.3, () => {
+  at(clock + clickDelay + 0.3, () => {
     s.description.textContent = words.versions[key].description;
     s.description.classList.remove("fading");
     layout.classList.add("in");
@@ -289,8 +308,10 @@ function chooseVersion(s, index, key, layout) {
 }
 
 function play() {
-  timers.forEach(clearTimeout);
-  timers = [];
+  if (frame) cancelAnimationFrame(frame);
+  cues = [];
+  clock = 0;
+  lastFrame = null;
   const s = build();
   document.body.classList.add("playing");
   startScreen.classList.add("gone");
@@ -322,7 +343,7 @@ function play() {
     const line = make("p", "logo-line rise", s.appTitle);
     s.logo.replaceChildren(logo, line);
     on(s.logo);
-    setTimeout(() => reveal(line), (length + 0.1) * 1000);
+    at(clock + length + 0.1, () => reveal(line));
   });
   at(18.8, () => off(s.logo));
 
@@ -353,6 +374,7 @@ function play() {
   });
   at(38.3, () => reveal(s.credit));
   at(40.0, () => document.body.classList.remove("playing"));
+  frame = requestAnimationFrame(tick);
 }
 
 // ---------- Keys and start ----------
