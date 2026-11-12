@@ -258,7 +258,8 @@ h3,
   animation: opening-type 0.16s linear both;
 }
 
-/* The "&" pops in, and its gold highlighter stroke sweeps behind it. */
+/* The "&" pops in. Its gold highlighter stroke sweeps in last, once the
+   whole name is typed, as the finale. */
 .opening-amp {
   position: relative;
   isolation: isolate;
@@ -282,7 +283,7 @@ h3,
   background: var(--gold-highlight);
   transform: rotate(-3deg) scaleX(0);
   transform-origin: left center;
-  animation: opening-sweep 0.35s cubic-bezier(0.4, 0, 0.2, 1) calc(var(--d) + 0.2s) forwards;
+  animation: opening-sweep 0.55s cubic-bezier(0.65, 0, 0.35, 1) var(--sweep) forwards;
 }
 
 .opening-line {

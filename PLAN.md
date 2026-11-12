@@ -345,7 +345,7 @@ Zachary wanted the page to feel like an easy-to-use app, not a legal tool, keepi
 - **Upload screen:** the headline on the left and the upload card on the right on a laptop.
 - **How this works:** the versions are cards that carry their own descriptions, and the tiers sit in four columns. Same words.
 - **Motion,** borrowed in spirit from react-bits but written in plain CSS and JavaScript, and off for reduced motion:
-  - an arcade-style opening screen of about 2.5 seconds that any click or key skips
+  - an arcade-style opening screen of about 3 seconds that any click or key skips. The gold highlight sweeps behind the "&" last, as the finale
   - the highlighter sweep on key phrases
   - the sliding version pill
   - cards easing in

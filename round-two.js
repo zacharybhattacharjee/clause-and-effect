@@ -592,8 +592,9 @@ function movePill(chosen) {
 }
 
 // The opening screen: the logo types itself out like an arcade title,
-// the "&" pops in with its gold stroke, then the screen wipes away.
-// About 2.5 seconds; any click, tap or key skips it.
+// then, as the finale, the gold highlighter sweeps behind the "&" (what
+// the tool does to a lease), and the screen wipes away.
+// About 3 seconds; any click, tap or key skips it.
 function playOpening() {
   const screen = document.getElementById("opening");
   if (!screen) return;
@@ -618,6 +619,10 @@ function playOpening() {
     amp.style.setProperty("--d", `${delay}s`);
     delay += 0.35;
     logo.append(amp, ...typed(rest.join("&")));
+    // The finale: once the whole name is typed, the highlight sweeps in.
+    delay += 0.2;
+    amp.style.setProperty("--sweep", `${delay}s`);
+    delay += 0.55;
   }
   const line = make("p", "opening-line", content.page.title);
   line.style.animationDelay = `${delay + 0.1}s`;
