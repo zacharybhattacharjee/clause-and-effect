@@ -352,7 +352,8 @@ body.reading .app-name {
 
 /* In every version the section number sits above the section's name. */
 .checklist-row .row-ref,
-.summary-detail .row-ref {
+.summary-detail .row-ref,
+.whole-row .row-ref {
   margin: 0 0 4px;
 }
 

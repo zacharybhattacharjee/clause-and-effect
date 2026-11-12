@@ -227,9 +227,17 @@ function sectionRef(section) {
   return [label, section.heading].filter(Boolean).join(" · ");
 }
 
+// "Section 13", without the form's heading, for sections that have a plain
+// name. The text before the first section is "Start of the lease".
+function sectionNumber(section) {
+  return section.number ? `${words.labels.section} ${section.number}` : sectionRef(section);
+}
+
+const typeNames = (section) => section.matches.map((m) => m.type.name).filter(Boolean);
+
 // A section's plain title: its clause type's name, or the lease's heading.
 function sectionName(section) {
-  const named = section.matches.map((m) => m.type.name).filter(Boolean);
+  const named = typeNames(section);
   return named.length ? named.join(" or ") : sectionRef(section);
 }
 
@@ -336,7 +344,7 @@ function checklistRow(section) {
   const top = make("div", "row-top");
   top.append(make("h3", "row-title", sectionName(section)));
   if (hasFlag(section)) top.append(make("span", "flag-mark", words.labels.flag));
-  appendAll(row, make("p", "row-ref", sectionRef(section)), top, meaning(section), askBullets(section));
+  appendAll(row, make("p", "row-ref", sectionNumber(section)), top, meaning(section), askBullets(section));
   const text = leaseWords(section);
   const links = make("div", "row-links");
   links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
@@ -353,7 +361,7 @@ function annotatedRow(section) {
   const title = make("h3", "row-title", sectionName(section));
   const explained = meaning(section);
   const asks = askBullets(section);
-  page.append(make("p", "row-ref", sectionRef(section)));
+  page.append(make("p", "row-ref", sectionNumber(section)));
   if (!explained && !asks) {
     row.classList.add("no-note");
     page.append(title);
@@ -372,7 +380,7 @@ function annotatedRow(section) {
 function summaryRow(section) {
   const row = make("article", "row summary-row");
   const panel = make("div", "summary-detail");
-  appendAll(panel, make("p", "row-ref", sectionRef(section)), meaning(section), askBullets(section));
+  appendAll(panel, make("p", "row-ref", sectionNumber(section)), meaning(section), askBullets(section));
   const text = leaseWords(section);
   const links = make("div", "row-links");
   links.append(toggle(words.labels.showLeaseWords, words.labels.hideLeaseWords, text));
@@ -479,8 +487,11 @@ function renderWholeLease() {
   for (const piece of lease.sections) {
     const row = make("article", "row whole-row");
     const top = make("div", "row-top");
-    top.append(make("h3", "row-title", sectionRef(piece)));
+    top.append(make("h3", "row-title", sectionName(piece)));
     if (piece.status !== "not-sorted") top.append(tierLabel(piece.tier));
+    // A section with a plain name gets "Section 14" above it. One without
+    // keeps the lease's own heading as its title, since it has no other name.
+    if (typeNames(piece).length) row.append(make("p", "row-ref", sectionNumber(piece)));
     row.append(top, leaseWords(piece));
     view.append(row);
   }
@@ -553,6 +564,9 @@ function showView(view) {
   for (const button of reader.querySelectorAll("[data-view]")) {
     button.setAttribute("aria-pressed", String(button.dataset.view === view));
   }
+  // On a phone the buttons swipe sideways: slide the chosen one into view.
+  const chosen = reader.querySelector(`[data-view="${view}"]`);
+  chosen.parentElement.scrollLeft = chosen.offsetLeft - 16;
   buildTracker(built);
   setTabTitle(view === "whole" ? words.labels.wholeLease : words.versions[view].name);
   window.scrollTo(0, 0);

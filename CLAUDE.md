@@ -76,8 +76,9 @@ The page uses pdf.js (Mozilla's free PDF reader) to read uploaded PDFs, loaded a
 
 ## How testers see it
 
-- Testers see "Version 1", "Version 2", "Version 3". Never show A, B, C or the internal names.
-- The `order` link setting sets which version is 1, 2, and 3. Example: `?order=CAB` makes C Version 1. Default is `ABC`. Ignore invalid values and use the default.
+- On the main page (round 2), testers see each version's name from `content-round-two.json`: "Lease text first", "What to ask first" and "Risk summary first". Zachary chose this on 11/12. Never show A, B or C.
+- On `round-one.html`, testers see "Version 1", "Version 2", "Version 3", never the internal names.
+- The `order` link setting sets which version comes first, second and third. Example: `?order=CAB` puts C first. Default is `ABC`. Ignore invalid values and use the default.
 - The `t` link setting carries a tester label, such as `?t=R1`. Show it small in the footer so notes can be matched. Never use tester names anywhere, including commits.
 - One version shows at a time. Switching versions scrolls back to the top.
 - The page must make sense without anyone explaining it.

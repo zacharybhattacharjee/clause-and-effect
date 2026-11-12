@@ -5,6 +5,7 @@
       "id": "default-notice-and-cure",
       "type": "default",
       "cues": [
+        "continue for {days} days after written notice",
         "within {days} days after written notice",
         "after written notice thereof"
       ],
