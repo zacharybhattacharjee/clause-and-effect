@@ -1,0 +1,770 @@
+/* The hype video (hype.html). Same colors and type as the main page.
+   Everything is laid out on a 1600 x 900 stage that hype.js scales to
+   fit the window, so sizes here are in stage pixels. */
+
+:root {
+  --cream: #F7F3EA;
+  --plum: #3B2340;
+  --plum-muted: #655468;
+  --slate: #5B7083;
+  --slate-tint: #EAEFF3;
+  --gold: #C9A227;
+  --gold-highlight: #E6C955;
+  --brick: #A63A2B;
+  --white: #FFFFFF;
+  --ask-tint: #FBF3D9;
+  --bar: #E4DED2;
+  --bar-dark: #CEC5B5;
+  --tier-1-bg: #F6E3DF;  --tier-1-ink: #7A2A1F;
+  --tier-2-bg: #F7EDCB;  --tier-2-ink: #5C4A0E;
+  --tier-3-bg: #DCEBDF;  --tier-3-ink: #1F4D30;
+  --float-shadow: 0 0 0 1px rgba(59, 35, 64, 0.04), 0 2px 6px rgba(59, 35, 64, 0.05), 0 6px 16px rgba(59, 35, 64, 0.08);
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --s: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: var(--cream);
+  color: var(--plum);
+  font-family: var(--sans);
+  font-feature-settings: "calt", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+body.playing {
+  cursor: none;
+}
+
+/* ---------- The stage ---------- */
+
+/* Holds the stage to the window, so the full-size stage never makes the
+   page wider than a phone's screen. */
+.viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1600px;
+  height: 900px;
+  overflow: hidden;
+  background: var(--cream);
+  transform: translate(-50%, -50%) scale(var(--s));
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.scene.on {
+  opacity: 1;
+}
+
+/* Things that rise into place when their cue comes. */
+.rise {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.8s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 0.12s);
+}
+
+.rise.in {
+  opacity: 1;
+  transform: none;
+}
+
+.big-line {
+  max-width: 1280px;
+  margin: 0;
+  font-size: 76px;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-align: center;
+}
+
+/* ---------- Highlighter marks ---------- */
+
+.mark-gold,
+.mark-brick {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-repeat: no-repeat;
+  transition: background-size 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Gold is a background, with plum text on it. */
+.mark-gold {
+  padding: 0 0.08em;
+  background-image: linear-gradient(var(--gold-highlight), var(--gold-highlight));
+  background-position: 0 62%;
+  background-size: 0% 62%;
+}
+
+.mark-gold.in {
+  background-size: 100% 62%;
+}
+
+/* Brick is a thick underline, so the text stays plum on cream. */
+.mark-brick {
+  background-image: linear-gradient(var(--brick), var(--brick));
+  background-position: 0 96%;
+  background-size: 0% 0.12em;
+}
+
+.mark-brick.in {
+  background-size: 100% 0.12em;
+}
+
+/* ---------- Scene 2: pages of fine print ---------- */
+
+.wall {
+  position: absolute;
+  inset: -60px -200px auto;
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  transform: perspective(1500px) rotateX(24deg);
+  transform-origin: 50% 0;
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.wall-col {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.wall-col:nth-child(even) {
+  margin-top: -340px;
+}
+
+.on .wall-col {
+  /* Slow at first, then faster and faster, like flipping pages. */
+  animation: wall-scroll 5s cubic-bezier(0.6, 0, 0.95, 0.55) forwards;
+}
+
+.wall.frozen {
+  opacity: 0.22;
+  filter: blur(5px);
+}
+
+.wall.frozen .wall-col {
+  animation-play-state: paused;
+}
+
+@keyframes wall-scroll {
+  to { transform: translateY(-3600px); }
+}
+
+.page {
+  width: 440px;
+  padding: 44px 40px;
+  border-radius: 10px;
+  background: var(--white);
+  box-shadow: var(--float-shadow);
+}
+
+.bar {
+  height: 10px;
+  margin-bottom: 14px;
+  border-radius: 5px;
+  background: var(--bar);
+}
+
+.bar.head {
+  height: 14px;
+  margin-top: 26px;
+  background: var(--bar-dark);
+}
+
+.bar.head:first-child {
+  margin-top: 0;
+}
+
+.print-card,
+.question-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  padding: 56px 88px;
+  border-radius: 32px;
+  background: rgba(247, 243, 234, 0.94);
+  box-shadow: var(--float-shadow);
+  transition: opacity 0.5s ease;
+}
+
+.print-card.gone {
+  opacity: 0;
+}
+
+.question-card {
+  gap: 28px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.signature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.signature svg {
+  display: block;
+  width: 520px;
+  height: 120px;
+  overflow: visible;
+}
+
+.signature .ink {
+  fill: none;
+  stroke: var(--plum);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.45, 0, 0.3, 1);
+}
+
+.signature.signed .ink {
+  stroke-dashoffset: 0;
+}
+
+.signature .rule {
+  stroke: var(--plum-muted);
+  stroke-width: 2;
+}
+
+.signature-caption {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--plum-muted);
+}
+
+/* ---------- The logo, typed out like the main page's opening screen ---------- */
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 168px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.logo-letter {
+  animation: logo-type 0.16s linear both;
+}
+
+.logo-amp {
+  position: relative;
+  isolation: isolate;
+  margin: 0 0.16em;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.45em;
+  opacity: 0;
+  animation: logo-pop 0.4s cubic-bezier(0.3, 1.6, 0.5, 1) var(--d, 0s) forwards;
+}
+
+.logo-amp::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.2em;
+  right: -0.26em;
+  top: 0.36em;
+  height: 0.5em;
+  background: var(--gold-highlight);
+  transform: rotate(-3deg) scaleX(0);
+  transform-origin: left center;
+  animation: logo-sweep 0.55s cubic-bezier(0.65, 0, 0.35, 1) var(--sweep, 0s) forwards;
+}
+
+.logo.small {
+  font-size: 120px;
+}
+
+.logo-line {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--plum-muted);
+}
+
+@keyframes logo-type {
+  0% { opacity: 0; }
+  1%, 60% { opacity: 1; color: transparent; background: var(--plum); }
+  61%, 100% { opacity: 1; color: inherit; background: transparent; }
+}
+@keyframes logo-pop {
+  from { opacity: 0; transform: scale(0.3) rotate(-12deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes logo-sweep { to { transform: rotate(-3deg) scaleX(1); } }
+
+/* ---------- Scene 5: the three versions ---------- */
+
+.scene-versions {
+  justify-content: flex-start;
+  gap: 0;
+  padding-top: 72px;
+}
+
+.switcher {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: var(--float-shadow);
+}
+
+.switch {
+  position: relative;
+  z-index: 1;
+  padding: 20px 40px;
+  border-radius: 999px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+.switch.chosen {
+  color: var(--cream);
+}
+
+.switch-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 999px;
+  background: var(--plum);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.3, 0.7, 0.2, 1), width 0.45s cubic-bezier(0.3, 0.7, 0.2, 1), opacity 0.3s ease;
+}
+
+.switch-pill.placed {
+  opacity: 1;
+}
+
+.description {
+  height: 44px;
+  margin: 36px 0 32px;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--plum-muted);
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.description.fading {
+  opacity: 0;
+}
+
+.layouts {
+  position: relative;
+  width: 1320px;
+  height: 560px;
+}
+
+.layout {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.layout.in {
+  opacity: 1;
+}
+
+.card {
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: var(--float-shadow);
+}
+
+.card-title {
+  margin: 0 0 22px;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.label {
+  margin: 0 0 18px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--plum-muted);
+}
+
+/* Lease text first: the lease's words on white, the meaning on slate. */
+.layout-a {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  padding: 28px;
+}
+
+.doc {
+  padding: 28px 32px 18px;
+  border: 1px solid rgba(59, 35, 64, 0.1);
+  border-radius: 14px;
+  font-family: var(--serif);
+}
+
+.doc .card-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.meaning {
+  padding: 28px 32px 18px;
+  border-radius: 14px;
+  background: var(--slate-tint);
+}
+
+.meaning .label {
+  color: var(--slate);
+}
+
+.meaning .bar {
+  background: #C9D3DC;
+}
+
+/* What to ask first: cards tagged with what you can ask. */
+.layout-b {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.ask-card {
+  padding: 36px 34px 30px;
+}
+
+.tag {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--plum);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ask-box {
+  margin-top: 24px;
+  padding: 24px 26px 12px;
+  border-radius: 16px;
+  background: var(--ask-tint);
+}
+
+.ask-box .bar {
+  background: #EADDB2;
+}
+
+/* Risk summary first: short cards, highest stakes first. */
+.layout-c {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.risk-card {
+  display: grid;
+  grid-template-columns: 300px 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 30px 36px;
+}
+
+.risk-card .card-title {
+  margin: 0 0 14px;
+}
+
+.risk-card .bar {
+  margin: 0;
+}
+
+.badge {
+  justify-self: start;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.badge.tier-1 { background: var(--tier-1-bg); color: var(--tier-1-ink); }
+.badge.tier-2 { background: var(--tier-2-bg); color: var(--tier-2-ink); }
+.badge.tier-3 { background: var(--tier-3-bg); color: var(--tier-3-ink); }
+
+.more {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--plum);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  white-space: nowrap;
+}
+
+/* A pointer that "clicks" each version, so the audience sees it's an app. */
+.pointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 40px;
+  height: 52px;
+  opacity: 0;
+  transform: translate(var(--x, 1500px), var(--y, 820px));
+  transition: transform 0.7s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.3s ease;
+  filter: drop-shadow(0 3px 6px rgba(59, 35, 64, 0.25));
+}
+
+.pointer.shown {
+  opacity: 1;
+}
+
+.pointer svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: 20% 10%;
+  transition: transform 0.12s ease;
+}
+
+.pointer.pressing svg {
+  transform: scale(0.82);
+}
+
+/* ---------- Scene 6: the design question ---------- */
+
+.question {
+  max-width: 1360px;
+  margin: 0;
+  font-size: 66px;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.35s ease, transform 0.5s var(--ease-out);
+}
+
+.word.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Scene 7: logo and credit ---------- */
+
+.credit {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--plum-muted);
+}
+
+/* ---------- The start screen (not part of the recording) ---------- */
+
+.start {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 24px;
+  background: var(--cream);
+  text-align: center;
+  transition: opacity 0.4s ease;
+}
+
+.start.gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start-logo {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.play {
+  min-width: 160px;
+  min-height: 56px;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 999px;
+  background: var(--plum);
+  color: var(--cream);
+  font: 600 1.25rem var(--sans);
+  cursor: pointer;
+}
+
+.play:hover {
+  box-shadow: var(--float-shadow);
+}
+
+.play:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+.play:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.start-hint {
+  max-width: 34em;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--plum-muted);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--plum);
+  text-underline-offset: 5px;
+}
+
+/* A small frame, like the pop-up on a phone: no room for the key hint,
+   and phones have no F or R keys anyway. */
+@media (max-height: 420px) {
+  .start {
+    gap: 14px;
+  }
+
+  .start-logo {
+    font-size: 2rem;
+  }
+
+  .play {
+    min-height: 44px;
+    padding: 10px 32px;
+  }
+
+  .start-hint {
+    display: none;
+  }
+}
+
+.back-link[hidden] {
+  display: none;
+}
+
+.back-link:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ---------- Reduced motion: scenes still change, but nothing moves ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .word {
+    transform: none;
+  }
+
+  .on .wall-col,
+  .logo-letter,
+  .logo-amp,
+  .logo-amp::before {
+    animation: none;
+  }
+
+  .logo-amp {
+    opacity: 1;
+  }
+
+  .logo-amp::before {
+    transform: rotate(-3deg) scaleX(1);
+  }
+
+  .wall {
+    transform: perspective(1500px) rotateX(24deg);
+  }
+
+  .mark-gold,
+  .mark-brick,
+  .switch-pill,
+  .pointer,
+  .signature .ink {
+    transition: opacity 0.4s ease;
+  }
+
+  .pointer {
+    display: none;
+  }
+}

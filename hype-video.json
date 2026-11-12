@@ -1,0 +1,37 @@
+{
+  "note": "Words for the hype video (hype.html). Lines named in 'unverified' are Claude's drafts from the outline Zachary approved on 11/12. Delete a name once you've checked it. The logo, version names, tier names and labels come from content.json and content-round-two.json. The cards use these clause ids from library/clause-types.json, approved rows only.",
+  "unverified": [
+    "pageTitle",
+    "playButton",
+    "startHint",
+    "backLink",
+    "lines.opening",
+    "lines.finePrint",
+    "lines.signature",
+    "lines.push",
+    "lines.cost",
+    "lines.credit"
+  ],
+  "pageTitle": "Clause & Effect video",
+  "playButton": "Play",
+  "startHint": "Press F for full screen, then Space to play. Press R to replay.",
+  "backLink": "Try it yourself",
+  "lines": {
+    "opening": "Small businesses sign commercial leases every day.",
+    "finePrint": "Pages of fine print.",
+    "signature": "One signature.",
+    "push": "What can I push on?",
+    "cost": "What could cost me the most?",
+    "question": "How might we redesign small business contracts so that what is negotiable and what is consequential are visible in the document that legally binds?",
+    "credit": "Northeastern Law Legal Design Studio"
+  },
+  "highlights": {
+    "gold": "negotiable",
+    "brick": "consequential"
+  },
+  "clauseCards": [
+    "default",
+    "repairs",
+    "notices"
+  ]
+}
