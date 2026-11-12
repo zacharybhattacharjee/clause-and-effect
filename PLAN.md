@@ -350,3 +350,16 @@ Zachary wanted the page to feel like an easy-to-use app, not a legal tool, keepi
   - the sliding version pill
   - cards easing in
 - `round-one.html` is unchanged.
+
+### Step 13: Fixes from the AI expert feedback (11/12)
+
+From `Clause_and_Effect_Expert_Feedback.docx`. These are the things all three AI experts flagged that could be fixed by the end of the day.
+
+1. **Section 18 ask removed for this lease.** New rule: the tool never asks for what the lease already gives. The ask's "ask for" version (rent goes down while the space is unusable) now matches the form's "just and proportionate abatement of rent", so the 180-day draft no longer shows.
+2. **Section 18 explanation fixed.** It no longer gives the landlord a deadline the form doesn't set. It now reads "the landlord can choose to end your lease", plus a "Good for you" line: "Your rent goes down while the space can't be used."
+3. **The lease's own numbers** now fill the blanks in explanations ("You then have 10 days to pay").
+4. **Section 19** adds a second line: "If the landlord ends the lease, you can still owe rent for the rest of the term, plus the landlord's costs, including lawyer's fees, with interest." This is a new version row, `default-landlord-remedies`.
+5. **The form's copyright footer** is dropped from the lease text.
+6. **Every version** now says that any term can be asked about, and the flagged ones are just those with a ready ask.
+
+Claude drafted the wording for 2, 4 and 6. It's marked Approved in the workbook so it shows, with a note in each row's Notes column. Zachary confirms it by merging.

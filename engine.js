@@ -108,7 +108,7 @@ const LeaseEngine = (() => {
   const NUMBER = "(?:(?:[a-z-]+\\s+){0,4}\\(\\s*\\$?[\\d,.]+\\s*%?\\s*\\)|\\$?\\d[\\d,.]*%?)";
 
   // A pattern for a cue phrase. A blank in braces, such as {days}, stands for
-  // a number. "..." stands for up to GAP_WORDS words.
+  // a number, and catches it. "..." stands for up to GAP_WORDS words.
   function cuePattern(cue) {
     const parts = forMatching(cue)
       .split(/\s*(?:\.\.\.|…)\s*/)
@@ -116,11 +116,24 @@ const LeaseEngine = (() => {
       .map((part) =>
         part
           .split(/(\{\w+\})/)
-          .map((piece) => (/^\{\w+\}$/.test(piece) ? NUMBER : piece.split(" ").map(escapeForPattern).join("\\s+")))
+          .map((piece) => (/^\{\w+\}$/.test(piece) ? `(${NUMBER})` : piece.split(" ").map(escapeForPattern).join("\\s+")))
           .join(""),
       );
     const gap = `(?:\\s+\\S+){0,${GAP_WORDS}}?\\s+`;
     return new RegExp(`(^|[^\\w-])(${parts.join(gap)})(?![\\w-])`);
+  }
+
+  // The lease's own numbers, caught by a cue's blanks: {days: "10"} from
+  // "ten (10) days". A number written in words and figures keeps the figures.
+  function cueNumbers(cue, match) {
+    const names = [...cue.matchAll(/\{(\w+)\}/g)].map((found) => found[1]);
+    const numbers = {};
+    names.forEach((name, index) => {
+      const written = (match[index + 3] || "").trim();
+      const figures = /\(\s*([^)]+?)\s*\)/.exec(written);
+      if (written) numbers[name] = figures ? figures[1] : written;
+    });
+    return numbers;
   }
 
   // ---------- Reading a PDF ----------
@@ -200,6 +213,21 @@ const LeaseEngine = (() => {
   const ARTICLE_ALONE = /^(?:ARTICLE|Article)\s+([IVXLC]{1,6}|\d{1,3})\.?\s*$/; // "ARTICLE 5", heading on the next line
   const ATTACHMENT_START = /^(RIDER|EXHIBIT|ADDENDUM|AMENDMENT|SCHEDULE)\b\s*([A-Z0-9-]*)[.:]?\s*(.*)$/;
   const TABLE_OF_CONTENTS_LINE = /(\.{4,}|\s{3,})\s*\d{1,3}\s*$/;
+
+  // Whole lines of a printed form's footer: its copyright notice and the
+  // name of the software that filled it in. Only whole lines match, so
+  // lease text that mentions copyright is kept.
+  const FORM_FOOTER = [
+    /^COPYRIGHT\s*©/i,
+    /^GREATER BOSTON REAL ESTATE BOARD$/,
+    /^REVISED \d{4}(, \d{4})*$/,
+    /^All rights reserved\. This form may not be copied or$/,
+    /^reproduced in whole or in part in any manner$/,
+    /^whatsoever without the prior express written consent$/,
+    /^of the Greater Boston Real Estate Board\.$/,
+    /^This form was created by .+ using e-FORMS\./,
+    /^(may )?not be used by any other party\.$/,
+  ];
   // "64 Sidney Street" is an address, not section 64.
   const ADDRESS_HEADING = /\b(street|st|avenue|ave|road|rd|drive|dr|boulevard|blvd|lane|ln|way|place|pl|court|ct|square|sq|plaza|suite|floor|highway|parkway|pkwy)\.?$/i;
 
@@ -268,6 +296,9 @@ const LeaseEngine = (() => {
 
     for (const line of ordered) {
       const text = line.text.trim();
+
+      // The form's own footer, such as its copyright notice, isn't lease text.
+      if (FORM_FOOTER.some((pattern) => pattern.test(text))) continue;
 
       // Attachments start their own section, whatever the layout.
       const attachment = ATTACHMENT_START.exec(text);
@@ -420,12 +451,16 @@ const LeaseEngine = (() => {
       for (const cue of version.cues) {
         const match = cuePattern(cue).exec(bodyText);
         if (match) {
-          found.push({ version, cue, matchedText: match[2] });
+          found.push({ version, cue, matchedText: match[2], numbers: cueNumbers(cue, match) });
           break;
         }
       }
     }
-    return found.map((item) => withAskChain(item, rows));
+    // Never ask for what the lease already gives: a flag whose ask points to
+    // a version this same section already has is not a flag here.
+    const has = new Set(found.map((item) => item.version.id));
+    return found.map((item) => withAskChain(item, rows)).map((item) =>
+      item.flag && item.askFor && has.has(item.askFor.id) ? { ...item, flag: false } : item);
   }
 
   // The flag-to-ask chain: a version with a row on the Asks sheet is a flag.

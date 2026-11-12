@@ -911,10 +911,8 @@
       ],
       "example": "within forty-five (45) days after the damage, terminate this Lease",
       "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_747 (CC BY-NC 4.0)",
-      "plain": "If a fire or other disaster damages the building, the landlord can end your lease within {days} days.",
-      "numbers": [
-        "days"
-      ],
+      "plain": "If a fire or other disaster badly damages the building, the landlord can choose to end your lease.",
+      "numbers": [],
       "rating": "Worst",
       "tier": 1,
       "status": "Approved",
@@ -928,11 +926,12 @@
       "type": "casualty-condemnation",
       "cues": [
         "rent shall abate",
-        "abate proportionately"
+        "abate proportionately",
+        "proportionate abatement of rent"
       ],
       "example": "the rent shall abate in full during the period of such rebuilding",
       "exampleSource": "Leivaditi et al. (2020) lease dataset, lease_756 (CC BY-NC 4.0)",
-      "plain": "You don't pay rent while the space is being rebuilt.",
+      "plain": "Your rent goes down while the space can't be used.",
       "numbers": [],
       "rating": "Best",
       "tier": 3,
@@ -1000,6 +999,25 @@
       "tierReason": "Costs money that can be calculated (tier 2): the rest of the rent after you close.",
       "effectiveTier": 2,
       "live": false
+    },
+    {
+      "id": "default-landlord-remedies",
+      "type": "default",
+      "cues": [
+        "during the residue of the term",
+        "for the remainder of the term"
+      ],
+      "example": "",
+      "exampleSource": "",
+      "plain": "If the landlord ends the lease, you can still owe rent for the rest of the term, plus the landlord's costs, including lawyer's fees, with interest.",
+      "numbers": [],
+      "rating": "Worst",
+      "tier": null,
+      "status": "Approved",
+      "suggestedTier": 1,
+      "tierReason": "Rule 1: it can cost the business, since you can owe the rest of the term's rent.",
+      "effectiveTier": 1,
+      "live": true
     }
   ]
 }
