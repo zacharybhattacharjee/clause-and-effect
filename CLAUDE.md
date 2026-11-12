@@ -31,6 +31,8 @@ Zachary is not a software developer. Explain every change in plain words, withou
 
 The site runs on GitHub Pages from the main branch, root folder. Keep it a plain static site, with `index.html` as the start page. No build step, no server, no package installs.
 
+The live address is https://zacharybhattacharjee.github.io/clause-and-effect/. The project was renamed from `lease-reader` on 11/12. A separate small project, `zacharybhattacharjee/lease-reader`, only forwards old links to the new address, keeping their link settings.
+
 The page uses pdf.js (Mozilla's free PDF reader) to read uploaded PDFs, loaded at an exact version. Ask before adding any other outside code.
 
 ## Rules for the build
